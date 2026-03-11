@@ -391,7 +391,7 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
   <div class="stat"><span class="stat-num"><span class="counter" data-t="6">0</span>+</span><span class="stat-label">Years Exp</span></div>
   <div class="stat"><span class="stat-num"><span class="counter" data-t="300">0</span>+</span><span class="stat-label">Projects</span></div>
   <div class="stat"><span class="stat-num"><span class="counter" data-t="50">0</span>M+</span><span class="stat-label">Records Processed</span></div>
-  <div class="stat"><span class="stat-num"><span class="counter" data-t="5">0</span>+</span><span class="stat-label">International Companies</span></div>
+  <div class="stat"><span class="stat-num"><span class="counter" data-t="500">0</span>+</span><span class="stat-label">Scrapers Built</span></div>
   <div class="stat"><span class="stat-num"><span class="counter" data-t="400">0</span>+</span><span class="stat-label">Sites Crawled</span></div>
 </div>
 
@@ -1021,8 +1021,7 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
 </style>
 
 <script>
-const AI_KEY2 = 'AIzaSyB05aWX5Bl-ahEeYD2r1hlETCvIMk4p9zM';
-const AI_URL2 = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${AI_KEY2}`;
+const AI_URL2 = 'https://ancient-sun-9ed6.asad-ikram53.workers.dev/';
 const AI_PROMPT = `You are a friendly AI assistant on Asad Ikram's portfolio website. Answer questions about Asad concisely (2-4 sentences max unless detail is needed). Be warm and professional.
 
 Asad Ikram is a Senior Full Stack Data Engineer based in Lahore, Pakistan with 6+ years experience. Chevening Scholar 2024-2025 (top 2-3% of 70,000+ applicants, 160 countries, UK FCDO funded). MSc Data Analytics, University of Portsmouth (Distinction). BSc CS, FAST-NUCES Pakistan.
@@ -1078,8 +1077,8 @@ function aiAppend(role, text) {
   const isUser = role === 'user';
   const div = document.createElement('div');
   div.className = 'ai-msg' + (isUser ? ' user' : '');
-  const formatted = text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
-  div.innerHTML = `<div class="ai-msg-av">${isUser?'👤':'🤖'}</div><div class="ai-msg-bub">${formatted}</div>`;
+  const formatted = text.split('\n').join('<br>');
+  div.innerHTML = '<div class="ai-msg-av">' + (isUser ? '👤' : '🤖') + '</div><div class="ai-msg-bub">' + formatted + '</div>';
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
 }
@@ -1088,7 +1087,7 @@ function aiTyping() {
   const msgs = document.getElementById('ai-messages');
   const div = document.createElement('div');
   div.className = 'ai-msg';
-  div.innerHTML = `<div class="ai-msg-av">🤖</div><div class="ai-typing"><div class="ai-td"></div><div class="ai-td"></div><div class="ai-td"></div></div>`;
+  div.innerHTML = '<div class="ai-msg-av">🤖</div><div class="ai-typing"><div class="ai-td"></div><div class="ai-td"></div><div class="ai-td"></div></div>';
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return div;
