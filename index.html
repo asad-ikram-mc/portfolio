@@ -274,6 +274,7 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
     <li><a href="#skills-section">skills</a></li>
     <li><a href="#experience">experience</a></li>
     <li><a href="#projects">projects</a></li>
+    <li><a href="#ask-ai">ask_ai</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
   <a href="mailto:asad.ikram53@gmail.com" class="nav-cta">hire_me()</a>
@@ -323,7 +324,7 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
   <div class="stat"><span class="stat-num"><span class="counter" data-t="6">0</span>+</span><span class="stat-label">Years Exp</span></div>
   <div class="stat"><span class="stat-num"><span class="counter" data-t="300">0</span>+</span><span class="stat-label">Projects</span></div>
   <div class="stat"><span class="stat-num"><span class="counter" data-t="50">0</span>M+</span><span class="stat-label">Records Processed</span></div>
-  <div class="stat"><span class="stat-num"><span class="counter" data-t="500">0</span>+</span><span class="stat-label">Scrapers Built</span></div>
+  <div class="stat"><span class="stat-num"><span class="counter" data-t="5">0</span>+</span><span class="stat-label">International Companies</span></div>
   <div class="stat"><span class="stat-num"><span class="counter" data-t="400">0</span>+</span><span class="stat-label">Sites Crawled</span></div>
 </div>
 
@@ -891,6 +892,151 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
 </section>
 
 <!-- CONTACT -->
+
+<!-- ASK AI SECTION -->
+<section id="ask-ai" style="padding:110px 56px;border-top:1px solid var(--border)">
+  <div class="sec-label">AI Assistant</div>
+  <h2 class="sec-title">Ask <em>anything</em> about me</h2>
+  <div style="max-width:760px">
+    <p style="font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:28px;line-height:1.7">
+      Powered by Gemini AI — ask about my experience, skills, availability, or anything else.
+      <span style="color:var(--green)">Free to use, no login needed.</span>
+    </p>
+
+    <!-- QUICK SUGGESTIONS -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px" id="ai-suggestions">
+      <button class="ai-sugg" onclick="aiAsk(this)">What's your scraping expertise?</button>
+      <button class="ai-sugg" onclick="aiAsk(this)">Tell me about ArtemisAI</button>
+      <button class="ai-sugg" onclick="aiAsk(this)">What anti-bot systems can you bypass?</button>
+      <button class="ai-sugg" onclick="aiAsk(this)">Are you available for hire?</button>
+      <button class="ai-sugg" onclick="aiAsk(this)">What's the Chevening scholarship?</button>
+      <button class="ai-sugg" onclick="aiAsk(this)">What AWS services do you use?</button>
+    </div>
+
+    <!-- MESSAGES -->
+    <div id="ai-messages" style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;max-height:420px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(0,255,136,0.15) transparent"></div>
+
+    <!-- INPUT -->
+    <div style="display:flex;gap:10px;align-items:flex-end">
+      <textarea id="ai-input" rows="1" placeholder="Ask anything about Asad..."
+        style="flex:1;background:rgba(0,255,136,0.03);border:1px solid var(--border);color:var(--white);font-family:var(--mono);font-size:13px;padding:13px 16px;resize:none;outline:none;line-height:1.6;max-height:100px;transition:border-color .08s;scrollbar-width:none"
+        onfocus="this.style.borderColor='rgba(0,255,136,0.4)'"
+        onblur="this.style.borderColor=''"
+      ></textarea>
+      <button id="ai-send" onclick="aiSend()"
+        style="width:48px;height:48px;background:var(--green);border:none;cursor:pointer;font-size:18px;color:var(--dark);transition:background .08s,transform .08s;flex-shrink:0;font-family:var(--mono)"
+        onmouseover="this.style.background='var(--green-d)';this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.background='var(--green)';this.style.transform=''"
+      >↑</button>
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:8px;text-align:right">
+      Enter to send · <a href="chat.html" style="color:var(--green);text-decoration:none">open full chat ↗</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.ai-sugg{font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:7px 12px;border:1px solid var(--border);color:var(--bright);cursor:pointer;background:transparent;transition:color .08s,border-color .08s,background .08s}
+.ai-sugg:hover{color:var(--green);border-color:var(--border-h);background:rgba(0,255,136,0.05)}
+.ai-msg{display:flex;gap:10px;animation:fadeIn .2s ease}
+.ai-msg.user{flex-direction:row-reverse}
+.ai-msg-av{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px}
+.ai-msg.user .ai-msg-av{border-color:rgba(0,212,255,0.25)}
+.ai-msg-bub{max-width:80%;padding:12px 16px;border:1px solid var(--border);background:rgba(0,255,136,0.025);font-family:var(--mono);font-size:12px;line-height:1.75;color:var(--bright)}
+.ai-msg.user .ai-msg-bub{background:rgba(0,212,255,0.04);border-color:rgba(0,212,255,0.18);color:var(--white)}
+.ai-typing{display:flex;gap:5px;padding:10px 14px;border:1px solid var(--border);background:rgba(0,255,136,0.025);width:fit-content}
+.ai-td{width:5px;height:5px;border-radius:50%;background:var(--green);opacity:.4;animation:typingB 1.2s infinite}
+.ai-td:nth-child(2){animation-delay:.2s}.ai-td:nth-child(3){animation-delay:.4s}
+@keyframes typingB{0%,60%,100%{opacity:.4;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+#ai-messages::-webkit-scrollbar{width:3px}
+#ai-messages::-webkit-scrollbar-thumb{background:rgba(0,255,136,0.15)}
+#ai-input::-webkit-scrollbar{display:none}
+</style>
+
+<script>
+const AI_KEY2 = 'AIzaSyB05aWX5Bl-ahEeYD2r1hlETCvIMk4p9zM';
+const AI_URL2 = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${AI_KEY2}`;
+const AI_PROMPT = `You are a friendly AI assistant on Asad Ikram's portfolio website. Answer questions about Asad concisely (2-4 sentences max unless detail is needed). Be warm and professional.
+
+Asad Ikram is a Senior Full Stack Data Engineer based in Lahore, Pakistan with 6+ years experience. Chevening Scholar 2024-2025 (top 2-3% of 70,000+ applicants, 160 countries, UK FCDO funded). MSc Data Analytics, University of Portsmouth (Distinction). BSc CS, FAST-NUCES Pakistan.
+
+Current roles: Data Engineer Consultant at M+C Saatchi Fluency (Dec 2024-present); Founder & Lead Data Engineer at ArtemisAI (artemisai.co.uk, Feb 2025-present).
+
+Previous: Senior Data Engineer at Dubizzle Labs (promoted twice, 500+ scrapers on EKS across MENA); Data Engineer Consultant at Fix.com Canada (50M+ records, 200+ sites); VendueTech Ireland (contract); Prefe Italy; CXG Dubai; 300+ Fiverr projects (Level 2 Seller, 5 stars).
+
+Skills: Scrapy/Playwright/Puppeteer/curl_cffi for scraping. TLS/JA3/JA4 fingerprint spoofing, GoLogin, playwright-stealth — bypasses Akamai, Cloudflare, Datadome, PerimeterX, Kasada, F5. PySpark, AWS Glue, dbt, Matillion, Airflow, Step Functions for ETL. Redshift, Snowflake, BigQuery for warehousing. ECS Fargate, EKS, Lambda, S3 on AWS. Docker, Kubernetes, GitHub Actions. PostgreSQL, MongoDB, Elasticsearch. LangChain, OpenAI API, RAG, HuggingFace, SageMaker for ML/AI. Tableau, Power BI, QuickSight for BI.
+
+Available for senior data engineering roles, scraping consulting, pipeline architecture. Email: asad.ikram53@gmail.com. LinkedIn: linkedin.com/in/asad-ikram98.`;
+
+const aiHistory = [];
+
+async function aiSend(textOverride) {
+  const input = document.getElementById('ai-input');
+  const text = textOverride || input.value.trim();
+  if (!text) return;
+  input.value = ''; input.style.height = 'auto';
+  document.getElementById('ai-send').disabled = true;
+
+  aiAppend('user', text);
+  aiHistory.push({ role: 'user', parts: [{ text }] });
+
+  const typing = aiTyping();
+  try {
+    const res = await fetch(AI_URL2, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: AI_PROMPT }] },
+        contents: aiHistory,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 400 }
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || 'API error');
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I had trouble with that.';
+    aiHistory.push({ role: 'model', parts: [{ text: reply }] });
+    typing.remove();
+    aiAppend('assistant', reply);
+  } catch(e) {
+    typing.remove();
+    aiAppend('assistant', 'Sorry, something went wrong. Try the <a href="chat.html" style="color:var(--green)">full chat page</a> or email asad.ikram53@gmail.com');
+  }
+  document.getElementById('ai-send').disabled = false;
+}
+
+function aiAsk(btn) { aiSend(btn.textContent); }
+
+function aiAppend(role, text) {
+  const msgs = document.getElementById('ai-messages');
+  const isUser = role === 'user';
+  const div = document.createElement('div');
+  div.className = 'ai-msg' + (isUser ? ' user' : '');
+  const formatted = text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/
+/g,'<br>');
+  div.innerHTML = `<div class="ai-msg-av">${isUser?'👤':'🤖'}</div><div class="ai-msg-bub">${formatted}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function aiTyping() {
+  const msgs = document.getElementById('ai-messages');
+  const div = document.createElement('div');
+  div.className = 'ai-msg';
+  div.innerHTML = `<div class="ai-msg-av">🤖</div><div class="ai-typing"><div class="ai-td"></div><div class="ai-td"></div><div class="ai-td"></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+document.getElementById('ai-input').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+document.getElementById('ai-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiSend(); }
+});
+</script>
+
 <section id="contact">
   <div class="contact-inner">
     <div class="sec-label">Contact</div>

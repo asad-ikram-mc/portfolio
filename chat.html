@@ -100,7 +100,7 @@ header {
   font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
   color: var(--muted); text-decoration: none;
   border: 1px solid var(--border); padding: 7px 14px;
-  transition: all .2s;
+  transition: color .08s, border-color .08s .08s;
 }
 .back-link:hover { color: var(--green); border-color: var(--border-h); }
 .status-badge {
@@ -179,8 +179,8 @@ header {
   font-size: 11px; letter-spacing: .05em;
   padding: 7px 13px;
   border: 1px solid var(--border);
-  color: var(--muted); cursor: pointer;
-  transition: all .2s; background: transparent;
+  color: var(--bright); cursor: pointer;
+  transition: color .08s, border-color .08s, background .08s; background: rgba(0,255,136,0.02);
   font-family: var(--mono);
 }
 .suggestion:hover { color: var(--green); border-color: var(--border-h); background: rgba(0,255,136,0.04); }
@@ -214,7 +214,7 @@ header {
   background: var(--green); border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; color: var(--dark);
-  transition: all .2s; flex-shrink: 0;
+  transition: background .08s, box-shadow .08s; flex-shrink: 0;
   font-family: var(--mono);
 }
 #send:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,255,136,0.25); }
@@ -324,7 +324,7 @@ inputEl.addEventListener('keydown', e => {
 
 // ── GEMINI API ────────────────────────────────────────────────
 const API_KEY = 'AIzaSyB05aWX5Bl-ahEeYD2r1hlETCvIMk4p9zM';
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
 
 const SYSTEM_PROMPT = `You are a friendly, knowledgeable AI assistant for Asad Ikram's personal portfolio website. Your job is to answer questions about Asad accurately and helpfully. Be concise but informative. Use a professional yet warm tone. If someone asks if Asad is a good fit for a role, give an honest assessment based on his skills.
 
