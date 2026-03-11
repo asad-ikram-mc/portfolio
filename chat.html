@@ -29,7 +29,6 @@ body {
   color: var(--white);
   font-family: var(--mono);
   overflow: hidden;
-  cursor: none;
 }
 
 /* SCANLINES */
@@ -37,10 +36,6 @@ body::after {
   content: ''; position: fixed; inset: 0; z-index: 9000; pointer-events: none;
   background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.022) 3px, rgba(0,0,0,0.022) 4px);
 }
-
-/* CURSOR */
-#cur { width: 10px; height: 10px; background: var(--green); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); box-shadow: 0 0 12px var(--green); transition: all .15s; }
-#cur.big { width: 36px; height: 36px; background: transparent; border: 1px solid var(--green); }
 
 /* GRID */
 .grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -138,14 +133,14 @@ header {
 .msg-content { max-width: 78%; }
 .msg-label {
   font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 6px;
+  color: #6BA880; margin-bottom: 6px;
 }
 .msg.user .msg-label { text-align: right; }
 .msg-bubble {
   padding: 14px 18px;
   border: 1px solid var(--border);
   background: var(--panel);
-  font-size: 13px; line-height: 1.75; color: var(--bright);
+  font-size: 13px; line-height: 1.75; color: #E8FFF3;
 }
 .msg.user .msg-bubble {
   background: rgba(0,212,255,0.05);
@@ -197,7 +192,7 @@ header {
   flex: 1;
   background: rgba(0,255,136,0.03);
   border: 1px solid var(--border);
-  color: var(--white);
+  color: #E8FFF3;
   font-family: var(--mono); font-size: 13px;
   padding: 13px 16px;
   resize: none; outline: none;
@@ -324,7 +319,7 @@ inputEl.addEventListener('keydown', e => {
 
 // ── GEMINI API ────────────────────────────────────────────────
 const API_KEY = 'AIzaSyB05aWX5Bl-ahEeYD2r1hlETCvIMk4p9zM';
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 const SYSTEM_PROMPT = `You are a friendly, knowledgeable AI assistant for Asad Ikram's personal portfolio website. Your job is to answer questions about Asad accurately and helpfully. Be concise but informative. Use a professional yet warm tone. If someone asks if Asad is a good fit for a role, give an honest assessment based on his skills.
 
