@@ -18,7 +18,7 @@
   --border:  rgba(0,255,136,0.13);
   --border-h:rgba(0,255,136,0.38);
   --white:   #E8FFF3;
-  --muted:   #4A7A5A;
+  --muted:   #7DB898;
   --bright:  #AAFFCC;
   --mono:    'JetBrains Mono', monospace;
 }
@@ -93,7 +93,7 @@ header {
 .header-right { display: flex; align-items: center; gap: 16px; }
 .back-link {
   font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none;
+  color: #9DCFB4; text-decoration: none;
   border: 1px solid var(--border); padding: 7px 14px;
   transition: color .08s, border-color .08s .08s;
 }
@@ -133,7 +133,7 @@ header {
 .msg-content { max-width: 78%; }
 .msg-label {
   font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
-  color: #6BA880; margin-bottom: 6px;
+  color: #7DB898; margin-bottom: 6px;
 }
 .msg.user .msg-label { text-align: right; }
 .msg-bubble {
@@ -202,21 +202,21 @@ header {
   scrollbar-width: none;
 }
 #input:focus { border-color: rgba(0,255,136,0.4); }
-#input::placeholder { color: var(--muted); }
+#input::placeholder { color: #5A9A70; }
 #input::-webkit-scrollbar { display: none; }
 #send {
   width: 48px; height: 48px;
   background: var(--green); border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; color: var(--dark);
-  transition: background .08s, box-shadow .08s; flex-shrink: 0;
+  transition: background .08s, box-shadow .08s, transform .08s; flex-shrink: 0;
   font-family: var(--mono);
 }
 #send:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,255,136,0.25); }
 #send:disabled { background: rgba(0,255,136,0.2); cursor: not-allowed; transform: none; box-shadow: none; }
 .input-hint {
   font-size: 9px; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--muted); margin-top: 8px; text-align: right;
+  color: #7DB898; margin-top: 8px; text-align: right;
 }
 
 /* WELCOME STATE */
@@ -319,7 +319,7 @@ inputEl.addEventListener('keydown', e => {
 
 // ── GEMINI API ────────────────────────────────────────────────
 const API_KEY = 'AIzaSyB05aWX5Bl-ahEeYD2r1hlETCvIMk4p9zM';
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const SYSTEM_PROMPT = `You are a friendly, knowledgeable AI assistant for Asad Ikram's personal portfolio website. Your job is to answer questions about Asad accurately and helpfully. Be concise but informative. Use a professional yet warm tone. If someone asks if Asad is a good fit for a role, give an honest assessment based on his skills.
 
