@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asad Ikram — Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green:    #00FF88;
+  --green-d:  #00CC6A;
+  --green-dim:#00FF8818;
+  --blue:     #00D4FF;
+  --amber:    #FFB800;
+  --red:      #FF4466;
+  --dark:     #030A06;
+  --dark2:    #060F08;
+  --panel:    rgba(0,255,136,0.03);
+  --border:   rgba(0,255,136,0.12);
+  --border-h: rgba(0,255,136,0.35);
+  --white:    #E8FFF3;
+  --muted:    #4A7A5A;
+  --bright:   #AAFFCC;
+  --mono:     'JetBrains Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+
+/* SCANLINES */
+body::after{content:'';position:fixed;inset:0;z-index:8000;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.025) 3px,rgba(0,0,0,0.025) 4px);
+}
+
+/* CURSOR */
+#cur{width:10px;height:10px;background:var(--green);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 14px var(--green);transition:all .15s}
+#cur.big{width:38px;height:38px;background:transparent;border:1px solid var(--green);box-shadow:0 0 24px rgba(0,255,136,.3)}
+#curT{width:30px;height:30px;border:1px solid rgba(0,255,136,.2);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+
+/* MATRIX CANVAS */
+#matrix{position:fixed;inset:0;z-index:0;opacity:.06;pointer-events:none}
+
+/* GRID */
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,255,136,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.035) 1px,transparent 1px);
+  background-size:44px 44px}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--green),var(--blue));z-index:101;box-shadow:0 0 10px var(--green);width:0;transition:width .1s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,10,6,.9);border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--green);letter-spacing:.08em;display:flex;align-items:center;gap:8px}
+.logo-bracket{color:var(--muted)}
+.logo-blink{display:inline-block;width:8px;height:14px;background:var(--green);animation:blink 1s step-end infinite;vertical-align:middle;margin-left:3px}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding:4px 0}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--green);color:var(--green);padding:9px 22px;text-decoration:none;transition:all .25s}
+.nav-cta:hover{background:var(--green);color:var(--dark);box-shadow:0 0 28px rgba(0,255,136,.25)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:110px 56px 80px;position:relative;z-index:1;overflow:hidden}
+.hero-inner{max-width:980px;width:100%}
+.hero-status{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--green);margin-bottom:26px;opacity:0;animation:fadeUp .8s .2s forwards;display:flex;align-items:center;gap:10px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulseAnim 2s infinite}
+@keyframes pulseAnim{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.7);opacity:.5}}
+h1.hero-name{font-family:'Syne',sans-serif;font-size:clamp(54px,9.5vw,124px);font-weight:800;line-height:.88;letter-spacing:-.025em;opacity:0;animation:fadeUp .8s .4s forwards}
+.n1{color:var(--white);display:block}
+.n2{color:transparent;-webkit-text-stroke:1px rgba(0,255,136,.35);display:block}
+.hero-tagline{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:26px 0 10px;opacity:0;animation:fadeUp .8s .55s forwards;display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.ht-seg{padding:0 14px;border-right:1px solid var(--border)}
+.ht-seg:first-child{padding-left:0}
+.ht-seg:last-child{border-right:none}
+.ht-g{color:var(--green)}.ht-a{color:var(--amber)}.ht-b{color:var(--blue)}.ht-m{color:var(--muted)}
+.hero-loc{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:30px;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero-loc b{color:var(--bright)}
+.hero-desc{font-size:17px;line-height:1.75;color:var(--muted);max-width:520px;margin-bottom:44px;opacity:0;animation:fadeUp .8s .75s forwards}
+.hero-desc strong{color:var(--bright)}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .9s forwards}
+.btn-p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--green);color:var(--dark);padding:14px 32px;text-decoration:none;transition:all .25s;font-weight:700;display:inline-flex;align-items:center;gap:10px}
+.btn-p:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,255,136,.2)}
+.btn-s{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);color:var(--muted);padding:14px 28px;text-decoration:none;transition:all .25s}
+.btn-s:hover{border-color:var(--green);color:var(--green);background:rgba(0,255,136,.04)}
+
+/* TERMINAL PANEL */
+.hero-terminal{position:absolute;right:56px;top:50%;transform:translateY(-50%);width:390px;opacity:0;animation:slideIn 1s 1.1s forwards}
+@keyframes slideIn{from{opacity:0;transform:translateY(-50%) translateX(36px)}to{opacity:1;transform:translateY(-50%) translateX(0)}}
+.term{background:rgba(0,8,4,.95);border:1px solid var(--border);backdrop-filter:blur(24px)}
+.term-bar{background:rgba(0,255,136,.06);padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
+.td{width:9px;height:9px;border-radius:50%}.td-r{background:#ff5f57}.td-y{background:#febc2e}.td-g{background:#28c840}
+.term-title{font-family:var(--mono);font-size:10px;color:var(--muted);margin:0 auto;letter-spacing:.1em}
+.term-body{padding:18px;font-family:var(--mono);font-size:12px;line-height:1.95;min-height:230px}
+.tl{display:block}.tp{color:var(--green)}.tg{color:#4ADE80}.ta{color:var(--amber)}.tb{color:var(--blue)}.tm{color:var(--muted)}
+.tcur{display:inline-block;width:7px;height:13px;background:var(--green);animation:blink 1s step-end infinite;vertical-align:middle}
+
+.scroll-hint{position:absolute;bottom:36px;left:56px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp .8s 1.4s forwards;z-index:2}
+.sline{width:48px;height:1px;background:var(--muted);overflow:hidden;position:relative}
+.sline::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--green);animation:sweep 2.2s 2s ease-in-out infinite}
+@keyframes sweep{0%{left:-100%}50%,100%{left:100%}}
+
+/* STATS */
+.stats-strip{position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:30px 56px;display:flex;background:rgba(0,255,136,.015)}
+.stat{flex:1;padding:0 32px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;color:var(--green);line-height:1;margin-bottom:5px;display:block;text-shadow:0 0 30px rgba(0,255,136,.25)}
+.stat-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* SECTION UTILITIES */
+section{position:relative;z-index:1}
+.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-label::before{content:'//';color:var(--muted)}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(34px,5.5vw,62px);font-weight:800;line-height:1;margin-bottom:48px;letter-spacing:-.02em}
+.sec-title em{font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(0,255,136,.45)}
+
+/* CLICK PROMPT */
+.click-prompt{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:8px 16px;margin-bottom:36px;animation:glowPulse 2.5s ease-in-out infinite}
+.cp-arrow{color:var(--green);animation:bounceX 1.1s ease-in-out infinite}
+@keyframes bounceX{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@keyframes glowPulse{0%,100%{border-color:var(--border)}50%{border-color:rgba(0,255,136,.4);box-shadow:0 0 18px rgba(0,255,136,.08)}}
+
+/* ABOUT */
+#about{padding:110px 56px}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:start;max-width:1100px}
+.about-text p{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:18px}
+.about-text p strong{color:var(--bright)}
+.chev{display:flex;align-items:flex-start;gap:14px;border:1px solid rgba(255,184,0,.22);padding:18px 20px;margin-top:28px;background:rgba(255,184,0,.025)}
+.chev-icon{font-size:24px;flex-shrink:0;line-height:1.4}
+.chev-text{font-family:var(--mono);font-size:11px;line-height:1.75;color:var(--muted)}
+.chev-text strong{color:var(--amber);font-size:13px;display:block;margin-bottom:4px}
+.skill-cloud{display:flex;flex-wrap:wrap;gap:8px}
+.sc-tag{font-family:var(--mono);font-size:10px;padding:7px 12px;border:1px solid var(--border);color:var(--muted);transition:all .2s;cursor:default}
+.sc-tag:hover{color:var(--green);border-color:var(--border-h)}
+.sc-tag.h{border-color:rgba(255,184,0,.28);color:var(--amber)}
+.sc-tag.b{border-color:rgba(0,212,255,.22);color:var(--blue)}
+
+/* SKILLS — TABS */
+#skills-section{padding:110px 56px}
+.tabs-row{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:0}
+.tab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:11px 18px;cursor:pointer;color:var(--muted);border:1px solid transparent;border-bottom:none;margin-bottom:-1px;transition:all .2s;display:flex;align-items:center;gap:7px;user-select:none}
+.tab:hover{color:var(--green);background:rgba(0,255,136,.03)}
+.tab.active{color:var(--green);border-color:var(--border);border-bottom-color:var(--dark);background:rgba(0,255,136,.04)}
+.tab-icon{font-size:13px}
+.tab-panel{display:none;padding:28px;border:1px solid var(--border);border-top:none;background:rgba(0,255,136,.015);animation:fadeIn .28s ease}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.panel-desc{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:22px;line-height:1.7}
+.panel-desc span{color:var(--green)}
+.chip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:8px}
+.chip{font-family:var(--mono);font-size:11px;padding:9px 13px;border:1px solid var(--border);color:var(--muted);cursor:default;transition:all .22s;display:flex;align-items:center;gap:8px;position:relative;overflow:hidden}
+.chip::before{content:'';position:absolute;inset:0;background:rgba(0,255,136,.055);transform:scaleX(0);transform-origin:left;transition:transform .28s}
+.chip:hover{color:var(--green);border-color:var(--border-h)}
+.chip:hover::before{transform:scaleX(1)}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;opacity:.45;transition:opacity .2s,box-shadow .2s}
+.chip:hover .chip-dot{opacity:1;box-shadow:0 0 7px var(--green)}
+.chip.hot{border-color:rgba(255,184,0,.28);color:var(--amber)}
+.chip.hot .chip-dot{background:var(--amber)}
+.chip.hot:hover{border-color:var(--amber);box-shadow:0 0 14px rgba(255,184,0,.08)}
+.chip.hot::before{background:rgba(255,184,0,.06)}
+
+/* EXPERIENCE — accordion */
+#experience{padding:110px 56px}
+.exp-wrap{max-width:1060px;position:relative}
+.exp-spine{position:absolute;left:0;top:10px;bottom:10px;width:1px;background:linear-gradient(to bottom,transparent,rgba(0,255,136,.35),transparent)}
+.exp-item{padding-left:40px;margin-bottom:6px;opacity:0;transform:translateY(20px);transition:all .5s}
+.exp-item.vis{opacity:1;transform:translateY(0)}
+.exp-dot{position:absolute;left:-5px;top:18px;width:11px;height:11px;border:1px solid var(--green);background:var(--dark);transition:all .3s;cursor:pointer}
+.exp-item:hover .exp-dot,.exp-item.active .exp-dot{background:var(--green);box-shadow:0 0 18px rgba(0,255,136,.45)}
+
+/* accordion header */
+.exp-head{padding:20px 22px;border:1px solid var(--border);cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;background:rgba(0,8,4,.65)}
+.exp-head:hover{border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.03)}
+.exp-head.open{border-color:rgba(0,255,136,.38);background:rgba(0,255,136,.04);border-bottom:none}
+.exp-head-l{}
+.exp-co{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:3px;display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.exp-co a{font-family:var(--mono);font-size:12px;color:var(--green);text-decoration:none;font-weight:400;border:1px solid rgba(0,255,136,.25);padding:2px 9px}
+.exp-co a:hover{background:rgba(0,255,136,.1)}
+.exp-role{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.exp-head-r{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.exp-period{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--border);padding:3px 9px;white-space:nowrap}
+.exp-hint{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--muted);opacity:.55;text-transform:uppercase}
+.exp-plus{font-size:18px;color:var(--green);transition:transform .28s;width:22px;text-align:center;flex-shrink:0}
+.exp-head.open .exp-plus{transform:rotate(45deg)}
+
+/* accordion body */
+.exp-body{display:none;border:1px solid rgba(0,255,136,.18);border-top:none;padding:22px 22px 26px;background:rgba(0,5,2,.85)}
+.exp-body.open{display:block;animation:fadeIn .3s ease}
+.exp-buls{list-style:none}
+.exp-buls li{font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:9px;padding-left:20px;position:relative}
+.exp-buls li::before{content:'▸';position:absolute;left:0;color:var(--green);font-size:11px;top:4px}
+.exp-buls li strong{color:var(--bright)}
+.exp-tags-row{margin-top:16px;display:flex;flex-wrap:wrap;gap:5px}
+.etag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.14);color:rgba(0,255,136,.55)}
+
+/* PROJECTS — click cards */
+#projects{padding:110px 56px}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;max-width:1060px}
+.proj-card{background:rgba(0,8,4,.75);border:1px solid var(--border);padding:30px;cursor:pointer;transition:all .35s;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,136,.04),transparent);opacity:0;transition:opacity .35s}
+.proj-card:hover::before{opacity:1}
+.proj-card:hover{border-color:rgba(0,255,136,.32);transform:translateY(-3px);box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.proj-expand-hint{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);opacity:.4;position:absolute;bottom:14px;right:16px;transition:all .3s}
+.proj-card:hover .proj-expand-hint{opacity:.75;color:var(--green)}
+.proj-card.open .proj-expand-hint{content:'COLLAPSE';color:var(--green);opacity:.7}
+.pc-icon{font-size:28px;margin-bottom:16px;display:block}
+.pc-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px}
+.pc-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.pc-badges{display:flex;flex-wrap:wrap;gap:5px}
+.pc-badge{font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--border);color:var(--muted)}
+.pc-extra{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.proj-card.open .pc-extra{max-height:400px}
+.proj-card.open{border-color:rgba(0,255,136,.38);background:rgba(0,255,136,.025)}
+.pc-extra-inner{padding-top:16px;border-top:1px solid var(--border);margin-top:16px}
+.pc-extra ul{list-style:none}
+.pc-extra li{font-size:14px;color:var(--muted);padding:6px 0 6px 18px;position:relative;border-bottom:1px solid rgba(0,255,136,.05);line-height:1.6}
+.pc-extra li::before{content:'→';position:absolute;left:0;color:var(--green);font-size:11px}
+.pc-extra a{color:var(--green);font-family:var(--mono);font-size:11px;text-decoration:none}
+.pc-extra a:hover{text-decoration:underline}
+
+/* CONTACT */
+#contact{padding:110px 56px}
+.contact-inner{max-width:680px}
+.contact-title{font-family:'Syne',sans-serif;font-size:clamp(36px,6vw,70px);font-weight:800;line-height:.95;margin-bottom:26px;letter-spacing:-.02em}
+.contact-title span{color:var(--green)}
+.contact-desc{font-size:16px;line-height:1.75;color:var(--muted);margin-bottom:44px}
+.contact-links{display:flex;flex-direction:column}
+.clink{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--white);transition:all .25s}
+.clink:hover{padding-left:12px;background:rgba(0,255,136,.02)}
+.clink:hover .cl-label{color:var(--green)}
+.clink:hover .cl-arr{transform:translate(4px,-4px);color:var(--green)}
+.clink:hover .cl-icon{background:rgba(0,255,136,.08);border-color:var(--border-h);box-shadow:0 0 18px rgba(0,255,136,.12)}
+.cl-l{display:flex;align-items:center;gap:16px}
+.cl-icon{width:42px;height:42px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;color:var(--green);transition:all .25s;flex-shrink:0}
+.cl-label{font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+.cl-val{font-size:15px;color:var(--white);margin-top:2px}
+.cl-arr{font-size:18px;color:var(--muted);transition:all .25s}
+
+/* FOOTER */
+footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.fcopy{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.fcopy span{color:var(--green)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* MOBILE */
+@media(max-width:880px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  #hero{padding:90px 20px 60px}
+  .hero-terminal{display:none}
+  .stats-strip{padding:20px;flex-wrap:wrap}
+  .stat{min-width:50%;padding:14px;border-right:none;border-bottom:1px solid var(--border)}
+  #about,#skills-section,#experience,#projects,#contact{padding:70px 20px}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .proj-grid{grid-template-columns:1fr}
+  footer{padding:20px;flex-direction:column;gap:8px;text-align:center}
+  .hero-ctas{flex-direction:column}
+  .btn-p,.btn-s{text-align:center;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="curT"></div>
+<div id="progress"></div>
+<canvas id="matrix"></canvas>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo"><span class="logo-bracket">[</span>AI<span class="logo-bracket">]</span>&nbsp;asad_ikram<span class="logo-blink"></span></div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills-section">skills</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <a href="mailto:asad.ikram53@gmail.com" class="nav-cta">hire_me()</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-status"><span class="pulse"></span>available for new roles</div>
+    <h1 class="hero-name">
+      <span class="n1">ASAD</span>
+      <span class="n2">IKRAM</span>
+    </h1>
+    <div class="hero-tagline">
+      <span class="ht-seg ht-g">data_engineer</span>
+      <span class="ht-seg ht-a">chevening_scholar</span>
+      <span class="ht-seg ht-b">6+ yrs xp</span>
+      <span class="ht-seg ht-m">300+ projects</span>
+    </div>
+    <div class="hero-loc">📍 <b>Lahore, Pakistan</b></div>
+    <p class="hero-desc">
+      I architect <strong>adversarial scraping infrastructure</strong> that defeats every anti-bot system,
+      and build <strong>cloud-native data pipelines</strong> that turn raw chaos into clean, trusted warehouses powering real business decisions.
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-p">explore_work() →</a>
+      <a href="https://artemisai.co.uk" target="_blank" class="btn-s">artemisai.co.uk ↗</a>
+      <a href="https://linkedin.com/in/asad-ikram98" target="_blank" class="btn-s">linkedin ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-terminal">
+    <div class="term">
+      <div class="term-bar">
+        <div class="td td-r"></div><div class="td td-y"></div><div class="td td-g"></div>
+        <span class="term-title">pipeline.live</span>
+      </div>
+      <div class="term-body" id="tty"></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span class="sline"></span>scroll</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat"><span class="stat-num"><span class="counter" data-t="6">0</span>+</span><span class="stat-label">Years Exp</span></div>
+  <div class="stat"><span class="stat-num"><span class="counter" data-t="300">0</span>+</span><span class="stat-label">Projects</span></div>
+  <div class="stat"><span class="stat-num"><span class="counter" data-t="50">0</span>M+</span><span class="stat-label">Records Processed</span></div>
+  <div class="stat"><span class="stat-num"><span class="counter" data-t="500">0</span>+</span><span class="stat-label">Scrapers Built</span></div>
+  <div class="stat"><span class="stat-num"><span class="counter" data-t="400">0</span>+</span><span class="stat-label">Sites Crawled</span></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">About</div>
+  <h2 class="sec-title">Data at <em>enterprise</em> scale</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Senior Data Engineer</strong> with 6+ years turning messy, blocked, or non-existent data sources into clean, scalable pipelines businesses actually trust.</p>
+      <p>My specialty is <strong>adversarial scraping</strong> — building infrastructure that defeats Akamai, Cloudflare, Datadome and every other anti-bot system — combined with the engineering depth to build proper layered data warehouses on top.</p>
+      <p>I've built platforms for <strong>M+C Saatchi, Dubizzle, Fix.com</strong> and 50+ global clients. Currently running <strong><a href="https://artemisai.co.uk" target="_blank" style="color:var(--green);text-decoration:none">ArtemisAI</a></strong> — a social data intelligence platform for brands.</p>
+      <div class="chev">
+        <span class="chev-icon">🏆</span>
+        <div class="chev-text">
+          <strong>Chevening Scholar 2024–2025</strong>
+          Top 2–3% of 70,000+ applicants across 160 countries<br>
+          Fully funded by UK Foreign & Commonwealth Development Office
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="click-prompt" style="margin-bottom:20px"><span class="cp-arrow">→</span> hover any tag · click skill tabs below</div>
+      <div class="skill-cloud">
+        <span class="sc-tag h">Scrapy</span>
+        <span class="sc-tag h">Playwright</span>
+        <span class="sc-tag h">TLS Evasion</span>
+        <span class="sc-tag">PySpark</span>
+        <span class="sc-tag">Redshift</span>
+        <span class="sc-tag b">LangChain</span>
+        <span class="sc-tag">ECS Fargate</span>
+        <span class="sc-tag">Airflow</span>
+        <span class="sc-tag h">Cloudflare Bypass</span>
+        <span class="sc-tag b">RAG Pipelines</span>
+        <span class="sc-tag">Snowflake</span>
+        <span class="sc-tag">Kubernetes</span>
+        <span class="sc-tag">Elasticsearch</span>
+        <span class="sc-tag">dbt</span>
+        <span class="sc-tag h">curl_cffi</span>
+        <span class="sc-tag b">OpenAI API</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS — tabbed interactive -->
+<section id="skills-section">
+  <div class="sec-label">Skills</div>
+  <h2 class="sec-title">The full <em>stack</em></h2>
+  <div class="click-prompt"><span class="cp-arrow">→</span> click a tab to explore all skills</div>
+
+  <div class="tabs-row" id="tabs-row">
+    <div class="tab active" data-tab="scraping"><span class="tab-icon">🕷️</span>Scraping</div>
+    <div class="tab" data-tab="antibot"><span class="tab-icon">🛡️</span>Anti-Bot</div>
+    <div class="tab" data-tab="etl"><span class="tab-icon">⚙️</span>ETL / ELT</div>
+    <div class="tab" data-tab="warehouse"><span class="tab-icon">🗄️</span>Warehousing</div>
+    <div class="tab" data-tab="cloud"><span class="tab-icon">☁️</span>Cloud AWS</div>
+    <div class="tab" data-tab="devops"><span class="tab-icon">🐳</span>DevOps</div>
+    <div class="tab" data-tab="databases"><span class="tab-icon">💾</span>Databases</div>
+    <div class="tab" data-tab="ml"><span class="tab-icon">🤖</span>ML / AI</div>
+    <div class="tab" data-tab="bi"><span class="tab-icon">📊</span>BI</div>
+    <div class="tab" data-tab="languages"><span class="tab-icon">💻</span>Languages</div>
+  </div>
+
+  <div class="tab-panel active" id="tab-scraping">
+    <div class="panel-desc">Web scraping frameworks and extraction tooling — <span>6+ years, 400+ sites, 50M+ records</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>Scrapy</div>
+      <div class="chip hot"><span class="chip-dot"></span>Scrapy Cluster</div>
+      <div class="chip hot"><span class="chip-dot"></span>Scrapyd</div>
+      <div class="chip hot"><span class="chip-dot"></span>Playwright</div>
+      <div class="chip hot"><span class="chip-dot"></span>Puppeteer</div>
+      <div class="chip"><span class="chip-dot"></span>Selenium</div>
+      <div class="chip"><span class="chip-dot"></span>BeautifulSoup</div>
+      <div class="chip"><span class="chip-dot"></span>Splash</div>
+      <div class="chip hot"><span class="chip-dot"></span>Apify</div>
+      <div class="chip hot"><span class="chip-dot"></span>curl_cffi</div>
+      <div class="chip"><span class="chip-dot"></span>httpx</div>
+      <div class="chip"><span class="chip-dot"></span>requests</div>
+      <div class="chip"><span class="chip-dot"></span>Scrapy-Playwright</div>
+      <div class="chip"><span class="chip-dot"></span>lxml / parsel</div>
+      <div class="chip"><span class="chip-dot"></span>mechanize</div>
+      <div class="chip"><span class="chip-dot"></span>Crawlee</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-antibot">
+    <div class="panel-desc">Fingerprint evasion, CAPTCHA solving, API recon — <span>defeating Akamai v3, Cloudflare Turnstile, Datadome, PerimeterX, Kasada, F5</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>TLS / JA3 / JA4 Spoofing</div>
+      <div class="chip hot"><span class="chip-dot"></span>curl_cffi</div>
+      <div class="chip hot"><span class="chip-dot"></span>cycle-tls</div>
+      <div class="chip hot"><span class="chip-dot"></span>GoLogin</div>
+      <div class="chip hot"><span class="chip-dot"></span>undetected-chromedriver</div>
+      <div class="chip hot"><span class="chip-dot"></span>playwright-stealth</div>
+      <div class="chip hot"><span class="chip-dot"></span>rebrowser-patches</div>
+      <div class="chip"><span class="chip-dot"></span>2Captcha</div>
+      <div class="chip"><span class="chip-dot"></span>Puzzle Solving</div>
+      <div class="chip"><span class="chip-dot"></span>Proxy Rotation</div>
+      <div class="chip hot"><span class="chip-dot"></span>Akamai v3 Bypass</div>
+      <div class="chip hot"><span class="chip-dot"></span>Cloudflare Turnstile</div>
+      <div class="chip hot"><span class="chip-dot"></span>Datadome Bypass</div>
+      <div class="chip"><span class="chip-dot"></span>PerimeterX</div>
+      <div class="chip"><span class="chip-dot"></span>Kasada</div>
+      <div class="chip"><span class="chip-dot"></span>F5 Shape Security</div>
+      <div class="chip"><span class="chip-dot"></span>Bright Data</div>
+      <div class="chip"><span class="chip-dot"></span>Oxylabs</div>
+      <div class="chip"><span class="chip-dot"></span>Smartproxy</div>
+      <div class="chip"><span class="chip-dot"></span>NetNut</div>
+      <div class="chip"><span class="chip-dot"></span>Charles Proxy</div>
+      <div class="chip"><span class="chip-dot"></span>Burp Suite</div>
+      <div class="chip"><span class="chip-dot"></span>HTTP Toolkit</div>
+      <div class="chip"><span class="chip-dot"></span>Android Studio MITM</div>
+      <div class="chip"><span class="chip-dot"></span>Hidden REST / GraphQL</div>
+      <div class="chip"><span class="chip-dot"></span>JS Bundle Deobfuscation</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-etl">
+    <div class="panel-desc">ETL/ELT pipelines, orchestration and streaming — <span>production pipelines processing hundreds of millions of records</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>PySpark</div>
+      <div class="chip hot"><span class="chip-dot"></span>AWS Glue</div>
+      <div class="chip hot"><span class="chip-dot"></span>dbt</div>
+      <div class="chip hot"><span class="chip-dot"></span>Matillion</div>
+      <div class="chip hot"><span class="chip-dot"></span>Apache Airflow</div>
+      <div class="chip hot"><span class="chip-dot"></span>AWS Step Functions</div>
+      <div class="chip"><span class="chip-dot"></span>EventBridge</div>
+      <div class="chip"><span class="chip-dot"></span>Apache Spark</div>
+      <div class="chip"><span class="chip-dot"></span>EMR Serverless</div>
+      <div class="chip"><span class="chip-dot"></span>Apache Kafka</div>
+      <div class="chip"><span class="chip-dot"></span>AWS Kinesis</div>
+      <div class="chip"><span class="chip-dot"></span>SNS / SQS</div>
+      <div class="chip"><span class="chip-dot"></span>Great Expectations</div>
+      <div class="chip"><span class="chip-dot"></span>Pandas</div>
+      <div class="chip"><span class="chip-dot"></span>Polars</div>
+      <div class="chip"><span class="chip-dot"></span>NumPy</div>
+      <div class="chip"><span class="chip-dot"></span>Apache Flink</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-warehouse">
+    <div class="panel-desc">Data warehouse design and modelling — <span>RDL → ODL → ADL layered architecture, star & snowflake schemas</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>Amazon Redshift</div>
+      <div class="chip hot"><span class="chip-dot"></span>Snowflake</div>
+      <div class="chip"><span class="chip-dot"></span>Google BigQuery</div>
+      <div class="chip"><span class="chip-dot"></span>Apache Hive</div>
+      <div class="chip"><span class="chip-dot"></span>Hadoop HDFS</div>
+      <div class="chip"><span class="chip-dot"></span>Star Schema</div>
+      <div class="chip"><span class="chip-dot"></span>Snowflake Schema</div>
+      <div class="chip"><span class="chip-dot"></span>Dimensional Modeling</div>
+      <div class="chip"><span class="chip-dot"></span>RDL → ODL → ADL</div>
+      <div class="chip"><span class="chip-dot"></span>Bronze / Silver / Gold</div>
+      <div class="chip"><span class="chip-dot"></span>Data Lakehouse</div>
+      <div class="chip"><span class="chip-dot"></span>Redshift Spectrum</div>
+      <div class="chip"><span class="chip-dot"></span>AWS Athena</div>
+      <div class="chip"><span class="chip-dot"></span>Apache Parquet / ORC</div>
+      <div class="chip"><span class="chip-dot"></span>Delta Lake</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-cloud">
+    <div class="panel-desc">AWS cloud-native infrastructure — <span>full stack from Lambda to EKS, end-to-end pipeline ownership</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>ECS Fargate</div>
+      <div class="chip hot"><span class="chip-dot"></span>EKS (Kubernetes)</div>
+      <div class="chip"><span class="chip-dot"></span>AWS Batch</div>
+      <div class="chip"><span class="chip-dot"></span>Lambda</div>
+      <div class="chip"><span class="chip-dot"></span>ECR</div>
+      <div class="chip"><span class="chip-dot"></span>S3</div>
+      <div class="chip"><span class="chip-dot"></span>Athena</div>
+      <div class="chip"><span class="chip-dot"></span>AWS Glue</div>
+      <div class="chip"><span class="chip-dot"></span>Kinesis</div>
+      <div class="chip"><span class="chip-dot"></span>SNS / SQS</div>
+      <div class="chip"><span class="chip-dot"></span>CloudWatch</div>
+      <div class="chip"><span class="chip-dot"></span>CloudFormation</div>
+      <div class="chip"><span class="chip-dot"></span>EventBridge</div>
+      <div class="chip"><span class="chip-dot"></span>SageMaker</div>
+      <div class="chip"><span class="chip-dot"></span>QuickSight</div>
+      <div class="chip"><span class="chip-dot"></span>DynamoDB</div>
+      <div class="chip"><span class="chip-dot"></span>EMR Serverless</div>
+      <div class="chip"><span class="chip-dot"></span>Step Functions</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-devops">
+    <div class="panel-desc">DevOps, CI/CD and infrastructure automation — <span>containerised, automated, production-grade deployments</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>Docker</div>
+      <div class="chip hot"><span class="chip-dot"></span>Kubernetes</div>
+      <div class="chip hot"><span class="chip-dot"></span>GitHub Actions</div>
+      <div class="chip"><span class="chip-dot"></span>Scrapyd</div>
+      <div class="chip"><span class="chip-dot"></span>Scrapy Cluster</div>
+      <div class="chip"><span class="chip-dot"></span>CloudFormation</div>
+      <div class="chip"><span class="chip-dot"></span>Terraform</div>
+      <div class="chip"><span class="chip-dot"></span>CI/CD Pipelines</div>
+      <div class="chip"><span class="chip-dot"></span>Git</div>
+      <div class="chip"><span class="chip-dot"></span>Linux / Bash</div>
+      <div class="chip"><span class="chip-dot"></span>pytest</div>
+      <div class="chip"><span class="chip-dot"></span>Datadog / CloudWatch</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-databases">
+    <div class="panel-desc">Relational, NoSQL and search — <span>from OLTP Postgres to Elasticsearch full-text search</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>PostgreSQL</div>
+      <div class="chip"><span class="chip-dot"></span>MySQL</div>
+      <div class="chip"><span class="chip-dot"></span>MS SQL Server</div>
+      <div class="chip hot"><span class="chip-dot"></span>MongoDB</div>
+      <div class="chip"><span class="chip-dot"></span>DynamoDB</div>
+      <div class="chip"><span class="chip-dot"></span>Firebase</div>
+      <div class="chip hot"><span class="chip-dot"></span>Elasticsearch</div>
+      <div class="chip"><span class="chip-dot"></span>ELK Stack (Kibana)</div>
+      <div class="chip"><span class="chip-dot"></span>Redis</div>
+      <div class="chip"><span class="chip-dot"></span>SQLite</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-ml">
+    <div class="panel-desc">Machine learning, NLP and AI pipelines — <span>from RAG and vector search to custom LLM fine-tuning</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>LangChain</div>
+      <div class="chip hot"><span class="chip-dot"></span>OpenAI API</div>
+      <div class="chip hot"><span class="chip-dot"></span>RAG Pipelines</div>
+      <div class="chip"><span class="chip-dot"></span>HuggingFace</div>
+      <div class="chip"><span class="chip-dot"></span>Vector Databases</div>
+      <div class="chip"><span class="chip-dot"></span>BERT</div>
+      <div class="chip"><span class="chip-dot"></span>GPT Fine-tuning</div>
+      <div class="chip"><span class="chip-dot"></span>LSTM</div>
+      <div class="chip"><span class="chip-dot"></span>XGBoost</div>
+      <div class="chip"><span class="chip-dot"></span>LightGBM</div>
+      <div class="chip"><span class="chip-dot"></span>AWS SageMaker</div>
+      <div class="chip"><span class="chip-dot"></span>VADER (Sentiment)</div>
+      <div class="chip"><span class="chip-dot"></span>spaCy</div>
+      <div class="chip"><span class="chip-dot"></span>TextBlob / NLTK</div>
+      <div class="chip"><span class="chip-dot"></span>Topic Modeling</div>
+      <div class="chip"><span class="chip-dot"></span>Sentiment Analysis</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-bi">
+    <div class="panel-desc">Business intelligence and dashboards — <span>from raw pipeline output to C-suite reporting</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>Tableau</div>
+      <div class="chip"><span class="chip-dot"></span>Power BI</div>
+      <div class="chip"><span class="chip-dot"></span>Amazon QuickSight</div>
+      <div class="chip"><span class="chip-dot"></span>Sisense</div>
+      <div class="chip"><span class="chip-dot"></span>Periscope Data</div>
+      <div class="chip"><span class="chip-dot"></span>Retool</div>
+      <div class="chip"><span class="chip-dot"></span>Kibana</div>
+      <div class="chip"><span class="chip-dot"></span>D3.js</div>
+      <div class="chip"><span class="chip-dot"></span>Matplotlib</div>
+      <div class="chip"><span class="chip-dot"></span>Plotly</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-languages">
+    <div class="panel-desc">Programming languages and core frameworks — <span>Python-first, polyglot where it matters</span></div>
+    <div class="chip-grid">
+      <div class="chip hot"><span class="chip-dot"></span>Python</div>
+      <div class="chip hot"><span class="chip-dot"></span>SQL (advanced)</div>
+      <div class="chip"><span class="chip-dot"></span>JavaScript / Node.js</div>
+      <div class="chip"><span class="chip-dot"></span>Go (Golang)</div>
+      <div class="chip"><span class="chip-dot"></span>Bash / Shell</div>
+      <div class="chip"><span class="chip-dot"></span>Django</div>
+      <div class="chip"><span class="chip-dot"></span>FastAPI</div>
+      <div class="chip"><span class="chip-dot"></span>Flask</div>
+      <div class="chip"><span class="chip-dot"></span>React</div>
+      <div class="chip"><span class="chip-dot"></span>REST APIs</div>
+      <div class="chip"><span class="chip-dot"></span>GraphQL</div>
+      <div class="chip"><span class="chip-dot"></span>HTML / CSS</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE — accordion -->
+<section id="experience">
+  <div class="sec-label">Experience</div>
+  <h2 class="sec-title">Where I've <em>built</em> things</h2>
+  <div class="click-prompt"><span class="cp-arrow">→</span> click any role to expand</div>
+  <div class="exp-wrap">
+    <div class="exp-spine"></div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">M+C Saatchi Fluency</div>
+          <div class="exp-role">Data Engineer Consultant · UK Remote</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">Dec 2024 – Present</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Architected <strong>end-to-end AWS pipeline</strong> (GitHub Actions → ECR → ECS Fargate → EventBridge → Step Functions → S3 → AWS Glue → Athena) from zero to production in under 30 days</li>
+          <li>Delivered <strong>ETL/ELT pipelines + SageMaker NLP sentiment analysis</strong> powering marketing campaigns for Amazon, Nike, Ford, Reckitt and the UK Government</li>
+          <li>Eliminated <strong>100% of manual data collection</strong> via Scrapy with CAPTCHA bypass, reverse-engineering, proxy rotation and TLS fingerprint evasion</li>
+          <li>Reduced infrastructure costs <strong>35%</strong> with auto-scaling ECS Fargate container architecture replacing legacy VMs</li>
+          <li>Built real-time <strong>CloudWatch monitoring + Slack alerting</strong> with Retool data freshness dashboards; maintained 99%+ pipeline uptime</li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">ECS Fargate</span><span class="etag">Step Functions</span><span class="etag">SageMaker</span><span class="etag">Scrapy</span><span class="etag">AWS Glue</span><span class="etag">Athena</span><span class="etag">NLP</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">ArtemisAI <a href="https://artemisai.co.uk" target="_blank" onclick="event.stopPropagation()">artemisai.co.uk ↗</a></div>
+          <div class="exp-role">Founder & Lead Data Engineer · UK</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">Feb 2025 – Present</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Built a <strong>Meta social data lakehouse</strong> from scratch — GitHub Actions → ECR → ECS Fargate → DynamoDB → S3 — ingesting 30+ brand pages daily at scale</li>
+          <li>Designed <strong>layered Redshift DWH</strong> (RDL → ODL → ADL) orchestrated by Step Functions; sub-second KPI reporting via QuickSight</li>
+          <li>Deployed ECS-hosted <strong>ML sentiment-tagging + topic-labeling microservices</strong>; packaged ADL outputs as B2B subscription datasets</li>
+          <li>Trained <strong>custom LLMs</strong> on engagement data; predictive trend models improved client content monetization by <strong>40%</strong></li>
+          <li>Implemented <strong>self-healing infrastructure</strong> — EventBridge dead-letter queues, CloudWatch alarms and Twilio WhatsApp alerts — zero manual intervention</li>
+          <li>Multi-tenant Redshift access layer with <strong>row-level security</strong>; secure B2B data sharing across 10+ client accounts</li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">Redshift</span><span class="etag">LangChain</span><span class="etag">Custom LLMs</span><span class="etag">ECS</span><span class="etag">DynamoDB</span><span class="etag">QuickSight</span><span class="etag">Step Functions</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">Dubizzle Labs</div>
+          <div class="exp-role">Senior Data Engineer (Promoted ×2) — Dubizzle · Bayut · Zameen · OLX · Pakistan</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">Feb 2022 – Aug 2024</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Led team owning <strong>500+ regional web scrapers</strong> across MENA on EKS — GitHub Actions CI/CD, Matillion ELT / AWS Glue (S3 → Athena → Redshift)</li>
+          <li>Redesigned <strong>layered DWH (RDL → ODL → ADL)</strong> for Propforce; improved ETL/ELT throughput <strong>60%</strong>, directly driving record revenues</li>
+          <li>Built competitor intelligence platform using DWH + scraping; modelled Star Schema, Snowflake Schema and Dimensional warehouse schemas</li>
+          <li>Developed <strong>Elasticsearch data pipelines</strong> for property search; optimised query performance <strong>50%</strong> via custom index mapping and sharding</li>
+          <li>Reverse-engineered competitor mobile apps via <strong>Android Studio MITM</strong> (HTTP Toolkit + Charles Proxy) to extract hidden REST and GraphQL APIs</li>
+          <li>Introduced unit testing + Scrapy contract validation; cut production scraping incidents <strong>45%</strong></li>
+          <li><strong>Promoted twice in 2 years</strong>: Associate SWE → Data Engineer → Senior Data Engineer</li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">EKS</span><span class="etag">Scrapy</span><span class="etag">Elasticsearch</span><span class="etag">Matillion</span><span class="etag">Redshift</span><span class="etag">AWS Glue</span><span class="etag">Mobile MITM</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">VendueTech</div>
+          <div class="exp-role">Lead Data Engineer · Ireland Remote · Contract</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">Jun – Jul 2025</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Led 3-engineer team building <strong>real-time auction data ingestion</strong> using Scrapy, Playwright, AWS Batch and Step Functions; bypassed CAPTCHA and anti-bot stacks</li>
+          <li>Migrated full infrastructure <strong>Azure → AWS</strong>; PySpark on EMR Serverless reduced data latency <strong>40%</strong> across Bronze, Silver and Gold layers</li>
+          <li>Designed <strong>idempotent pipeline</strong> with DynamoDB deduplication checkpoints ensuring exactly-once processing at high throughput</li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">PySpark</span><span class="etag">EMR Serverless</span><span class="etag">Playwright</span><span class="etag">AWS Batch</span><span class="etag">DynamoDB</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">Fix.com</div>
+          <div class="exp-role">Data Engineer Consultant · Canada Remote</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">May 2023 – Present</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Designed Scrapy + Scrapyd pipelines processing <strong>50M+ data points</strong> from 200+ e-commerce sites; expanded product catalog <strong>50%</strong> in 12 months</li>
+          <li>Optimised distributed <strong>Scrapy Cluster on AWS ECS</strong>; cut crawl time <strong>40%</strong> via async I/O tuning, connection pooling and smart retry logic</li>
+          <li>Implemented residential proxy rotation across Bright Data, Oxylabs and Smartproxy with <strong>CloudWatch burn-rate monitoring</strong> and auto-failover</li>
+          <li>Introduced <strong>Great Expectations</strong> data validation; automated schema drift detection, reducing bad data in production by <strong>70%</strong></li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">Scrapy Cluster</span><span class="etag">Proxy Rotation</span><span class="etag">AWS ECS</span><span class="etag">Great Expectations</span><span class="etag">MS SQL</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">Prefe</div>
+          <div class="exp-role">Data Engineer Consultant · Italy Remote</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">Sep – Dec 2024</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Rebuilt legacy scripts into modern Scrapy-based architecture with middleware, item pipelines and retry logic; <strong>reduced scraper failure rate 60%</strong></li>
+          <li>Set scraping best practices and code review standards adopted across the full team; mentored 2 junior engineers on anti-bot evasion techniques</li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">Scrapy</span><span class="etag">Middleware</span><span class="etag">Anti-Bot</span><span class="etag">Mentoring</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">CXG</div>
+          <div class="exp-role">Freelance Data Engineer · Dubai Remote</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">Dec 2025 – Jan 2026</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Built and maintained production crawlers for global luxury fashion brands; bypassed advanced anti-bot protections including <strong>Akamai v3 and Cloudflare Turnstile</strong></li>
+          <li>Introduced pytest-based automated QA quality-check framework; achieved <strong>99%+ data completeness</strong> across all active crawlers</li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">Akamai v3</span><span class="etag">Cloudflare Turnstile</span><span class="etag">pytest</span><span class="etag">Luxury Brands</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-head" onclick="toggleExp(this)">
+        <div class="exp-head-l">
+          <div class="exp-co">Fiverr / Independent Consulting</div>
+          <div class="exp-role">Senior Freelance Data Engineer · Level 2 Seller · 5★ · 300+ Projects</div>
+        </div>
+        <div class="exp-head-r">
+          <span class="exp-hint">click to expand</span>
+          <span class="exp-period">Dec 2018 – Feb 2026</span>
+          <span class="exp-plus">+</span>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-buls">
+          <li>Delivered <strong>300+ web scraping and data engineering projects</strong> for global clients across 400+ websites worldwide</li>
+          <li>Bypassed <strong>Akamai, Cloudflare, Datadome, PerimeterX, Kasada and F5 Shape Security</strong> via TLS/JA3 evasion, GoLogin, proxy rotation and behavioural mimicry</li>
+          <li>Deployed full-stack data products: Scrapy → ECS Fargate → S3 → Redshift DWH → Tableau / QuickSight dashboards for 50+ international clients</li>
+          <li>Deployed AWS-native scrapers, ECS pipelines, Django web tools and browser extensions; <strong>mobile API recon</strong> via Android Studio emulator MITM</li>
+        </ul>
+        <div class="exp-tags-row"><span class="etag">TLS Evasion</span><span class="etag">GoLogin</span><span class="etag">curl_cffi</span><span class="etag">Anti-Bot</span><span class="etag">Mobile MITM</span><span class="etag">Django</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS — click-to-expand cards -->
+<section id="projects">
+  <div class="sec-label">Projects</div>
+  <h2 class="sec-title"><em>Featured</em> work</h2>
+  <div class="click-prompt"><span class="cp-arrow">→</span> click a card to read more</div>
+  <div class="proj-grid">
+
+    <div class="proj-card" onclick="toggleCard(this)">
+      <span class="proj-expand-hint">CLICK TO EXPAND</span>
+      <span class="pc-icon">🌐</span>
+      <div class="pc-name">ArtemisAI</div>
+      <div class="pc-desc">Social data intelligence platform for brands — Meta data lakehouse, ML sentiment tagging, B2B subscription datasets.</div>
+      <div class="pc-badges"><span class="pc-badge">ECS Fargate</span><span class="pc-badge">Redshift</span><span class="pc-badge">LLMs</span><span class="pc-badge">Step Functions</span><span class="pc-badge">QuickSight</span></div>
+      <div class="pc-extra">
+        <div class="pc-extra-inner">
+          <ul>
+            <li>GitHub Actions → ECR → ECS Fargate → DynamoDB → S3 ingesting 30+ brand pages daily</li>
+            <li>Layered Redshift DWH (RDL → ODL → ADL) with sub-second KPI reporting</li>
+            <li>Custom LLMs on engagement data — improved client monetization 40%</li>
+            <li>Self-healing EventBridge + Twilio WhatsApp alerts — zero manual ops</li>
+            <li><a href="https://artemisai.co.uk" target="_blank" onclick="event.stopPropagation()">→ artemisai.co.uk</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card" onclick="toggleCard(this)">
+      <span class="proj-expand-hint">CLICK TO EXPAND</span>
+      <span class="pc-icon">🕷️</span>
+      <div class="pc-name">MENA Scraping Platform</div>
+      <div class="pc-desc">500+ regional scrapers for Dubizzle, Bayut, Zameen and OLX across MENA — enterprise scale on EKS.</div>
+      <div class="pc-badges"><span class="pc-badge">EKS</span><span class="pc-badge">Scrapy</span><span class="pc-badge">Matillion</span><span class="pc-badge">Redshift</span></div>
+      <div class="pc-extra">
+        <div class="pc-extra-inner">
+          <ul>
+            <li>500+ scrapers managed on AWS EKS with full GitHub Actions CI/CD</li>
+            <li>Matillion ELT pipeline: S3 → Glue → Athena → Redshift</li>
+            <li>Reverse-engineered competitor mobile APIs via Android Studio MITM</li>
+            <li>Competitor revenue forecasting combining DWH + scraping intelligence</li>
+            <li>ETL throughput improved 60% — drove record company revenues</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card" onclick="toggleCard(this)">
+      <span class="proj-expand-hint">CLICK TO EXPAND</span>
+      <span class="pc-icon">📦</span>
+      <div class="pc-name">Fix.com Product Intelligence</div>
+      <div class="pc-desc">50M+ data points from 200+ e-commerce sites — pricing, assortment and stock intelligence pipeline at scale.</div>
+      <div class="pc-badges"><span class="pc-badge">Scrapy Cluster</span><span class="pc-badge">AWS ECS</span><span class="pc-badge">Proxy Rotation</span><span class="pc-badge">Tableau</span></div>
+      <div class="pc-extra">
+        <div class="pc-extra-inner">
+          <ul>
+            <li>Scrapy + Scrapyd fleet processing 50M+ data points from 200+ sites</li>
+            <li>Residential proxy pools — Bright Data, Oxylabs, Smartproxy — with burn-rate monitoring</li>
+            <li>Great Expectations validation — 70% reduction in bad production data</li>
+            <li>Product catalog expanded 50% in 12 months via automated scraping</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card" onclick="toggleCard(this)">
+      <span class="proj-expand-hint">CLICK TO EXPAND</span>
+      <span class="pc-icon">🛡️</span>
+      <div class="pc-name">Adversarial Scraping Toolkit</div>
+      <div class="pc-desc">Production-grade stealth infrastructure defeating Akamai, Cloudflare, Datadome, PerimeterX, Kasada and F5.</div>
+      <div class="pc-badges"><span class="pc-badge">TLS/JA3/JA4</span><span class="pc-badge">GoLogin</span><span class="pc-badge">curl_cffi</span><span class="pc-badge">2Captcha</span></div>
+      <div class="pc-extra">
+        <div class="pc-extra-inner">
+          <ul>
+            <li>TLS/JA3/JA4 fingerprint spoofing via curl_cffi and cycle-tls</li>
+            <li>playwright-stealth + rebrowser-patches for headless Chrome evasion</li>
+            <li>Residential/mobile proxy rotation with intelligent burn-rate monitoring</li>
+            <li>Mobile API recon: Charles Proxy + HTTP Toolkit MITM on Android emulators</li>
+            <li>Canvas, WebGL, audio context spoofing for browser fingerprint normalisation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="sec-label">Contact</div>
+    <h2 class="contact-title">Let's build<br>something <span>real</span></h2>
+    <p class="contact-desc">Open to senior data engineering roles, scraping contracts and pipeline architecture consulting. Based in Lahore, Pakistan. Response within 24 hours.</p>
+    <div class="contact-links">
+      <a href="mailto:asad.ikram53@gmail.com" class="clink">
+        <div class="cl-l"><div class="cl-icon">✉</div><div><div class="cl-label">Email</div><div class="cl-val">asad.ikram53@gmail.com</div></div></div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/asad-ikram98" target="_blank" class="clink">
+        <div class="cl-l"><div class="cl-icon" style="font-family:var(--mono);font-size:11px;font-weight:700">in</div><div><div class="cl-label">LinkedIn</div><div class="cl-val">linkedin.com/in/asad-ikram98</div></div></div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a href="https://artemisai.co.uk" target="_blank" class="clink">
+        <div class="cl-l"><div class="cl-icon">🌐</div><div><div class="cl-label">ArtemisAI</div><div class="cl-val">artemisai.co.uk</div></div></div>
+        <span class="cl-arr">↗</span>
+      </a>
+      <a href="tel:+447482376417" class="clink">
+        <div class="cl-l"><div class="cl-icon">📞</div><div><div class="cl-label">Phone</div><div class="cl-val">+44 7482 376417</div></div></div>
+        <span class="cl-arr">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fcopy">© 2026 <span>Asad Ikram</span> — Full Stack Data Engineer</div>
+  <div class="fcopy">Lahore, <span>Pakistan</span></div>
+</footer>
+
+<script>
+// ── CURSOR ────────────────────────────────────────────────────
+const cur=document.getElementById('cur'),curT=document.getElementById('curT');
+let mx=0,my=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){tx+=(mx-tx)*.12;ty+=(my-ty)*.12;curT.style.left=tx+'px';curT.style.top=ty+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.proj-card,.exp-head,.tab,.chip,.clink').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+
+// ── MATRIX RAIN ──────────────────────────────────────────────
+const mc=document.getElementById('matrix'),mctx=mc.getContext('2d');
+let mW,mH,cols,drops;
+function initM(){mW=mc.width=innerWidth;mH=mc.height=innerHeight;cols=Math.floor(mW/18);drops=Array.from({length:cols},()=>Math.random()*-80)}
+initM();addEventListener('resize',initM);
+const CHARS='01アイウエカキククサシスセタチツテトΩαβγδ∑∆∫≈≠∞ABCDEF';
+setInterval(()=>{
+  mctx.fillStyle='rgba(3,10,6,.05)';mctx.fillRect(0,0,mW,mH);
+  mctx.font='13px JetBrains Mono,monospace';
+  for(let i=0;i<cols;i++){
+    const ch=CHARS[Math.floor(Math.random()*CHARS.length)];
+    const b=Math.random();
+    mctx.fillStyle=b>.96?'#AAFFCC':b>.78?'#00FF88':'#002810';
+    mctx.fillText(ch,i*18,drops[i]*18);
+    if(drops[i]*18>mH&&Math.random()>.97)drops[i]=0;
+    drops[i]++;
+  }
+},55);
+
+// ── PROGRESS ─────────────────────────────────────────────────
+const prog=document.getElementById('progress');
+addEventListener('scroll',()=>{prog.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%'});
+
+// ── TERMINAL TYPEWRITER ──────────────────────────────────────
+const lines=[
+  {c:'#00FF88',v:'$ python3 pipeline.py --stealth'},
+  {c:'#4ADE80',v:'✓ warehouse connected (Redshift)'},
+  {c:'#4ADE80',v:'✓ proxy pool ready (1200 IPs)'},
+  {c:'#00FF88',v:'$ scrapy crawl target --antibot'},
+  {c:'#FFB800',v:'⟳ rotating TLS fingerprint JA3...'},
+  {c:'#FFB800',v:'⟳ spoofing canvas / WebGL...'},
+  {c:'#4ADE80',v:'✓ Cloudflare bypassed'},
+  {c:'#4ADE80',v:'✓ 18,492 records ingested'},
+  {c:'#00FF88',v:'$ dbt run --select staging+'},
+  {c:'#4ADE80',v:'✓ 14 models OK  0 warn  0 error'},
+  {c:'#00FF88',v:'$ whoami'},
+  {c:'#00D4FF',v:'asad_ikram · lahore, pakistan'},
+];
+const tty=document.getElementById('tty');
+let li=0,ci=0,curEl=null;
+function type(){
+  if(li>=lines.length){const s=document.createElement('span');s.className='tcur';tty.appendChild(s);return}
+  if(ci===0){curEl=document.createElement('span');curEl.className='tl';curEl.style.color=lines[li].c;tty.appendChild(curEl)}
+  curEl.textContent=lines[li].v.substring(0,ci+1);ci++;
+  if(ci<lines[li].v.length)setTimeout(type,lines[li].v[0]==='$'?44:20);
+  else{li++;ci=0;setTimeout(type,lines[li-1].v[0]==='$'?380:110)}
+}
+setTimeout(type,1600);
+
+// ── COUNTERS ─────────────────────────────────────────────────
+const cObs=new IntersectionObserver(ents=>{
+  ents.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,t=+el.dataset.t,d=1500;
+    let s=null;
+    (function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/d,1),ease=1-Math.pow(1-p,3);el.textContent=Math.floor(ease*t);if(p<1)requestAnimationFrame(step);else el.textContent=t})(performance.now());
+    cObs.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>cObs.observe(el));
+
+// ── REVEAL ───────────────────────────────────────────────────
+const rObs=new IntersectionObserver(ents=>{
+  ents.forEach((e,i)=>{if(e.isIntersecting){e.target.style.transitionDelay=(i*.07)+'s';e.target.classList.add('vis');rObs.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.exp-item').forEach(el=>rObs.observe(el));
+
+// ── SKILLS TABS ──────────────────────────────────────────────
+document.getElementById('tabs-row').addEventListener('click',e=>{
+  const tab=e.target.closest('.tab');if(!tab)return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+});
+
+// ── EXPERIENCE ACCORDION ─────────────────────────────────────
+function toggleExp(h){
+  const body=h.nextElementSibling,isOpen=h.classList.contains('open');
+  document.querySelectorAll('.exp-head.open').forEach(oh=>{
+    oh.classList.remove('open');oh.nextElementSibling.classList.remove('open');
+    oh.querySelector('.exp-hint').textContent='click to expand';
+    oh.closest('.exp-item').classList.remove('active');
+  });
+  if(!isOpen){
+    h.classList.add('open');body.classList.add('open');
+    h.querySelector('.exp-hint').textContent='click to collapse';
+    h.closest('.exp-item').classList.add('active');
+    setTimeout(()=>h.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+  }
+}
+
+// ── PROJECT CARDS ────────────────────────────────────────────
+function toggleCard(card){
+  const isOpen=card.classList.contains('open');
+  document.querySelectorAll('.proj-card.open').forEach(c=>c.classList.remove('open'));
+  if(!isOpen){
+    card.classList.add('open');
+    card.querySelector('.proj-expand-hint').textContent='CLICK TO COLLAPSE';
+  } else {
+    card.querySelector('.proj-expand-hint').textContent='CLICK TO EXPAND';
+  }
+}
+// Reset hints on non-open cards
+document.querySelectorAll('.proj-card').forEach(c=>{
+  const hint=c.querySelector('.proj-expand-hint');
+  const obs=new MutationObserver(()=>{ if(!c.classList.contains('open'))hint.textContent='CLICK TO EXPAND'; });
+  obs.observe(c,{attributes:true,attributeFilter:['class']});
+});
+
+// ── NAV ──────────────────────────────────────────────────────
+addEventListener('scroll',()=>{
+  document.getElementById('nav').style.background=scrollY>50?'rgba(3,10,6,.97)':'rgba(3,10,6,.9)';
+});
+
+// ── MAGNETIC BUTTONS ─────────────────────────────────────────
+document.querySelectorAll('.btn-p,.btn-s,.nav-cta').forEach(b=>{
+  b.addEventListener('mousemove',e=>{
+    const r=b.getBoundingClientRect();
+    b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.18}px)`;
+  });
+  b.addEventListener('mouseleave',()=>{
+    b.style.transition='transform .5s cubic-bezier(.23,1,.32,1)';b.style.transform='';
+    setTimeout(()=>b.style.transition='',500);
+  });
+});
+</script>
+
+<!-- CHAT BUTTON -->
+<a href="chat.html" id="chat-btn" title="Ask AI about Asad">
+  <span class="cb-icon">🤖</span>
+  <span class="cb-label">Ask AI</span>
+  <span class="cb-ping"></span>
+</a>
+<style>
+#chat-btn {
+  position: fixed; bottom: 32px; right: 32px; z-index: 500;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--dark2); border: 1px solid var(--green);
+  padding: 13px 20px; text-decoration: none;
+  box-shadow: 0 0 30px rgba(0,255,136,0.2);
+  transition: all .3s; cursor: none;
+  animation: chatPop .6s 2s both;
+}
+#chat-btn:hover { background: rgba(0,255,136,0.08); transform: translateY(-3px); box-shadow: 0 0 40px rgba(0,255,136,0.3); }
+.cb-icon { font-size: 18px; }
+.cb-label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+.cb-ping {
+  position: absolute; top: -4px; right: -4px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 10px var(--green);
+  animation: pingAnim 2s ease-in-out infinite;
+}
+@keyframes pingAnim { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:.5} }
+@keyframes chatPop { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</body>
+</html>
