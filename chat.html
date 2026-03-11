@@ -241,7 +241,6 @@ header {
 </head>
 <body>
 
-<div id="cur"></div>
 <div class="grid-bg"></div>
 <canvas id="matrix"></canvas>
 
@@ -294,14 +293,6 @@ header {
 </div>
 
 <script>
-// ── CURSOR ────────────────────────────────────────────────────
-const cur = document.getElementById('cur');
-document.addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; });
-document.querySelectorAll('a,button,textarea').forEach(el => {
-  el.addEventListener('mouseenter', () => cur.classList.add('big'));
-  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
-});
-
 // ── MATRIX ───────────────────────────────────────────────────
 const mc = document.getElementById('matrix'), mctx = mc.getContext('2d');
 let mW, mH, cols, drops;
