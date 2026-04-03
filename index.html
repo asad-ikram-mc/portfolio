@@ -306,56 +306,6 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
   margin-left: auto; flex-shrink: 0;
 }
 
-/* LEARNING TRACKER BADGE */
-.learning-badge {}
-.learning-link {
-  display: inline-flex; align-items: center; gap: 14px;
-  border: 1px solid rgba(0,212,255,0.3);
-  padding: 12px 20px;
-  text-decoration: none;
-  background: rgba(0,212,255,0.03);
-  transition: border-color .08s, background .08s, transform .1s;
-  position: relative; overflow: hidden;
-  max-width: 420px;
-  animation: learningGlow 3s ease-in-out infinite;
-}
-@keyframes learningGlow {
-  0%,100% { box-shadow: 0 0 0px rgba(0,212,255,0); border-color: rgba(0,212,255,0.25); }
-  50%      { box-shadow: 0 0 18px rgba(0,212,255,0.15); border-color: rgba(0,212,255,0.55); }
-}
-.learning-link:hover { border-color: rgba(0,212,255,0.7); background: rgba(0,212,255,0.07); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.12) !important; }
-.learning-link:hover .learning-arrow { transform: translateX(4px); color: var(--blue); }
-.learning-ping {
-  position: absolute; top: 9px; left: 9px;
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--blue); box-shadow: 0 0 8px var(--blue);
-  animation: learningPing 2s ease-in-out infinite;
-}
-@keyframes learningPing {
-  0%,100% { transform: scale(1); opacity: 1; }
-  50%     { transform: scale(1.6); opacity: 0.4; }
-}
-.learning-icon { font-size: 20px; flex-shrink: 0; animation: bookBounce 2.5s ease-in-out infinite; }
-@keyframes bookBounce {
-  0%,100% { transform: rotate(0deg); }
-  25%     { transform: rotate(-8deg); }
-  75%     { transform: rotate(8deg); }
-}
-.learning-text { display: flex; flex-direction: column; gap: 3px; }
-.learning-title {
-  font-family: var(--mono); font-size: 12px; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--blue);
-}
-.learning-sub {
-  font-family: var(--mono); font-size: 10px; color: var(--muted);
-  letter-spacing: .05em;
-}
-.learning-arrow {
-  font-size: 18px; color: var(--muted);
-  transition: transform .08s, color .08s;
-  margin-left: auto; flex-shrink: 0;
-}
-
 /* RESUME DOWNLOAD */
 .nav-resume {
   font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
@@ -418,19 +368,6 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
       <a href="#experience" class="btn-p">explore_work() →</a>
       <a href="https://artemisai.co.uk" target="_blank" class="btn-s">artemisai.co.uk ↗</a>
       <a href="https://linkedin.com/in/asad-ikram98" target="_blank" class="btn-s">linkedin ↗</a>
-    </div>
-
-    <!-- LEARNING TRACKER BADGE -->
-    <div class="learning-badge" style="opacity:0;animation:fadeUp .8s 1.05s forwards;margin-top:20px">
-      <a href="https://asad-ikram-mc.github.io/genai-learning-tracker/" target="_blank" class="learning-link">
-        <span class="learning-ping"></span>
-        <span class="learning-icon">📚</span>
-        <span class="learning-text">
-          <span class="learning-title">See what I'm learning</span>
-          <span class="learning-sub">GenAI · live tracker · updated regularly</span>
-        </span>
-        <span class="learning-arrow">→</span>
-      </a>
     </div>
 
     <!-- AI PROMO BADGE -->
