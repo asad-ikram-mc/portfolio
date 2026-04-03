@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ask Asad — AI Assistant</title>
+<!-- Google Analytics GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKGH1SSDMS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YKGH1SSDMS', {
+    page_title: 'Ask Asad — AI Assistant',
+    page_location: window.location.href
+  });
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
@@ -469,6 +480,14 @@ async function sendMessage(textOverride) {
 
   // Add user message
   appendMessage('user', text);
+
+  // Track AI chat interaction in GA4
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'ai_chat_message', {
+      event_category: 'AI Assistant',
+      event_label: text.substring(0, 100)
+    });
+  }
 
   // Add to history
   history.push({ role: 'user', parts: [{ text }] });

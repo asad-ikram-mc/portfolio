@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asad Ikram — Data Engineer</title>
+<!-- Google Analytics GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKGH1SSDMS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YKGH1SSDMS', {
+    page_title: 'Portfolio — Asad Ikram',
+    page_location: window.location.href
+  });
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1107,6 +1118,15 @@ async function aiSend(textOverride) {
   document.getElementById('ai-send').disabled = true;
 
   aiAppend('user', text);
+
+  // Track inline AI widget interaction in GA4
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'ai_widget_message', {
+      event_category: 'AI Widget',
+      event_label: text.substring(0, 100)
+    });
+  }
+
   aiHistory.push({ role: 'user', parts: [{ text }] });
 
   const typing = aiTyping();
