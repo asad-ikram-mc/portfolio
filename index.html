@@ -92,6 +92,9 @@ h1.hero-name{font-family:'Syne',sans-serif;font-size:clamp(54px,9.5vw,124px);fon
 .btn-p:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,255,136,.2)}
 .btn-s{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);color:var(--muted);padding:14px 28px;text-decoration:none;transition:all .1s}
 .btn-s:hover{border-color:var(--green);color:var(--green);background:rgba(0,255,136,.04)}
+.btn-p,.btn-s{position:relative}
+.btn-p[data-tip]:hover::after,.btn-s[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);background:rgba(0,8,4,.97);border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:none;padding:7px 12px;white-space:nowrap;pointer-events:none;z-index:99;line-height:1.4}
+.btn-p[data-tip]:hover::before,.btn-s[data-tip]:hover::before{content:'';position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--border);pointer-events:none;z-index:99}
 
 /* TERMINAL PANEL */
 .hero-terminal{position:absolute;right:56px;top:50%;transform:translateY(-50%);width:390px;opacity:0;animation:slideIn 1s 1.1s forwards}
@@ -365,10 +368,10 @@ footer{padding:32px 56px;border-top:1px solid var(--border);display:flex;justify
       and build <strong>cloud-native data pipelines</strong> that turn raw chaos into clean, trusted warehouses powering real business decisions.
     </p>
     <div class="hero-ctas">
-      <a href="#experience" class="btn-p">explore_work() →</a>
-      <a href="https://artemisai.co.uk" target="_blank" class="btn-s">artemisai.co.uk ↗</a>
-      <a href="https://linkedin.com/in/asad-ikram98" target="_blank" class="btn-s">linkedin ↗</a>
-      <a href="https://asad-ikram-mc.github.io/genai-learning-tracker/" target="_blank" class="btn-s">📚 what_am_i_learning? ↗</a>
+      <a href="#experience" class="btn-p" data-tip="Browse my work across 5+ companies &amp; 300+ projects">My Work →</a>
+      <a href="https://artemisai.co.uk" target="_blank" class="btn-s" data-tip="ArtemisAI — social data intelligence SaaS I founded">ArtemisAI ↗</a>
+      <a href="https://linkedin.com/in/asad-ikram98" target="_blank" class="btn-s" data-tip="Connect with me on LinkedIn">LinkedIn ↗</a>
+      <a href="https://asad-ikram-mc.github.io/genai-learning-tracker/" target="_blank" class="btn-s" data-tip="My structured GenAI self-study — 80 sessions across LLMs, RAG &amp; Agents">Learning ↗</a>
     </div>
 
     <!-- AI PROMO BADGE -->
