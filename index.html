@@ -406,6 +406,31 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 }
 .rv{opacity:0;transform:translateY(34px) scale(.985);transition:opacity .85s var(--ease),transform .85s var(--ease)}
 .rv.in{opacity:1;transform:none}
+/* ══ logo-only client wall ══ */
+.lg.logo-only{min-height:112px;padding:22px}
+.lg.logo-only img{height:46px;max-width:58%;opacity:.5}
+.lg.logo-only:hover img{opacity:1;transform:scale(1.16) translateZ(24px)}
+/* ══ ambient depth pack ══ */
+.sec{--gh:0,113,227;overflow:hidden}
+.sec::before{content:'';position:absolute;width:640px;height:640px;left:-190px;top:-170px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(closest-side,rgba(var(--gh),.11),transparent 70%);filter:blur(32px);animation:orbA 26s ease-in-out infinite alternate}
+.sec:nth-of-type(even)::before{left:auto;right:-190px;animation-name:orbB}
+#who{--gh:0,113,227}#about{--gh:123,97,255}#ai{--gh:0,198,251}#skills{--gh:0,113,227}#exp{--gh:123,97,255}#ask{--gh:0,198,251}
+@keyframes orbA{from{transform:translate(0,0) scale(1)}to{transform:translate(96px,74px) scale(1.18)}}
+@keyframes orbB{from{transform:translate(0,0) scale(1.12)}to{transform:translate(-96px,64px) scale(1)}}
+.sec>.wrap{position:relative;z-index:1}
+.sec.grey::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(29,29,31,.055) 1px,transparent 1.4px);background-size:26px 26px;-webkit-mask-image:radial-gradient(78% 66% at 50% 42%,#000 28%,transparent 100%);mask-image:radial-gradient(78% 66% at 50% 42%,#000 28%,transparent 100%);animation:gridDrift 44s linear infinite}
+@keyframes gridDrift{to{background-position:260px 130px}}
+/* heading beam draws in on reveal */
+.head .hd{position:relative;padding-bottom:18px}
+.head .hd::after{content:'';position:absolute;left:0;bottom:0;height:3px;width:88px;border-radius:3px;background:linear-gradient(90deg,#0071E3,#00C6FB 55%,#7B61FF);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease) .35s}
+.head.mid .hd::after{left:50%;transform:translateX(-50%) scaleX(0)}
+.head.in .hd::after{transform:scaleX(1)}
+.head.mid.in .hd::after{transform:translateX(-50%) scaleX(1)}
+/* scroll-driven 3D section entry (progressive enhancement) */
+@supports (animation-timeline: view()){
+  .sec>.wrap{animation:secIn both;animation-timeline:view();animation-range:entry 0% entry 46%}
+  @keyframes secIn{from{transform:perspective(1300px) translateY(46px) rotateX(5deg) scale(.976);opacity:.3}to{transform:none;opacity:1}}
+}
 /* 3D scroll stage */
 .stage{perspective:1600px;perspective-origin:50% 50%}
 .d3{transform-style:preserve-3d;will-change:transform,opacity;opacity:0;transform:translateY(70px) rotateX(12deg) scale(.94);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -421,6 +446,9 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
   .ln>i{transform:none}
   .parx{transform:none!important}
   .aurora{animation:none}
+  .sec::before,.sec.grey::after{animation:none}
+  .lmq{transform:none!important}
+  .sec>.wrap{animation:none}
 }
 </style>
 </head>
@@ -480,16 +508,13 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
   <div class="scroll-c">Scroll<b></b></div>
 </section>
 
-<!-- THREE BANNERS -->
+<!-- BANNERS -->
 <div class="mq" style="padding:26px 0">
-  <div class="mqlab">Products &amp; systems I've built</div>
-  <div class="lmq s1 brand"><div class="lmq-t" id="mqProd"></div></div>
-
-  <div class="mqlab" style="margin-top:26px">Clients &amp; brands the work reached</div>
+  <div class="mqlab">Clients &amp; brands the work reached</div>
   <div class="lmq s2 brand"><div class="lmq-t" id="mqCli"></div></div>
 
   <div class="mqlab" style="margin-top:26px">Tools I build with</div>
-  <div class="lmq s3"><div class="lmq-t" id="mqTool"></div></div>
+  <div class="lmq s3 brand"><div class="lmq-t" id="mqTool"></div></div>
 </div>
 
 <!-- STATS -->
@@ -1009,21 +1034,26 @@ function fillMq(id,names){
   el.innerHTML=row+row;
 }
 
-/* BANNER 1 · products & systems built */
-fillMq('mqProd',['Ford LENS Auto-Healer','Amazon CORE Pipeline','ArtemisAI Platform','Art-E AI Analyst',
-  'Crawler IQ','Web Scraping Guide','ScrapeYard','Propforce Warehouse','Meta Social Lakehouse',
-  'GenAI Learning Tracker','Pakistan Energy Monitor','Competitor Intel Platform']);
-
-/* BANNER 2 · clients */
+/* BANNER 1 · clients */
 fillMq('mqCli',['Amazon','Ford','UK Government','Reckitt','Rentokil','Nike']);
 
-/* BANNER 3 · tools — breadth across the whole stack */
-fillMq('mqTool',['Python','SQL','Go','Scrapy','Playwright','curl_cffi','Camoufox',
-  'PySpark','Apache Airflow','dbt','Apache Kafka','Step Functions',
-  'AWS','ECS Fargate','Kubernetes','Docker','Terraform','GitHub Actions',
-  'PostgreSQL','Amazon Redshift','Snowflake','Elasticsearch','DynamoDB',
-  'Claude','OpenAI','DeepSeek V3','HuggingFace','LangChain','PyTorch','MCP servers',
-  'RAG pipelines','Pinecone','SageMaker','Tableau','QuickSight']);
+/* BANNER 2 · big tools, logo + wordmark (icon hides itself if the CDN lacks it) */
+(function(){
+  const T=[
+    ['amazonwebservices','AWS'],[null,'Azure'],['kubernetes','Kubernetes'],['docker','Docker'],
+    ['apachekafka','Kafka'],['apacheairflow','Airflow'],['dbt','dbt'],['amazonredshift','Redshift'],
+    ['snowflake','Snowflake'],['elasticsearch','Elasticsearch'],['postgresql','PostgreSQL'],
+    ['apachespark','PySpark'],['pytorch','PyTorch'],['langchain','LangChain'],
+    [null,'RAG Pipelines'],['modelcontextprotocol','MCP Servers'],['claude','Claude'],
+    ['huggingface','Hugging Face'],[null,'SageMaker'],['scrapy','Scrapy'],
+    [null,'Playwright'],['terraform','Terraform']
+  ];
+  const el=document.getElementById('mqTool');if(!el)return;
+  const row=T.map(t=>'<i>'+
+    (t[0]?'<img src="'+ICON(t[0])+'" alt="" loading="lazy" onerror="this.remove()">':'')+
+    '<b>'+t[1]+'</b></i>').join('');
+  el.innerHTML=row+row;
+})();
 
 /* ── employers ── */
 const SITE={
@@ -1060,23 +1090,22 @@ const EMP=[
   }).join('');
 })();
 
-/* ── client logo wall ── */
+/* ── client logo wall · logos only ── */
 (function(){
   const CLI=[
-    ['amazon','Amazon','Campaign analytics + social ETL'],
-    ['ford','Ford','Global crawler fleet'],
-    ['nike','Nike','Social data pipelines'],
-    [null,'UK Government','Sentiment analysis'],
-    [null,'Reckitt','Campaign reporting'],
-    [null,'Rentokil','Reporting pipelines']
+    ['amazon.com','Amazon'],
+    ['ford.com','Ford'],
+    ['nike.com','Nike'],
+    ['gov.uk','UK Government'],
+    ['reckitt.com','Reckitt'],
+    ['rentokil.com','Rentokil']
   ];
   const el=document.getElementById('cliGrid');
   if(!el)return;
-  el.innerHTML=CLI.map(c=>{
-    const img=c[0]?'<img src="'+ICON(c[0])+'" alt="'+c[1]+'" loading="lazy" onerror="this.style.display=\'none\'">':'';
-    return '<div class="lg" data-tilt="8">'+img+'<span class="lgname">'+c[1]+
-           '</span><span class="cap">'+c[2]+'</span></div>';
-  }).join('');
+  el.innerHTML=CLI.map(c=>
+    '<div class="lg logo-only" data-tilt="8" title="'+c[1]+'" aria-label="'+c[1]+'">'+
+    '<img src="https://www.google.com/s2/favicons?domain='+c[0]+'&amp;sz=128" alt="'+c[1]+'" loading="lazy">'+
+    '</div>').join('');
 })();
 
 /* ── AI through-line ── */
@@ -1162,7 +1191,19 @@ const EMP=[
   });
 })();
 
-/* ═══ magnetic buttons ═══ */
+/* ═══ marquee scroll-velocity skew ═══ */
+(function(){
+  if(RM)return;
+  const t=document.querySelectorAll('.lmq');if(!t.length)return;
+  let lastY=scrollY,v=0;
+  (function loop(){
+    const dy=scrollY-lastY;lastY=scrollY;
+    v+=(Math.max(-16,Math.min(16,dy*.5))-v)*.1;
+    const s=(-v*.55).toFixed(2);
+    t.forEach(m=>{m.style.transform=Math.abs(v)>.04?'skewX('+s+'deg)':''});
+    requestAnimationFrame(loop);
+  })();
+})();
 (function(){
   if(RM||matchMedia('(hover: none)').matches)return;
   document.querySelectorAll('.mag').forEach(el=>{
