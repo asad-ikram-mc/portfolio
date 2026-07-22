@@ -516,6 +516,28 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
   .proud-d{text-align:center}
   .gcards.gc3{grid-template-columns:1fr}
 }
+/* ══ chevening ══ */
+.award{display:inline-flex;align-items:center;gap:10px;margin:20px auto 0;font-family:var(--m);font-size:11px;letter-spacing:.06em;color:#8A6A1F}
+.award svg{width:15px;height:18px;color:#C9962E;flex-shrink:0}
+.award b{font-weight:700;background:linear-gradient(100deg,#8A6A1F,#C9962E 45%,#E9C46A 55%,#C9962E 70%,#8A6A1F);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:goldShift 5s ease-in-out infinite}
+@keyframes goldShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.chev{position:relative;display:grid;grid-template-columns:1.4fr 1fr;align-items:center;gap:34px;background:linear-gradient(150deg,#0A0A0C,#15120C);border:1px solid #2E2818;border-radius:24px;padding:34px 38px;margin-bottom:22px;overflow:hidden;transform-style:preserve-3d;transition:transform .45s var(--ease),box-shadow .45s;box-shadow:0 30px 70px rgba(201,150,46,.14)}
+.chev:hover{box-shadow:0 38px 84px rgba(201,150,46,.22)}
+.chev-glow{position:absolute;inset:0;background:radial-gradient(70% 90% at 15% 0%,rgba(233,196,106,.14),transparent 65%),radial-gradient(50% 80% at 95% 100%,rgba(201,150,46,.10),transparent 70%);pointer-events:none}
+.chev::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:38%;background:linear-gradient(105deg,transparent,rgba(233,196,106,.10),transparent);transform:skewX(-16deg);animation:chevSweep 6s ease-in-out infinite}
+@keyframes chevSweep{0%,55%,100%{left:-60%}25%{left:130%}}
+.chev>*{position:relative}
+.chev-k{font-family:var(--m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#C9962E;margin-bottom:13px}
+.chev-t{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.035em;line-height:1.1;color:#fff;margin-bottom:12px}
+.chev-t span{background:linear-gradient(100deg,#C9962E,#E9C46A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.chev-d{font-size:14.5px;color:#A9A491;line-height:1.6;max-width:480px}
+.chev-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cs{background:rgba(255,255,255,.045);border:1px solid #2E2818;border-radius:16px;padding:16px 14px;text-align:center;transition:transform .35s var(--ease),border-color .3s}
+.chev:hover .cs{border-color:#4A3D1E}
+.cs b{display:block;font-size:clamp(20px,2.4vw,27px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(110deg,#E9C46A,#C9962E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cs span{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8A8471}
+.gcards.gc2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:860px){.chev{grid-template-columns:1fr;padding:28px 24px}.gcards.gc2{grid-template-columns:1fr}}
 /* scroll-driven 3D handled by JS engine below (all browsers) */
 .sec>.wrap{will-change:transform;transform-style:preserve-3d}
 /* 3D scroll stage */
@@ -588,6 +610,11 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
       <span class="ln"><i style="animation-delay:.40s">companies actually rely on.</i></span>
     </h1>
     <p class="hero-sub ri" style="animation-delay:.72s">Chevening Scholar, MSc with Distinction, <b>seven years across six countries</b>. I've built pipelines and platforms for Amazon, Ford, Nike and the UK Government, and I run a data company of my own. Mostly I like the problems other people have given up on.</p>
+    <div class="award ri" style="animation-delay:.82s">
+      <svg viewBox="0 0 22 26" aria-hidden="true"><path d="M11 2 C5 6 4 13 6 19 M6 8 C4 8 2.5 7 2 5 M7 12 C5 12.4 3.2 11.6 2.2 9.8 M8 16 C6 16.8 4 16.2 2.8 14.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span><b>Chevening Scholar 2024/25</b> · top 2–3% of 70,000+ applicants · UK FCDO</span>
+      <svg viewBox="0 0 22 26" aria-hidden="true" style="transform:scaleX(-1)"><path d="M11 2 C5 6 4 13 6 19 M6 8 C4 8 2.5 7 2 5 M7 12 C5 12.4 3.2 11.6 2.2 9.8 M8 16 C6 16.8 4 16.2 2.8 14.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
     <div class="pills ri" style="animation-delay:.88s">
       <a href="#work" class="pill fill mag">See the work</a>
       <a href="Asad_Ikram_Resume_2026.pdf" download="Asad_Ikram_Resume_2026.pdf" class="pill mag">
@@ -756,8 +783,22 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
     <div class="proud-d">So I built an AI agent that repairs them on its own <em>→</em></div>
   </a>
 
-  <div class="gcards gc3 d3" data-stagger>
-      <div class="gc" data-tilt="6"><div class="gc-k">Recognition</div><div class="gc-t">Chevening Scholar 2024/25</div><div class="gc-d">Selected from 70,000+ applicants across 160 countries. Fully funded by the UK Foreign, Commonwealth &amp; Development Office.</div></div>
+  <div class="chev rv" data-tilt="3">
+    <div class="chev-glow" aria-hidden="true"></div>
+    <div class="chev-l">
+      <div class="chev-k">Recognition · UK Foreign, Commonwealth &amp; Development Office</div>
+      <div class="chev-t">Chevening Scholar<span> 2024/25</span></div>
+      <div class="chev-d">The UK government's flagship global scholarship — one fully funded year, awarded on leadership and impact. It's how a scraping engineer from Lahore ended up publishing NLP research in Portsmouth.</div>
+    </div>
+    <div class="chev-stats">
+      <div class="cs"><b>70,000+</b><span>applicants</span></div>
+      <div class="cs"><b>160</b><span>countries</span></div>
+      <div class="cs"><b>2–3%</b><span>selected</span></div>
+      <div class="cs"><b>100%</b><span>funded</span></div>
+    </div>
+  </div>
+
+  <div class="gcards gc2 d3" data-stagger>
       <div class="gc" data-tilt="6"><div class="gc-k">Education</div><div class="gc-t">MSc Data Analytics — Distinction</div><div class="gc-d">University of Portsmouth. Dissertation: 279k posts, fine-tuned BERT, macro-F1 0.878. BSc Computer Science, FAST-NUCES.</div></div>
       <div class="gc" data-tilt="6"><div class="gc-k">Published</div><div class="gc-t">web-scraping-guide.com</div><div class="gc-d">A free field reference — 73 libraries, 9 production architectures, a full Akamai v3 case study with the failed attempts left in. <b style="color:var(--blue)">web-scraping-guide.com &#8599;</b></div></div>
   </div>
