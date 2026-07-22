@@ -404,15 +404,15 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
   .stg .link,.stg.r .link{left:-30px;right:auto;width:30px;background:linear-gradient(270deg,transparent,var(--line));transform-origin:left}
   .stages{gap:22px}
 }
-.rv{opacity:0;transform:translateY(34px) scale(.985);transition:opacity .85s var(--ease),transform .85s var(--ease)}
-.rv.in{opacity:1;transform:none}
+.rv{opacity:0;transform:translateY(52px) scale(.965) rotateX(7deg);filter:blur(10px);transition:opacity .95s var(--ease),transform .95s var(--ease),filter .95s var(--ease)}
+.rv.in{opacity:1;transform:none;filter:none}
 /* ══ logo-only client wall ══ */
 .lg.logo-only{min-height:112px;padding:22px}
 .lg.logo-only img{height:46px;max-width:58%;opacity:.5}
 .lg.logo-only:hover img{opacity:1;transform:scale(1.16) translateZ(24px)}
 /* ══ ambient depth pack ══ */
 .sec{--gh:0,113,227;overflow:hidden}
-.sec::before{content:'';position:absolute;width:640px;height:640px;left:-190px;top:-170px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(closest-side,rgba(var(--gh),.11),transparent 70%);filter:blur(32px);animation:orbA 26s ease-in-out infinite alternate}
+.sec::before{content:'';position:absolute;width:640px;height:640px;left:-190px;top:-170px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(closest-side,rgba(var(--gh),.13),transparent 70%);filter:blur(32px);translate:0 var(--op,0px);animation:orbA 26s ease-in-out infinite alternate}
 .sec:nth-of-type(even)::before{left:auto;right:-190px;animation-name:orbB}
 #who{--gh:0,113,227}#about{--gh:123,97,255}#ai{--gh:0,198,251}#skills{--gh:0,113,227}#exp{--gh:123,97,255}#ask{--gh:0,198,251}
 @keyframes orbA{from{transform:translate(0,0) scale(1)}to{transform:translate(96px,74px) scale(1.18)}}
@@ -427,14 +427,12 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .head.in .hd::after{transform:scaleX(1)}
 .head.mid.in .hd::after{transform:translateX(-50%) scaleX(1)}
 /* scroll-driven 3D section entry (progressive enhancement) */
-@supports (animation-timeline: view()){
-  .sec>.wrap{animation:secIn both;animation-timeline:view();animation-range:entry 0% entry 46%}
-  @keyframes secIn{from{transform:perspective(1300px) translateY(46px) rotateX(5deg) scale(.976);opacity:.3}to{transform:none;opacity:1}}
-}
+/* scroll-driven 3D handled by JS engine below (all browsers) */
+.sec>.wrap{will-change:transform;transform-style:preserve-3d}
 /* 3D scroll stage */
 .stage{perspective:1600px;perspective-origin:50% 50%}
-.d3{transform-style:preserve-3d;will-change:transform,opacity;opacity:0;transform:translateY(70px) rotateX(12deg) scale(.94);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.d3.in{opacity:1;transform:none}
+.d3{transform-style:preserve-3d;will-change:transform,opacity;opacity:0;transform:translateY(96px) rotateX(20deg) scale(.9);filter:blur(12px);transition:opacity 1.05s var(--ease),transform 1.05s var(--ease),filter 1.05s var(--ease)}
+.d3.in{opacity:1;transform:none;filter:none}
 .sec{position:relative}
 .parx{will-change:transform}
 /* section depth tint that lifts on scroll */
@@ -442,7 +440,7 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .headline-3d{transform-style:preserve-3d}
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
-  .rv,.ri,.chip,.pane-d,.role-in li,.d3{opacity:1;transform:none}
+  .rv,.ri,.chip,.pane-d,.role-in li,.d3{opacity:1;transform:none;filter:none}
   .ln>i{transform:none}
   .parx{transform:none!important}
   .aurora{animation:none}
@@ -1090,22 +1088,31 @@ const EMP=[
   }).join('');
 })();
 
-/* ── client logo wall · logos only ── */
+/* ── client logo wall · logos only, 3-step fallback so nothing ever renders broken ── */
 (function(){
   const CLI=[
-    ['amazon.com','Amazon'],
-    ['ford.com','Ford'],
-    ['nike.com','Nike'],
-    ['gov.uk','UK Government'],
-    ['reckitt.com','Reckitt'],
-    ['rentokil.com','Rentokil']
+    ['amazon','amazon.com','Amazon'],
+    ['ford','ford.com','Ford'],
+    ['nike','nike.com','Nike'],
+    [null,'gov.uk','UK Government'],
+    [null,'reckitt.com','Reckitt'],
+    [null,'rentokil.com','Rentokil']
   ];
   const el=document.getElementById('cliGrid');
   if(!el)return;
-  el.innerHTML=CLI.map(c=>
-    '<div class="lg logo-only" data-tilt="8" title="'+c[1]+'" aria-label="'+c[1]+'">'+
-    '<img src="https://www.google.com/s2/favicons?domain='+c[0]+'&amp;sz=128" alt="'+c[1]+'" loading="lazy">'+
-    '</div>').join('');
+  el.innerHTML=CLI.map(c=>{
+    const fav='https://www.google.com/s2/favicons?domain='+c[1]+'&sz=128';
+    const primary=c[0]?ICON(c[0]):fav;
+    return '<div class="lg logo-only" data-tilt="8" title="'+c[2]+'" aria-label="'+c[2]+'">'+
+      '<img src="'+primary+'" data-backup="'+fav+'" alt="" loading="lazy"></div>';
+  }).join('');
+  el.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error',()=>{
+      if(!img.dataset.f && img.src!==img.dataset.backup){img.dataset.f='1';img.src=img.dataset.backup;return}
+      const s=document.createElement('span');s.className='wm';
+      s.textContent=img.closest('.lg').title;img.replaceWith(s);
+    });
+  });
 })();
 
 /* ── AI through-line ── */
@@ -1189,6 +1196,38 @@ const EMP=[
     });
     el.addEventListener('pointerleave',()=>{el.style.transform=''});
   });
+})();
+
+/* ═══ cinematic scroll engine — continuous 3D on every section ═══ */
+(function(){
+  if(RM)return;
+  const items=[...document.querySelectorAll('.sec')]
+    .map(s=>({s,w:s.querySelector(':scope>.wrap')}))
+    .filter(o=>o.w);
+  if(!items.length)return;
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+  let ticking=false;
+  function frame(){
+    ticking=false;
+    const vh=innerHeight;
+    items.forEach(o=>{
+      const r=o.s.getBoundingClientRect();
+      if(r.bottom<-120||r.top>vh+120){o.w.style.transform='';return}
+      /* entrance: 0 → 1 as the section rises through the lower half of the viewport */
+      const enter=clamp((vh*0.92-r.top)/(vh*0.6),0,1);
+      const e=1-Math.pow(1-enter,3); /* easeOutCubic */
+      /* center offset: -1 below → 0 centered → 1 above; drives continuous depth drift */
+      const c=clamp(((r.top+r.height/2)-vh/2)/vh,-1,1);
+      const ty=(1-e)*72 + c*-16;
+      const rx=(1-e)*8  + c*2.2;
+      const sc=.94+e*.06;
+      o.w.style.transform='perspective(1400px) translate3d(0,'+ty.toFixed(1)+'px,0) rotateX('+rx.toFixed(2)+'deg) scale('+sc.toFixed(3)+')';
+      o.s.style.setProperty('--op',(c*46).toFixed(1)+'px');
+    });
+  }
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});
+  addEventListener('resize',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});
+  frame();
 })();
 
 /* ═══ marquee scroll-velocity skew ═══ */
