@@ -840,7 +840,7 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 <!-- WORK -->
 <section class="sec dark" id="work"><div class="wrap" style="position:relative">
   <div aria-hidden="true" style="position:absolute;left:50%;top:6%;width:min(760px,92%);height:340px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(0,113,227,.22),transparent 72%);filter:blur(46px);pointer-events:none"></div>
-  <div class="head mid rv"><div class="eyeb">Selected work</div><h2 class="hd">Systems I'm proud of</h2><p class="hd-sub">Six builds, from an AI agent that repairs its own scrapers to a live national energy dashboard. Open any card for the architecture.</p></div>
+  <div class="head mid rv"><div class="eyeb">Selected work</div><h2 class="hd">Systems I'm proud of</h2><p class="hd-sub">Eight builds, from an AI agent that repairs its own scrapers to a 58-million-row catalogue crawl. Open any card for the architecture.</p></div>
   <div class="bento d3" data-stagger>
 
     <article class="bx w4 tilt" onclick="tog(this)">
@@ -1048,6 +1048,48 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
         <li><b>Load-shedding map.</b> Area-by-area LESCO outage schedule for Lahore with live feeder status.</li>
         <li><b>Economy.</b> GDP growth, inflation and current account deficit tracked against IMF releases.</li>
         <li><a href="https://dsc31239o0zcf.cloudfront.net/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Live dashboard ↗</a></li>
+      </ul></div></div>
+    </article>
+
+    <article class="bx w3 tilt" onclick="tog(this)">
+      <div class="bx-k"><span>Founder build</span><span class="bx-x">+</span></div>
+      <div class="bx-t">ArtemisAI platform</div>
+      <div class="bx-d">Predictive social intelligence I own end to end as CTO — virality scoring before you publish, crisis detection hours before the damage, and Art-E, an AI analyst that knows your pages better than you do.</div>
+      <div class="btags"><span class="tg">Meta lakehouse</span><span class="tg">DeBERTa MTL</span><span class="tg">Redshift</span><span class="tg">Art-E</span></div>
+      <div class="bx-b"><div class="bx-in"><ul>
+        <li><b>Lakehouse.</b> GitHub Actions → ECR → ECS Fargate → DynamoDB → S3, ingesting 30+ brand pages daily, landing in a layered Redshift warehouse (RDL → ODL → ADL) with sub-second KPIs via QuickSight.</li>
+        <li><b>NLP engine.</b> A multi-task DeBERTa-v3 — one shared encoder, five classification heads — trained on ~20k labels blended from frontier-model annotation, distilled labels and synthetic edge cases, gated at F1 &gt; 0.85 before anything ships.</li>
+        <li><b>Model routing.</b> Three-tier inference routing sends easy posts to the cheap path and uncertain ones up the ladder, with quarterly retrains fed by the uncertainty queue.</li>
+        <li><b>Art-E.</b> A conversational analyst grounded in the user's own connected pages and audience segments — "why did Tuesday's post go viral" gets a real answer.</li>
+        <li><a href="https://artemisai.co.uk" target="_blank" rel="noopener" onclick="event.stopPropagation()">artemisai.co.uk ↗</a></li>
+      </ul></div></div>
+    </article>
+
+    <article class="bx w3 tilt" onclick="tog(this)">
+      <div class="bx-k"><span>Ops product</span><span class="bx-x">+</span></div>
+      <div class="bx-t">ScrapeYard control plane</div>
+      <div class="bx-d">One dashboard running a fleet of 86 crawler projects for a parts-retail client — schedule, watch, stop, validate and ship every crawl without touching a terminal. Seven users, zero SSH.</div>
+      <div class="btags"><span class="tg">FastAPI</span><span class="tg">APScheduler</span><span class="tg">Drive sync</span><span class="tg">CI/CD</span></div>
+      <div class="bx-b"><div class="bx-in"><ul>
+        <li><b>Registry.</b> 86 manufacturer crawlers with priorities, notes, audit log, soft-delete and restore — the catalogue is the source of truth for what runs when.</li>
+        <li><b>Drive as ground truth.</b> Google Drive sync walks each crawler's output folder and uses the newest data file's timestamp as the real "last scraped" — no self-reported freshness.</li>
+        <li><b>Live ops.</b> Colourised streaming logs, run ETAs from windowed completion rates, a real STOP button, and a smoke-test mode capped at 2 models / 25 items for safe dry-runs.</li>
+        <li><b>Quality gates.</b> On-demand DQ checks — full-file JSON validity, required fields, duplicate detection, diagram coverage — before anything reaches the client.</li>
+        <li><b>Zero-touch deploys.</b> Push to main, GitHub Actions ships it to the VPS. The client team runs everything through named logins with per-action audit trails.</li>
+      </ul></div></div>
+    </article>
+
+    <article class="bx w3 tilt" onclick="tog(this)">
+      <div class="bx-k"><span>Scale</span><span class="bx-x">+</span></div>
+      <div class="bx-t">58-million-row catalogue crawl</div>
+      <div class="bx-d">A full-catalogue crawl of a heavily defended parts retailer: 58,394,093 parts across 331,194 models, delivered as one clean 30GB dataset. Akamai never noticed.</div>
+      <div class="btags"><span class="tg">curl_cffi</span><span class="tg">Akamai</span><span class="tg">Sharded</span><span class="tg">30GB</span></div>
+      <div class="bx-b"><div class="bx-in"><ul>
+        <li><b>Recon win.</b> Model pages turned out to ship their entire parts tree inline as a Knockout.js data blob — one GET per model instead of dozens of AJAX calls. Reading the page beat automating it.</li>
+        <li><b>Akamai.</b> A pool of homepage-warmed persistent curl_cffi sessions: cold requests 500 after 30 seconds, warmed ones return 200 in 0.2s. No browser was ever launched.</li>
+        <li><b>Scale mechanics.</b> A 362,875-model sitemap split across 6 parallel shards, deduplicated through disk-based SQLite, resumable checkpoints per shard.</li>
+        <li><b>Completeness.</b> A gap-backfill spider re-hit every zero-row model; 6,343 were proven legitimately parts-less, the rest recovered — then field-level QA on SKUs, prices and diagram coverage.</li>
+        <li><b>Result.</b> 58.4M rows, 331k models, 30.31GB compressed, with a live progress dashboard the client could watch mid-crawl.</li>
       </ul></div></div>
     </article>
 
