@@ -143,7 +143,7 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .head.mid .hd-sub{margin-left:auto;margin-right:auto}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 .stats{perspective:1200px}
 .st{background:var(--w);border:1px solid var(--line);border-radius:var(--r);padding:28px 18px;text-align:center;transform-style:preserve-3d;position:relative;overflow:hidden;transition:transform .35s var(--ease),box-shadow .35s,border-color .3s}
 .st::before{content:'';position:absolute;inset:0;border-radius:var(--r);background:linear-gradient(135deg,rgba(0,113,227,.09),rgba(123,97,255,.07));opacity:0;transition:opacity .35s}
@@ -152,8 +152,8 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .st>*{position:relative;transform:translateZ(26px)}
 .st-n{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.045em;font-variant-numeric:tabular-nums;background:linear-gradient(140deg,#0071E3,#7B61FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .st-l{font-size:12.5px;color:var(--sub);margin-top:8px;font-weight:500}
-@media(max-width:900px){.stats{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,1fr)}.st:nth-child(4){grid-column:1/3}.st:nth-child(5){grid-column:3/4}}
+
 
 /* about */
 .abt{display:grid;grid-template-columns:1.25fr 1fr;gap:60px;align-items:start}
@@ -562,6 +562,45 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .cs.wsg-cs span{color:#6E7E93}
 .chev.wsg .chev-logo{box-shadow:0 8px 22px rgba(0,113,227,.4)}
 @media(max-width:860px){.chev{grid-template-columns:1fr;grid-template-areas:"logo" "text" "stats";padding:28px 24px}.chev-logo{width:110px;height:110px;padding:22px;border-radius:28px}.gcards.gc2{grid-template-columns:1fr}}
+/* ══════ mobile pass ══════ */
+.stats{grid-template-columns:repeat(5,1fr)}
+@media(max-width:760px){
+  .sec{padding:64px 0}
+  .wrap{padding:0 18px}
+  h2.hd{font-size:clamp(27px,7.4vw,36px)}
+  .hd-sub{font-size:15px}
+  .hero{padding:88px 18px 64px}
+  .award{font-size:10px;gap:7px;text-align:center}
+  .half{padding:24px 20px}
+  .half-t{font-size:20px}
+  .chev{gap:20px}
+  .chev-d{font-size:13.5px}
+  .proud{padding:20px}
+  .pn b{font-size:26px}
+  .proud-n{gap:22px}
+  .bx{padding:22px 18px}
+  .bx-b svg{max-width:100%;height:auto}
+  .pipe-hint{display:block}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs .tab{flex-shrink:0}
+  /* perf: no blur filters or 3D canvas on phones */
+  #gl{display:none}
+  .rv,.rv-l,.rv-r,.d3{filter:none}
+  .sec::before{width:420px;height:420px;filter:blur(24px)}
+}
+@media(max-width:520px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .st:last-child{grid-column:span 2}
+  .nav-id b{font-size:14px}
+  .nav-in{height:52px;gap:12px}
+  .mk{width:29px;height:29px;font-size:11.5px}
+  .chev-stats{gap:9px}
+  .cs{padding:12px 8px}
+  .lg.logo-only{min-height:92px;padding:16px}
+  .lg.logo-only img{height:36px}
+}
+.pipe-hint{display:none;font-family:var(--m);font-size:9.5px;letter-spacing:.14em;color:#6E6E78;text-align:center;padding:8px 0 4px}
 /* scroll-driven 3D handled by JS engine below (all browsers) */
 .sec>.wrap{will-change:transform;transform-style:preserve-3d}
 /* 3D scroll stage */
@@ -758,6 +797,7 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
       <circle class="pdot vio" r="3"><animateMotion dur="2.8s" repeatCount="indefinite" begin=".4s"><mpath href="#h1"/></animateMotion></circle>
       <circle class="pdot amber" r="3"><animateMotion dur="2.8s" repeatCount="indefinite" begin="1.5s"><mpath href="#h2"/></animateMotion></circle>
     </svg>
+    <div class="pipe-hint">SWIPE TO EXPLORE &#8594;</div>
   </div>
   
 </div></section>
