@@ -355,7 +355,7 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .lmq.a .lmq-t{animation:mqa 46s linear infinite}
 .lmq.b .lmq-t{animation:mqb 52s linear infinite}
 .lmq.s1 .lmq-t{animation:mqb 50s linear infinite}
-.lmq.s2 .lmq-t{animation:mqa 44s linear infinite}
+.lmq.s2 .lmq-t{animation:mqb 58s linear infinite}
 .lmq.s3 .lmq-t{animation:mqb 58s linear infinite}
 .lmq:hover .lmq-t{animation-play-state:paused}
 @keyframes mqa{to{transform:translateX(-50%)}}
@@ -446,6 +446,10 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .pnode{fill:rgba(255,255,255,.045);stroke:#2E2E38;stroke-width:1.2}
 .pnode.hot{stroke:url(#pg);stroke-width:1.5;animation:npulse 3.4s ease-in-out infinite}
 .pnode.healer{stroke:#7B61FF;stroke-width:1.4;animation:npulse 3.4s ease-in-out infinite 1.2s}
+.pnode.gate{stroke:#30D158;stroke-width:1.4;animation:npulse 3.4s ease-in-out infinite .6s}
+.pnode.alertn{stroke:#E9A23B;stroke-width:1.3}
+.pedge.alertp{stroke:#E9A23B;opacity:.5;stroke-dasharray:5 7;animation:dashmove 1.5s linear infinite}
+.pdot.amber{fill:#F0B25A;filter:drop-shadow(0 0 7px rgba(233,162,59,.9))}
 @keyframes npulse{0%,100%{filter:drop-shadow(0 0 0 rgba(0,198,251,0))}50%{filter:drop-shadow(0 0 14px rgba(0,198,251,.45))}}
 .nglow{animation:nbreath 5s ease-in-out infinite}
 @keyframes nbreath{0%,100%{opacity:.5}50%{opacity:1}}
@@ -536,6 +540,10 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .chev:hover .cs{border-color:#4A3D1E}
 .cs b{display:block;font-size:clamp(20px,2.4vw,27px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(110deg,#E9C46A,#C9962E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .cs span{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8A8471}
+.chev-logo{position:absolute;top:22px;right:24px;width:44px;height:44px;border-radius:12px;padding:7px;background:rgba(255,255,255,.92);box-shadow:0 8px 22px rgba(201,150,46,.35);z-index:2;object-fit:contain}
+.bx.gold{border-color:#3A311B}
+.bx.gold:hover{border-color:#C9962E;box-shadow:0 24px 60px rgba(201,150,46,.22)}
+.bx.gold .bx-t{background:linear-gradient(100deg,#E9C46A,#C9962E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .gcards.gc2{grid-template-columns:repeat(2,1fr)}
 @media(max-width:860px){.chev{grid-template-columns:1fr;padding:28px 24px}.gcards.gc2{grid-template-columns:1fr}}
 /* scroll-driven 3D handled by JS engine below (all browsers) */
@@ -638,24 +646,23 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 <section class="sec grey"><div class="wrap">
   <div class="stats d3" data-stagger>
     <div class="st" data-tilt="9"><div class="st-n" data-to="7">0</div><div class="st-l">Years</div></div>
-    <div class="st" data-tilt="9"><div class="st-n" data-to="300" data-suf="+">0</div><div class="st-l">Projects</div></div>
-    <div class="st" data-tilt="9"><div class="st-n" data-to="500" data-suf="+">0</div><div class="st-l">Scrapers</div></div>
-    <div class="st" data-tilt="9"><div class="st-n" data-to="400" data-suf="+">0</div><div class="st-l">Sites crawled</div></div>
-    <div class="st" data-tilt="9"><div class="st-n" data-to="50" data-suf="M+">0</div><div class="st-l">Records</div></div>
-    <div class="st" data-tilt="9"><div class="st-n">&lt;1%</div><div class="st-l">Block rate</div></div>
+    <div class="st" data-tilt="9"><div class="st-n" data-to="300" data-suf="+">0</div><div class="st-l">Freelance projects</div></div>
+    <div class="st" data-tilt="9"><div class="st-n" data-to="600" data-suf="+">0</div><div class="st-l">Scrapers</div></div>
+    <div class="st" data-tilt="9"><div class="st-n" data-to="5" data-suf="+">0</div><div class="st-l">International companies</div></div>
+    <div class="st" data-tilt="9"><div class="st-n" data-to="5">0</div><div class="st-l">Countries of exposure</div></div>
   </div>
 </div></section>
 
 <!-- LIVE PIPELINE -->
 <section class="sec" id="flow"><div class="wrap">
   <div class="head mid rv">
-    <div class="eyeb">The shape of the work</div>
-    <h2 class="hd">Every system I ship<br>looks like this</h2>
-    <p class="hd-sub">Adversarial collection on the left, trusted analytics on the right — and an AI agent underneath keeping the whole thing alive.</p>
+    <div class="eyeb">How the data flows</div>
+    <h2 class="hd">From hostile web<br>to trusted insight</h2>
+    <p class="hd-sub">Defended sites in, decision-ready data out — with an AI agent and a quality gate standing guard in the middle.</p>
   </div>
   <div class="pipe rv">
     <div class="pipe-live"><i></i>LIVE FLOW</div>
-    <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a scraping and analytics pipeline with an AI auto-healer">
+    <svg viewBox="0 0 1200 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram: hostile web through fetch ladder, S3, quality gate and warehouse to insight, with an AI auto-healer and alerting underneath">
       <defs>
         <linearGradient id="pg" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stop-color="#0071E3"/><stop offset=".55" stop-color="#00C6FB"/><stop offset="1" stop-color="#7B61FF"/>
@@ -666,62 +673,77 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
       </defs>
 
       <!-- edges -->
-      <path id="e1" class="pedge" d="M148,120 C205,120 215,120 268,120"/>
-      <path id="e2" class="pedge" d="M418,120 C470,120 480,120 528,120"/>
-      <path id="e3" class="pedge" d="M652,120 C704,120 714,120 760,120"/>
-      <path id="e4" class="pedge" d="M916,120 C962,120 972,120 1014,120"/>
-      <!-- healer loops -->
-      <path id="h1" class="pedge heal" d="M560,236 C460,236 380,200 343,152"/>
-      <path id="h2" class="pedge heal" d="M700,236 C790,236 850,200 884,152"/>
+      <path id="e1" class="pedge" d="M179,128 C199,128 203,128 221,128"/>
+      <path id="e2" class="pedge" d="M379,128 C399,128 403,128 421,128"/>
+      <path id="e3" class="pedge" d="M579,128 C599,128 603,128 621,128"/>
+      <path id="e4" class="pedge" d="M779,128 C799,128 803,128 821,128"/>
+      <path id="e5" class="pedge" d="M979,128 C999,128 1003,128 1021,128"/>
+      <!-- heal + alert loops -->
+      <path id="h1" class="pedge heal" d="M355,238 C330,220 312,190 302,162"/>
+      <path id="h2" class="pedge alertp" d="M700,164 C712,190 726,216 745,236"/>
 
-      <!-- nodes -->
+      <!-- top row -->
       <g class="pnode-g">
-        <rect class="pnode" x="28" y="88" width="120" height="64" rx="15"/>
-        <text class="pnode-t" x="88" y="116" text-anchor="middle">400+ SITES</text>
-        <text class="pnode-s" x="88" y="134" text-anchor="middle">AKAMAI · CF · DD</text>
+        <rect class="pnode" x="21" y="96" width="158" height="64" rx="15"/>
+        <text class="pnode-t" x="100" y="122" text-anchor="middle">HOSTILE WEB</text>
+        <text class="pnode-s" x="100" y="140" text-anchor="middle">AKAMAI · CF · DATADOME</text>
       </g>
       <g class="pnode-g">
-        <circle class="nglow" cx="343" cy="120" r="66" fill="url(#ng)"/>
-        <rect class="pnode hot" x="268" y="84" width="150" height="72" rx="16"/>
-        <text class="pnode-t" x="343" y="114" text-anchor="middle">SCRAPERS</text>
-        <text class="pnode-s" x="343" y="132" text-anchor="middle">SCRAPY · PLAYWRIGHT</text>
-        <text class="pnode-s" x="343" y="145" text-anchor="middle">CURL_CFFI · JA4</text>
+        <circle class="nglow" cx="300" cy="128" r="64" fill="url(#ng)"/>
+        <rect class="pnode hot" x="221" y="92" width="158" height="72" rx="16"/>
+        <text class="pnode-t" x="300" y="118" text-anchor="middle">FETCH LADDER</text>
+        <text class="pnode-s" x="300" y="136" text-anchor="middle">CURL_CFFI FIRST</text>
+        <text class="pnode-s" x="300" y="150" text-anchor="middle">BROWSER LAST</text>
       </g>
       <g class="pnode-g">
-        <rect class="pnode" x="528" y="88" width="124" height="64" rx="15"/>
-        <text class="pnode-t" x="590" y="116" text-anchor="middle">S3 RAW</text>
-        <text class="pnode-s" x="590" y="134" text-anchor="middle">PARQUET · EVENTS</text>
+        <rect class="pnode" x="421" y="96" width="158" height="64" rx="15"/>
+        <text class="pnode-t" x="500" y="122" text-anchor="middle">S3 RAW</text>
+        <text class="pnode-s" x="500" y="140" text-anchor="middle">PARQUET · CHECKPOINTS</text>
       </g>
       <g class="pnode-g">
-        <circle class="nglow" cx="838" cy="120" r="66" fill="url(#ng)"/>
-        <rect class="pnode hot" x="760" y="84" width="156" height="72" rx="16"/>
-        <text class="pnode-t" x="838" y="114" text-anchor="middle">WAREHOUSE</text>
-        <text class="pnode-s" x="838" y="132" text-anchor="middle">RDL → ODL → ADL</text>
-        <text class="pnode-s" x="838" y="145" text-anchor="middle">REDSHIFT · DBT</text>
+        <rect class="pnode gate" x="621" y="92" width="158" height="72" rx="16"/>
+        <text class="pnode-t" x="700" y="118" text-anchor="middle">DQ GATE</text>
+        <text class="pnode-s" x="700" y="136" text-anchor="middle">SCHEMA CONTRACTS</text>
+        <text class="pnode-s" x="700" y="150" text-anchor="middle">FAIL LOUDLY</text>
       </g>
       <g class="pnode-g">
-        <rect class="pnode" x="1014" y="88" width="158" height="64" rx="15"/>
-        <text class="pnode-t" x="1093" y="116" text-anchor="middle">ML + DASHBOARDS</text>
-        <text class="pnode-s" x="1093" y="134" text-anchor="middle">NLP · LLM · TABLEAU</text>
+        <circle class="nglow" cx="900" cy="128" r="64" fill="url(#ng)"/>
+        <rect class="pnode hot" x="821" y="92" width="158" height="72" rx="16"/>
+        <text class="pnode-t" x="900" y="118" text-anchor="middle">WAREHOUSE</text>
+        <text class="pnode-s" x="900" y="136" text-anchor="middle">RDL → ODL → ADL</text>
+        <text class="pnode-s" x="900" y="150" text-anchor="middle">REDSHIFT · DBT</text>
       </g>
       <g class="pnode-g">
-        <rect class="pnode healer" x="560" y="208" width="140" height="56" rx="15"/>
-        <text class="pnode-t" x="630" y="232" text-anchor="middle">AUTO-HEALER</text>
-        <text class="pnode-s" x="630" y="249" text-anchor="middle">CLAUDE + MCP AGENT</text>
+        <rect class="pnode" x="1021" y="96" width="158" height="64" rx="15"/>
+        <text class="pnode-t" x="1100" y="122" text-anchor="middle">INSIGHT</text>
+        <text class="pnode-s" x="1100" y="140" text-anchor="middle">NLP · LLM · TABLEAU</text>
+      </g>
+
+      <!-- lower row -->
+      <g class="pnode-g">
+        <rect class="pnode healer" x="286" y="236" width="150" height="56" rx="15"/>
+        <text class="pnode-t" x="361" y="260" text-anchor="middle">AUTO-HEALER</text>
+        <text class="pnode-s" x="361" y="277" text-anchor="middle">CLAUDE + MCP AGENT</text>
+      </g>
+      <g class="pnode-g">
+        <rect class="pnode alertn" x="700" y="236" width="150" height="56" rx="15"/>
+        <text class="pnode-t" x="775" y="260" text-anchor="middle">ALERTS</text>
+        <text class="pnode-s" x="775" y="277" text-anchor="middle">SLACK · CLOUDWATCH</text>
       </g>
 
       <!-- flowing particles -->
-      <circle class="pdot" r="3.6"><animateMotion dur="2.8s" repeatCount="indefinite" begin="0s"><mpath href="#e1"/></animateMotion></circle>
-      <circle class="pdot" r="2.6"><animateMotion dur="2.8s" repeatCount="indefinite" begin="1.1s"><mpath href="#e1"/></animateMotion></circle>
-      <circle class="pdot" r="3.6"><animateMotion dur="2.6s" repeatCount="indefinite" begin=".4s"><mpath href="#e2"/></animateMotion></circle>
-      <circle class="pdot" r="2.6"><animateMotion dur="2.6s" repeatCount="indefinite" begin="1.6s"><mpath href="#e2"/></animateMotion></circle>
-      <circle class="pdot" r="3.6"><animateMotion dur="2.7s" repeatCount="indefinite" begin=".8s"><mpath href="#e3"/></animateMotion></circle>
-      <circle class="pdot" r="2.6"><animateMotion dur="2.7s" repeatCount="indefinite" begin="2s"><mpath href="#e3"/></animateMotion></circle>
-      <circle class="pdot" r="3.6"><animateMotion dur="2.5s" repeatCount="indefinite" begin="1.2s"><mpath href="#e4"/></animateMotion></circle>
-      <circle class="pdot vio" r="3"><animateMotion dur="3.4s" repeatCount="indefinite" begin=".6s"><mpath href="#h1"/></animateMotion></circle>
-      <circle class="pdot vio" r="3"><animateMotion dur="3.4s" repeatCount="indefinite" begin="2.2s"><mpath href="#h2"/></animateMotion></circle>
+      <circle class="pdot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin="0s"><mpath href="#e1"/></animateMotion></circle>
+      <circle class="pdot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".5s"><mpath href="#e2"/></animateMotion></circle>
+      <circle class="pdot" r="2.5"><animateMotion dur="2.2s" repeatCount="indefinite" begin="1.4s"><mpath href="#e2"/></animateMotion></circle>
+      <circle class="pdot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".9s"><mpath href="#e3"/></animateMotion></circle>
+      <circle class="pdot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin="1.2s"><mpath href="#e4"/></animateMotion></circle>
+      <circle class="pdot" r="2.5"><animateMotion dur="2.2s" repeatCount="indefinite" begin="1.9s"><mpath href="#e4"/></animateMotion></circle>
+      <circle class="pdot" r="3.4"><animateMotion dur="2.2s" repeatCount="indefinite" begin="1.6s"><mpath href="#e5"/></animateMotion></circle>
+      <circle class="pdot vio" r="3"><animateMotion dur="2.8s" repeatCount="indefinite" begin=".4s"><mpath href="#h1"/></animateMotion></circle>
+      <circle class="pdot amber" r="3"><animateMotion dur="2.8s" repeatCount="indefinite" begin="1.5s"><mpath href="#h2"/></animateMotion></circle>
     </svg>
   </div>
+  
 </div></section>
 
 <!-- WHO -->
@@ -785,6 +807,7 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 
   <div class="chev rv" data-tilt="3">
     <div class="chev-glow" aria-hidden="true"></div>
+    <img class="chev-logo" src="https://www.google.com/s2/favicons?domain=chevening.org&amp;sz=128" alt="Chevening" loading="lazy" onerror="this.remove()">
     <div class="chev-l">
       <div class="chev-k">Recognition · UK Foreign, Commonwealth &amp; Development Office</div>
       <div class="chev-t">Chevening Scholar<span> 2024/25</span></div>
@@ -840,12 +863,12 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 <!-- WORK -->
 <section class="sec dark" id="work"><div class="wrap" style="position:relative">
   <div aria-hidden="true" style="position:absolute;left:50%;top:6%;width:min(760px,92%);height:340px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(0,113,227,.22),transparent 72%);filter:blur(46px);pointer-events:none"></div>
-  <div class="head mid rv"><div class="eyeb">Selected work</div><h2 class="hd">Systems I'm proud of</h2><p class="hd-sub">Eight builds, from an AI agent that repairs its own scrapers to a 58-million-row catalogue crawl. Open any card for the architecture.</p></div>
+  <div class="head mid rv"><div class="eyeb">Selected work</div><h2 class="hd">Systems I'm proud of</h2><p class="hd-sub">Six things I'd point to first — three products, an architecture that crawled daily for three years, a published field guide, and the scholarship that reframed the work.</p></div>
   <div class="bento d3" data-stagger>
 
-    <article class="bx w4 tilt" onclick="tog(this)">
+    <article class="bx w3 tilt" onclick="tog(this)">
       <div class="bx-k"><span>Self-healing systems</span><span class="bx-x">+</span></div>
-      <div class="bx-t">Ford LENS Auto-Healer</div>
+      <div class="bx-t">Ford Crawler IQ — Auto-Healer</div>
       <div class="bx-d">A spider breaks at 3am. By the time anyone looks, an agent has already read the traceback, pulled the live page, tried four fix strategies, committed the one that worked to a path-locked branch and re-run the crawl. Seventy spiders, forty-four domains, nobody woken up.</div>
       <div class="btags"><span class="tg">Claude Sonnet</span><span class="tg">FastAPI MCP</span><span class="tg">Django DRF</span><span class="tg">ECS Fargate</span><span class="tg">Aurora Serverless</span></div>
       <div class="bx-b"><div class="bx-in">
@@ -905,74 +928,39 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
       </div></div>
     </article>
 
-    <article class="bx w2 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>Evasion</span><span class="bx-x">+</span></div>
-      <div class="bx-t">Adversarial toolkit</div>
-      <div class="bx-d">Six anti-bot vendors, one rule: never pay for a browser until the cheap path is provably dead. Sub-1% block rate across 300+ projects.</div>
-      <div class="btags"><span class="tg">curl_cffi</span><span class="tg">Camoufox</span><span class="tg">JA3 / JA4</span></div>
+    <article class="bx w3 tilt" onclick="tog(this)">
+      <div class="bx-k"><span>Product</span><span class="bx-x">+</span></div>
+      <div class="bx-t"><a href="https://artemisai.co.uk" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:inherit;border-bottom:2px solid rgba(100,168,255,.4)">ArtemisAI</a> <span style="font-size:15px;color:var(--blue-l)">&#8599;</span></div>
+      <div class="bx-d">Where I'm CTO and co-founder. A Meta lakehouse, six fine-tuned NLP models, an agentic analyst chatbot and packaged B2B subscription datasets — with self-healing ops so it keeps running while I sleep.</div>
+      <div class="btags"><span class="tg">Custom LLMs</span><span class="tg">Redshift</span><span class="tg">QuickSight</span></div>
       <div class="bx-b"><div class="bx-in"><ul>
-        <li><b>TLS layer first.</b> curl_cffi and cycle-tls for JA3/JA4 impersonation — browser-identical handshakes without paying for a browser. Most bypasses fail here, not in the DOM.</li>
-        <li><b>Camoufox.</b> Hardened Firefox fork patched at the C++ level, below CDP entirely. Randomised canvas, WebGL, AudioContext, font and screen fingerprints per session.</li>
-        <li><b>Scrapling.</b> Async-first Scrapy alternative with built-in stealth and element finding that survives DOM changes.</li>
-        <li><b>Mobile API recon.</b> Android emulator with HTTP Toolkit and Charles Proxy to intercept app traffic and surface hidden REST and GraphQL endpoints. Often bypasses web anti-bot entirely.</li>
-        <li><b>Fingerprint coherence.</b> Five vectors have to agree at once: IP country, timezone, Accept-Language, WebRTC ICE candidate and DNS resolver. A US proxy with the wrong language header fails immediately.</li>
-        <li><b>Proxy economics.</b> Residential and mobile rotation across Bright Data, Oxylabs and Smartproxy with burn-rate monitoring and auto-failover — because the fastest way to lose money on a scrape is a datacentre IP on a residential-only target.</li>
-        <li><b>Knowing when to stop.</b> Half the job is recognising the target isn't worth the browser. If a mobile endpoint returns the same JSON for 1/40th the cost, that's the answer.</li>
+        <li><b>Ingest.</b> GitHub Actions → ECR → ECS Fargate → DynamoDB → S3, pulling 30+ brand pages daily.</li>
+        <li><b>Warehouse.</b> Layered Redshift (RDL → ODL → ADL) orchestrated by Step Functions with sub-second KPI reporting.</li>
+        <li><b>Models.</b> Custom LLMs trained on engagement data; predictive trend models lifted client content monetization 40%.</li>
+        <li><b>Ops.</b> Self-healing EventBridge dead-letter queues, CloudWatch alarms and Twilio alerts — no manual intervention.</li>
+        <li><b>Access.</b> Multi-tenant Redshift layer with row-level security across 10+ client accounts.</li>
+        <li><a href="https://artemisai.co.uk" target="_blank" rel="noopener" onclick="event.stopPropagation()">artemisai.co.uk ↗</a></li>
       </ul></div></div>
     </article>
 
     <article class="bx w3 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>ETL platform</span><span class="bx-x">+</span></div>
-      <div class="bx-t">Amazon CORE pipeline</div>
-      <div class="bx-d">Eight social platforms, ten Lambdas, sixteen filtering rules and an NLP pass — feeding campaign analytics for Amazon, Nike, Ford, Reckitt and the UK Government. Built from nothing in under thirty days.</div>
-      <div class="btags"><span class="tg">AWS Lambda</span><span class="tg">Step Functions</span><span class="tg">SageMaker</span></div>
-      <div class="bx-b"><div class="bx-in">
-        <svg viewBox="0 0 540 178" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ETL pipeline">
-          <defs><marker id="b1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1l6 3-6 3" fill="none" stroke="#64A8FF" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-          <rect x="8" y="30" width="88" height="44" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="52" y="49" text-anchor="middle" font-family="monospace" font-size="9" fill="#64A8FF">Sprinklr API</text>
-          <text x="52" y="63" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">8 platforms</text>
-          <line x1="96" y1="52" x2="118" y2="52" stroke="#64A8FF" marker-end="url(#b1)"/>
-          <rect x="120" y="30" width="78" height="44" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="159" y="49" text-anchor="middle" font-family="monospace" font-size="9" fill="#64A8FF">Lambda 1–3</text>
-          <text x="159" y="63" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">ingest + map</text>
-          <line x1="198" y1="52" x2="218" y2="52" stroke="#64A8FF" marker-end="url(#b1)"/>
-          <rect x="220" y="8" width="78" height="44" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="259" y="27" text-anchor="middle" font-family="monospace" font-size="9" fill="#64A8FF">S3 raw</text>
-          <text x="259" y="41" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">master table</text>
-          <line x1="259" y1="52" x2="259" y2="74" stroke="#64A8FF" marker-end="url(#b1)"/>
-          <rect x="220" y="76" width="78" height="44" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="259" y="95" text-anchor="middle" font-family="monospace" font-size="9" fill="#64A8FF">Lambda 4–6</text>
-          <text x="259" y="109" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">filter + bench</text>
-          <line x1="298" y1="98" x2="318" y2="98" stroke="#64A8FF" marker-end="url(#b1)"/>
-          <rect x="320" y="76" width="88" height="44" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="364" y="95" text-anchor="middle" font-family="monospace" font-size="9" fill="#64A8FF">SageMaker</text>
-          <text x="364" y="109" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">sentiment + topics</text>
-          <line x1="408" y1="98" x2="428" y2="98" stroke="#64A8FF" marker-end="url(#b1)"/>
-          <rect x="430" y="76" width="88" height="44" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="474" y="95" text-anchor="middle" font-family="monospace" font-size="9" fill="#64A8FF">PostgreSQL</text>
-          <text x="474" y="109" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">campaign analytics</text>
-          <path d="M120 10 Q320 -8 430 30" fill="none" stroke="#9AB8FF" stroke-dasharray="3 2"/>
-          <text x="275" y="6" text-anchor="middle" font-family="monospace" font-size="8" fill="#9AB8FF">Step Functions orchestration</text>
-          <rect x="8" y="140" width="150" height="30" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="83" y="159" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">CloudWatch + Slack</text>
-          <rect x="166" y="140" width="150" height="30" rx="7" fill="#1C1C20" stroke="#33333A"/>
-          <text x="241" y="159" text-anchor="middle" font-family="monospace" font-size="8" fill="#8E8E93">Retool dashboards</text>
-          <text x="330" y="159" font-family="monospace" font-size="8" fill="#64A8FF">99%+ uptime · −35% cost · 30 days</text>
-        </svg>
-        <ul>
-          <li><b>Chain.</b> Ten Lambdas from API ingest through post-ID mapping, master table build, sixteen filtering rules, NLP tagging and benchmarking into Postgres.</li>
-          <li><b>Coverage.</b> Organic, boosted and paid posts across Facebook, Instagram, X, LinkedIn, YouTube, TikTok, Threads and LINE.</li>
-          <li><b>Delivery.</b> GitHub Actions → ECR → ECS Fargate → EventBridge → Step Functions, nothing to production in under thirty days.</li>
-          <li><b>Next.</b> Designed the migration to a four-layer Postgres architecture (RDL/REF/ODL/ADL, 25 tables) replacing a 731-folder S3 CSV chain.</li>
-        </ul>
-      </div></div>
+      <div class="bx-k"><span>Ops product</span><span class="bx-x">+</span></div>
+      <div class="bx-t">ScrapeYard control plane</div>
+      <div class="bx-d">One dashboard running a fleet of 86 crawler projects for a parts-retail client — schedule, watch, stop, validate and ship every crawl without touching a terminal. Seven users, zero SSH.</div>
+      <div class="btags"><span class="tg">FastAPI</span><span class="tg">APScheduler</span><span class="tg">Drive sync</span><span class="tg">CI/CD</span></div>
+      <div class="bx-b"><div class="bx-in"><ul>
+        <li><b>Registry.</b> 86 manufacturer crawlers with priorities, notes, audit log, soft-delete and restore — the catalogue is the source of truth for what runs when.</li>
+        <li><b>Drive as ground truth.</b> Google Drive sync walks each crawler's output folder and uses the newest data file's timestamp as the real "last scraped" — no self-reported freshness.</li>
+        <li><b>Live ops.</b> Colourised streaming logs, run ETAs from windowed completion rates, a real STOP button, and a smoke-test mode capped at 2 models / 25 items for safe dry-runs.</li>
+        <li><b>Quality gates.</b> On-demand DQ checks — full-file JSON validity, required fields, duplicate detection, diagram coverage — before anything reaches the client.</li>
+        <li><b>Zero-touch deploys.</b> Push to main, GitHub Actions ships it to the VPS. The client team runs everything through named logins with per-action audit trails.</li>
+      </ul></div></div>
     </article>
 
     <article class="bx w3 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>Data platform</span><span class="bx-x">+</span></div>
-      <div class="bx-t">Dubizzle Labs platform</div>
-      <div class="bx-d">500+ spiders on Kubernetes across four marketplaces in MENA, feeding a three-layer warehouse, an Elasticsearch search tier, and a competitor-intelligence product built partly from reverse-engineered mobile APIs.</div>
+      <div class="bx-k"><span>Ran daily for 3 years</span><span class="bx-x">+</span></div>
+      <div class="bx-t">Dubizzle scraping architecture</div>
+      <div class="bx-d">500+ spiders on Kubernetes crawling every single day for three years straight across Dubizzle, Bayut, Zameen and OLX — feeding a three-layer warehouse, an Elasticsearch search tier and a competitor-intelligence product built partly from reverse-engineered mobile APIs.</div>
       <div class="btags"><span class="tg">EKS</span><span class="tg">Redshift</span><span class="tg">Elasticsearch</span></div>
       <div class="bx-b"><div class="bx-in">
         <svg viewBox="0 0 540 196" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data platform architecture">
@@ -1023,73 +1011,29 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
     </article>
 
     <article class="bx w3 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>Product</span><span class="bx-x">+</span></div>
-      <div class="bx-t"><a href="https://artemisai.co.uk" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:inherit;border-bottom:2px solid rgba(100,168,255,.4)">ArtemisAI</a> <span style="font-size:15px;color:var(--blue-l)">&#8599;</span></div>
-      <div class="bx-d">Where I'm CTO and co-founder. A Meta lakehouse, six fine-tuned NLP models, an agentic analyst chatbot and packaged B2B subscription datasets — with self-healing ops so it keeps running while I sleep.</div>
-      <div class="btags"><span class="tg">Custom LLMs</span><span class="tg">Redshift</span><span class="tg">QuickSight</span></div>
+      <div class="bx-k"><span>Published</span><span class="bx-x">+</span></div>
+      <div class="bx-t"><a href="https://web-scraping-guide.com/" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:inherit;border-bottom:2px solid rgba(100,168,255,.4)">Web Scraping Guide</a> <span style="font-size:15px;color:var(--blue-l)">&#8599;</span></div>
+      <div class="bx-d">The field reference I wished existed — so I wrote it. 73 libraries, 10 anti-bot vendors mapped, 9 production architectures, and a full Akamai v3 case study with the failed attempts left in.</div>
+      <div class="btags"><span class="tg">73 libraries</span><span class="tg">Akamai v3</span><span class="tg">JA4</span></div>
       <div class="bx-b"><div class="bx-in"><ul>
-        <li><b>Ingest.</b> GitHub Actions → ECR → ECS Fargate → DynamoDB → S3, pulling 30+ brand pages daily.</li>
-        <li><b>Warehouse.</b> Layered Redshift (RDL → ODL → ADL) orchestrated by Step Functions with sub-second KPI reporting.</li>
-        <li><b>Models.</b> Custom LLMs trained on engagement data; predictive trend models lifted client content monetization 40%.</li>
-        <li><b>Ops.</b> Self-healing EventBridge dead-letter queues, CloudWatch alarms and Twilio alerts — no manual intervention.</li>
-        <li><b>Access.</b> Multi-tenant Redshift layer with row-level security across 10+ client accounts.</li>
-        <li><a href="https://artemisai.co.uk" target="_blank" rel="noopener" onclick="event.stopPropagation()">artemisai.co.uk ↗</a></li>
+        <li><b>Anti-bot map.</b> Ten vendors — Akamai, Cloudflare, DataDome, Kasada, PerimeterX, F5 Shape and more — each with what they check and what actually beats them.</li>
+        <li><b>The honest case study.</b> A production Akamai v3 bypass documented end to end, including every approach that failed before the one that worked.</li>
+        <li><b>Deep dives.</b> JA3/JA4 fingerprinting, WASM SIMD detection, mobile API recon, fetch-ladder economics and a priority-ordered tooling cheat sheet.</li>
+        <li><b>Kept current.</b> Search-indexed, continuously updated as the arms race moves — because a 2024 bypass guide is a history book.</li>
+        <li><a href="https://web-scraping-guide.com/" target="_blank" rel="noopener" onclick="event.stopPropagation()">web-scraping-guide.com &#8599;</a></li>
       </ul></div></div>
     </article>
 
-    <article class="bx w3 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>Public data</span><span class="bx-x">+</span></div>
-      <div class="bx-t">Pakistan Energy Monitor</div>
-      <div class="bx-d">A national crisis rendered live. Strategic oil reserves draining at 4.82 barrels a second, fuel prices tracked since the Hormuz blockade, and Lahore's load-shedding map feeder by feeder.</div>
-      <div class="btags"><span class="tg">CloudFront</span><span class="tg">Real-time</span><span class="tg">Geospatial</span></div>
+    <article class="bx w3 tilt gold" onclick="tog(this)">
+      <div class="bx-k"><span style="color:#C9962E">Chevening exposure</span><span class="bx-x">+</span></div>
+      <div class="bx-t">A year that changed the frame</div>
+      <div class="bx-d">Chevening isn't just funding — it's a leadership network of 160 countries and direct exposure to how the UK government thinks about data. It turned an engineer into a researcher.</div>
+      <div class="btags"><span class="tg" style="border-color:#4A3D1E;color:#C9962E">UK FCDO</span><span class="tg" style="border-color:#4A3D1E;color:#C9962E">160 countries</span><span class="tg" style="border-color:#4A3D1E;color:#C9962E">Top 2–3%</span></div>
       <div class="bx-b"><div class="bx-in"><ul>
-        <li><b>Reserve counter.</b> Strategic reserve depletion ticking down at 4.82 barrels per second, live.</li>
-        <li><b>Fuel tracker.</b> Petrol, diesel and LPG with full price history since the February 2026 Hormuz blockade.</li>
-        <li><b>Load-shedding map.</b> Area-by-area LESCO outage schedule for Lahore with live feeder status.</li>
-        <li><b>Economy.</b> GDP growth, inflation and current account deficit tracked against IMF releases.</li>
-        <li><a href="https://dsc31239o0zcf.cloudfront.net/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Live dashboard ↗</a></li>
-      </ul></div></div>
-    </article>
-
-    <article class="bx w3 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>Founder build</span><span class="bx-x">+</span></div>
-      <div class="bx-t">ArtemisAI platform</div>
-      <div class="bx-d">Predictive social intelligence I own end to end as CTO — virality scoring before you publish, crisis detection hours before the damage, and Art-E, an AI analyst that knows your pages better than you do.</div>
-      <div class="btags"><span class="tg">Meta lakehouse</span><span class="tg">DeBERTa MTL</span><span class="tg">Redshift</span><span class="tg">Art-E</span></div>
-      <div class="bx-b"><div class="bx-in"><ul>
-        <li><b>Lakehouse.</b> GitHub Actions → ECR → ECS Fargate → DynamoDB → S3, ingesting 30+ brand pages daily, landing in a layered Redshift warehouse (RDL → ODL → ADL) with sub-second KPIs via QuickSight.</li>
-        <li><b>NLP engine.</b> A multi-task DeBERTa-v3 — one shared encoder, five classification heads — trained on ~20k labels blended from frontier-model annotation, distilled labels and synthetic edge cases, gated at F1 &gt; 0.85 before anything ships.</li>
-        <li><b>Model routing.</b> Three-tier inference routing sends easy posts to the cheap path and uncertain ones up the ladder, with quarterly retrains fed by the uncertainty queue.</li>
-        <li><b>Art-E.</b> A conversational analyst grounded in the user's own connected pages and audience segments — "why did Tuesday's post go viral" gets a real answer.</li>
-        <li><a href="https://artemisai.co.uk" target="_blank" rel="noopener" onclick="event.stopPropagation()">artemisai.co.uk ↗</a></li>
-      </ul></div></div>
-    </article>
-
-    <article class="bx w3 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>Ops product</span><span class="bx-x">+</span></div>
-      <div class="bx-t">ScrapeYard control plane</div>
-      <div class="bx-d">One dashboard running a fleet of 86 crawler projects for a parts-retail client — schedule, watch, stop, validate and ship every crawl without touching a terminal. Seven users, zero SSH.</div>
-      <div class="btags"><span class="tg">FastAPI</span><span class="tg">APScheduler</span><span class="tg">Drive sync</span><span class="tg">CI/CD</span></div>
-      <div class="bx-b"><div class="bx-in"><ul>
-        <li><b>Registry.</b> 86 manufacturer crawlers with priorities, notes, audit log, soft-delete and restore — the catalogue is the source of truth for what runs when.</li>
-        <li><b>Drive as ground truth.</b> Google Drive sync walks each crawler's output folder and uses the newest data file's timestamp as the real "last scraped" — no self-reported freshness.</li>
-        <li><b>Live ops.</b> Colourised streaming logs, run ETAs from windowed completion rates, a real STOP button, and a smoke-test mode capped at 2 models / 25 items for safe dry-runs.</li>
-        <li><b>Quality gates.</b> On-demand DQ checks — full-file JSON validity, required fields, duplicate detection, diagram coverage — before anything reaches the client.</li>
-        <li><b>Zero-touch deploys.</b> Push to main, GitHub Actions ships it to the VPS. The client team runs everything through named logins with per-action audit trails.</li>
-      </ul></div></div>
-    </article>
-
-    <article class="bx w3 tilt" onclick="tog(this)">
-      <div class="bx-k"><span>Scale</span><span class="bx-x">+</span></div>
-      <div class="bx-t">58-million-row catalogue crawl</div>
-      <div class="bx-d">A full-catalogue crawl of a heavily defended parts retailer: 58,394,093 parts across 331,194 models, delivered as one clean 30GB dataset. Akamai never noticed.</div>
-      <div class="btags"><span class="tg">curl_cffi</span><span class="tg">Akamai</span><span class="tg">Sharded</span><span class="tg">30GB</span></div>
-      <div class="bx-b"><div class="bx-in"><ul>
-        <li><b>Recon win.</b> Model pages turned out to ship their entire parts tree inline as a Knockout.js data blob — one GET per model instead of dozens of AJAX calls. Reading the page beat automating it.</li>
-        <li><b>Akamai.</b> A pool of homepage-warmed persistent curl_cffi sessions: cold requests 500 after 30 seconds, warmed ones return 200 in 0.2s. No browser was ever launched.</li>
-        <li><b>Scale mechanics.</b> A 362,875-model sitemap split across 6 parallel shards, deduplicated through disk-based SQLite, resumable checkpoints per shard.</li>
-        <li><b>Completeness.</b> A gap-backfill spider re-hit every zero-row model; 6,343 were proven legitimately parts-less, the rest recovered — then field-level QA on SKUs, prices and diagram coverage.</li>
-        <li><b>Result.</b> 58.4M rows, 331k models, 30.31GB compressed, with a live progress dashboard the client could watch mid-crawl.</li>
+        <li><b>Selection.</b> Chosen from 70,000+ applicants worldwide on leadership and impact — interviews, essays, references, the full gauntlet.</li>
+        <li><b>The research year.</b> MSc at Portsmouth with Distinction — the dissertation put production scraping skills to academic use: 279k posts, a fine-tuned BERT at macro-F1 0.878.</li>
+        <li><b>The network.</b> A global cohort of scholars across government, policy and industry — the kind of room a scraping engineer doesn't usually get invited into.</li>
+        <li><b>The result.</b> UK client work at M+C Saatchi, a UK-registered company of my own, and PhD conversations that started from the dissertation.</li>
       </ul></div></div>
     </article>
 
@@ -1318,8 +1262,19 @@ function fillMq(id,names){
   el.innerHTML=row+row;
 }
 
-/* BANNER 1 · clients */
-fillMq('mqCli',['Amazon','Ford','UK Government','Reckitt','Rentokil','Nike']);
+/* BANNER 1 · clients — icon + wordmark, favicon fallback for non-tech brands */
+(function(){
+  const C=[
+    ['amazon',null,'Amazon'],['ford',null,'Ford'],[null,'gov.uk','UK Government'],
+    [null,'reckitt.com','Reckitt'],[null,'rentokil.com','Rentokil'],['nike',null,'Nike']
+  ];
+  const el=document.getElementById('mqCli');if(!el)return;
+  const row=C.map(c=>{
+    const src=c[0]?ICON(c[0]):'https://www.google.com/s2/favicons?domain='+c[1]+'&sz=128';
+    return '<i><img src="'+src+'" alt="" loading="lazy" onerror="this.remove()"><b>'+c[2]+'</b></i>';
+  }).join('');
+  el.innerHTML=row+row+row;
+})();
 
 /* BANNER 2 · big tools, logo + wordmark (icon hides itself if the CDN lacks it) */
 (function(){
