@@ -525,7 +525,11 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .award svg{width:15px;height:18px;color:#C9962E;flex-shrink:0}
 .award b{font-weight:700;background:linear-gradient(100deg,#8A6A1F,#C9962E 45%,#E9C46A 55%,#C9962E 70%,#8A6A1F);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:goldShift 5s ease-in-out infinite}
 @keyframes goldShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.chev{position:relative;display:grid;grid-template-columns:1.4fr 1fr;align-items:center;gap:34px;background:linear-gradient(150deg,#0A0A0C,#15120C);border:1px solid #2E2818;border-radius:24px;padding:34px 38px;margin-bottom:22px;overflow:hidden;transform-style:preserve-3d;transition:transform .45s var(--ease),box-shadow .45s;box-shadow:0 30px 70px rgba(201,150,46,.14)}
+.chev{position:relative;display:grid;grid-template-columns:1fr 1.15fr;grid-template-areas:"logo text" "stats text";align-items:center;gap:26px 44px;background:linear-gradient(150deg,#0A0A0C,#15120C);border:1px solid #2E2818;border-radius:24px;padding:34px 38px;margin-bottom:22px;overflow:hidden;transform-style:preserve-3d;transition:transform .45s var(--ease),box-shadow .45s;box-shadow:0 30px 70px rgba(201,150,46,.14)}
+.chev-l{grid-area:text}
+.chev-stats{grid-area:stats}
+.chev-logo{grid-area:logo;position:static;justify-self:center;width:150px;height:150px;border-radius:36px;padding:30px;background:rgba(255,255,255,.96);box-shadow:0 20px 54px rgba(201,150,46,.42);object-fit:contain;transition:transform .45s var(--ease)}
+.chev:hover .chev-logo{transform:scale(1.06) rotate(-3deg)}
 .chev:hover{box-shadow:0 38px 84px rgba(201,150,46,.22)}
 .chev-glow{position:absolute;inset:0;background:radial-gradient(70% 90% at 15% 0%,rgba(233,196,106,.14),transparent 65%),radial-gradient(50% 80% at 95% 100%,rgba(201,150,46,.10),transparent 70%);pointer-events:none}
 .chev::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:38%;background:linear-gradient(105deg,transparent,rgba(233,196,106,.10),transparent);transform:skewX(-16deg);animation:chevSweep 6s ease-in-out infinite}
@@ -540,7 +544,6 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .chev:hover .cs{border-color:#4A3D1E}
 .cs b{display:block;font-size:clamp(20px,2.4vw,27px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(110deg,#E9C46A,#C9962E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .cs span{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8A8471}
-.chev-logo{position:absolute;top:22px;right:24px;width:44px;height:44px;border-radius:12px;padding:7px;background:rgba(255,255,255,.92);box-shadow:0 8px 22px rgba(201,150,46,.35);z-index:2;object-fit:contain}
 .bx.gold{border-color:#3A311B}
 .bx.gold:hover{border-color:#C9962E;box-shadow:0 24px 60px rgba(201,150,46,.22)}
 .bx.gold .bx-t{background:linear-gradient(100deg,#E9C46A,#C9962E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -558,7 +561,7 @@ h2.hd{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;li
 .cs.wsg-cs b{background:linear-gradient(110deg,#00C6FB,#0071E3);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .cs.wsg-cs span{color:#6E7E93}
 .chev.wsg .chev-logo{box-shadow:0 8px 22px rgba(0,113,227,.4)}
-@media(max-width:860px){.chev{grid-template-columns:1fr;padding:28px 24px}.gcards.gc2{grid-template-columns:1fr}}
+@media(max-width:860px){.chev{grid-template-columns:1fr;grid-template-areas:"logo" "text" "stats";padding:28px 24px}.chev-logo{width:110px;height:110px;padding:22px;border-radius:28px}.gcards.gc2{grid-template-columns:1fr}}
 /* scroll-driven 3D handled by JS engine below (all browsers) */
 .sec>.wrap{will-change:transform;transform-style:preserve-3d}
 /* 3D scroll stage */
@@ -1587,16 +1590,16 @@ const EMP=[
 
 /* ═══ data ═══ */
 const CAPS=[
- ['Scraping','Frameworks and extraction tooling. <b>Seven years, 400+ sites, 50M+ records.</b>',['Scrapy','Scrapy Cluster','Scrapyd','Playwright','Puppeteer','Selenium','BeautifulSoup','Splash','Apify','curl_cffi','httpx','requests','Scrapy-Playwright','lxml / parsel','Crawlee','Scrapling','aiohttp','MarkItDown','Sitemap-driven crawling']],
- ['Anti-bot','Fingerprint evasion, CAPTCHA solving, API recon. <b>Akamai v3, Cloudflare Turnstile, DataDome, PerimeterX, Kasada, F5.</b>',['TLS / JA3 / JA4 spoofing','curl_cffi','cycle-tls','Camoufox','GoLogin','undetected-chromedriver','playwright-stealth','rebrowser-patches','2Captcha','Puzzle solving','Proxy rotation','Akamai v3 bypass','Cloudflare Turnstile','DataDome','PerimeterX','Kasada','F5 Shape','Bright Data','Oxylabs','Smartproxy','NetNut','Charles Proxy','Burp Suite','HTTP Toolkit','Android Studio MITM','Hidden REST / GraphQL','JS deobfuscation','IPRoyal','Webshare','Zyte','Headful cookie-warming']],
- ['ETL / ELT','Pipelines, orchestration and streaming. <b>Production systems processing hundreds of millions of records.</b>',['PySpark','AWS Glue','dbt','Matillion','Apache Airflow','Step Functions','EventBridge','Apache Spark','EMR Serverless','Kafka','Kinesis','SNS / SQS','Great Expectations','Pandas','Polars','NumPy','Apache Flink','Openpyxl','Idempotent design','Data contracts']],
+ ['Scraping','Frameworks and extraction tooling. <b>Seven years, 400+ sites, 50M+ records.</b>',['Scrapy','Scrapy Cluster','Scrapyd','Playwright','Puppeteer','Selenium','BeautifulSoup','Splash','Apify','curl_cffi','httpx','requests','Scrapy-Playwright','lxml / parsel','Crawlee','Scrapling','aiohttp','MarkItDown','Sitemap-driven crawling','nodriver','hrequests','botasaurus','SeleniumBase','puppeteer-extra','Go (colly)','w3lib']],
+ ['Anti-bot','Fingerprint evasion, CAPTCHA solving, API recon. <b>Akamai v3, Cloudflare Turnstile, DataDome, PerimeterX, Kasada, F5.</b>',['TLS / JA3 / JA4 spoofing','curl_cffi','cycle-tls','Camoufox','GoLogin','undetected-chromedriver','playwright-stealth','rebrowser-patches','2Captcha','Puzzle solving','Proxy rotation','Akamai v3 bypass','Cloudflare Turnstile','DataDome','PerimeterX','Kasada','F5 Shape','Bright Data','Oxylabs','Smartproxy','NetNut','Charles Proxy','Burp Suite','HTTP Toolkit','Android Studio MITM','Hidden REST / GraphQL','JS deobfuscation','IPRoyal','Webshare','Zyte','Headful cookie-warming','CloakBrowser','webclaw','tls-client','uTLS','mitmproxy','Frida','Multilogin','Kameleo','CapSolver','ScraperAPI','ScrapingBee','Rayobyte','Apify platform']],
+ ['ETL / ELT','Pipelines, orchestration and streaming. <b>Production systems processing hundreds of millions of records.</b>',['PySpark','AWS Glue','dbt','Matillion','Apache Airflow','Step Functions','EventBridge','Apache Spark','EMR Serverless','Kafka','Kinesis','SNS / SQS','Great Expectations','Pandas','Polars','NumPy','Apache Flink','Openpyxl','Idempotent design','Data contracts','Celery','RabbitMQ','DuckDB']],
  ['Warehousing','Design and modelling. <b>RDL → ODL → ADL layered architecture, star and snowflake schemas.</b>',['Amazon Redshift','Snowflake','BigQuery','Apache Hive','Hadoop HDFS','Star schema','Snowflake schema','Dimensional modelling','RDL → ODL → ADL','Bronze / Silver / Gold','Lakehouse','Redshift Spectrum','Athena','Parquet / ORC','Delta Lake','Aurora PostgreSQL']],
  ['Cloud','AWS-native infrastructure. <b>Lambda through EKS, end-to-end pipeline ownership.</b>',['ECS Fargate','EKS','AWS Batch','Lambda','ECR','S3','Athena','Glue','Kinesis','SNS / SQS','CloudWatch','CloudFormation','EventBridge','SageMaker','QuickSight','DynamoDB','EMR Serverless','Step Functions','Aurora Serverless v2','Azure (migrations)','CloudFront','ALB','IAM','Secrets Manager']],
- ['DevOps','CI/CD and infrastructure automation. <b>Containerised, automated, production-grade.</b>',['Docker','Kubernetes','GitHub Actions','Scrapyd','Scrapy Cluster','CloudFormation','Terraform','CI/CD','Git','Linux / Bash','pytest','Datadog / CloudWatch','systemd','nginx / CloudPanel','APScheduler','cron']],
+ ['DevOps','CI/CD and infrastructure automation. <b>Containerised, automated, production-grade.</b>',['Docker','Kubernetes','GitHub Actions','Scrapyd','Scrapy Cluster','CloudFormation','Terraform','CI/CD','Git','Linux / Bash','pytest','Datadog / CloudWatch','systemd','nginx / CloudPanel','APScheduler','cron','Grafana','Prometheus']],
  ['Databases','Relational, NoSQL and search. <b>OLTP Postgres through Elasticsearch full-text.</b>',['PostgreSQL','MySQL','MS SQL Server','MongoDB','DynamoDB','Firebase','Elasticsearch','ELK / Kibana','Redis','SQLite','Amazon Aurora']],
  ['ML / AI','NLP and model pipelines. <b>RAG and vector search through custom LLM fine-tuning.</b>',['LangChain','Claude / Anthropic API','OpenAI API','RAG pipelines','MCP servers','HuggingFace','Pinecone','Vector databases','BERT','DeBERTa fine-tuning','GPT fine-tuning','LSTM','Prophet forecasting','XGBoost','LightGBM','SageMaker','VADER','spaCy','NLTK / TextBlob','Topic modelling','DeepSeek distillation','Multi-task learning','Synthetic data generation']],
  ['BI','Reporting and dashboards. <b>Raw pipeline output through to C-suite reporting.</b>',['Tableau','Power BI','QuickSight','Sisense','Periscope','Retool','Kibana','D3.js','Matplotlib','Plotly','Google Analytics 4','Firebase-sync dashboards']],
- ['Languages','Python-first, polyglot where it matters.',['Python','SQL (advanced)','JavaScript / Node','Go','Bash','Django','FastAPI','Flask','React','REST APIs','GraphQL','HTML / CSS','Tailwind CSS','Vite']]
+ ['Languages','Python-first, polyglot where it matters.',['Python','SQL (advanced)','JavaScript / Node','Go','Bash','Django','FastAPI','Flask','React','REST APIs','GraphQL','HTML / CSS','Tailwind CSS','Vite','TypeScript','Next.js','WebSockets']]
 ];
 const ROLES=[
  ['M+C Saatchi Fluency','Data Engineer Consultant · UK, remote','Dec 2024 — present',
