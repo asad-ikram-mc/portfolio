@@ -353,69 +353,61 @@ Here is everything you need to know about Asad:
 - Company website: artemisai.co.uk
 
 ## TITLE & SUMMARY
-Senior Full Stack Data Engineer with 6+ years of experience. Specialist in adversarial web scraping, cloud-native ETL/ELT pipelines, and scalable data warehouse architecture. Chevening Scholar 2024-2025.
+Data Engineer working on social media data and AI, with nearly eight years of experience (since 2018). Co-founder and CTO of Artemis AI. Chevening Scholar 2024-2025. First research paper on arXiv (2026).
 
 ## CHEVENING SCHOLARSHIP
-- Awarded the UK Chevening Scholarship 2024-2025
-- Selected from 70,000+ applicants across 160 countries
-- Top ~2-3% globally
-- Fully funded by the UK Foreign, Commonwealth & Development Office (FCDO)
-- Currently studying MSc Data Analytics at the University of Portsmouth, UK
+- Awarded the UK Chevening Scholarship 2024-2025, fully funded by the UK Foreign, Commonwealth & Development Office (FCDO)
+- His Chevening proposal: a cross-platform system so governments can read public reaction on social media before they decide
+- Used it for the MSc Data Analytics at the University of Portsmouth (Distinction)
 
-## EDUCATION
-- MSc Data Analytics, University of Portsmouth, UK — 2024-2025, Distinction
-- BSc Computer Sciences, FAST-NUCES, Pakistan — 2017-2022
+## EDUCATION AND RESEARCH
+- MSc Data Analytics, University of Portsmouth, UK, 2024-2025, Distinction. Dissertation: UK public reaction to economic policy from 255,446 comments on X, Reddit, YouTube and Quora; fine-tuned BERT (macro-F1 0.878)
+- Paper with Dr Ella Haig: "Is the Platform Part of the Measurement? A Protocol and Simulation Study for Cross-Platform Equivalence of Machine-Labelled Policy Sentiment", arXiv:2610.16757 (October 2026)
+- Applying for PhDs in responsible NLP and computational social science for 2027
+- BSc Computer Science, FAST-NUCES, Pakistan, 2017-2022
 
 ## WORK EXPERIENCE
 
-### M+C Saatchi Fluency (Dec 2024 – Present) — Data Engineer Consultant, UK Remote
-- Architected end-to-end AWS pipeline (GitHub Actions → ECR → ECS Fargate → EventBridge → Step Functions → S3 → AWS Glue → Athena) from zero to production in under 30 days
-- Delivered ETL/ELT pipelines and SageMaker NLP sentiment analysis for Amazon, Nike, Ford, Reckitt, UK Government
-- Eliminated 100% of manual data collection via Scrapy with CAPTCHA bypass and TLS evasion
-- Reduced infrastructure costs 35% with auto-scaling ECS Fargate architecture
-- Maintained 99%+ pipeline uptime with CloudWatch monitoring and Retool dashboards
+### M+C Saatchi Fluency (Dec 2024 – Present) — Data Engineer, UK
+- Social listening and AI pipelines for global brands in consumer health, automotive, e-commerce and sport (including Amazon, Ford, Reckitt, Abbott), and supporting data work for UK Government clients
+- Year-long sport discourse study of 100,845 posts: BERTopic themes, a human-approved codebook, GPT-4o-mini tagging with a prompt-version hash, hand-checked pilots
+- Ford Crawler IQ: 68 forum crawlers repaired by Claude agents over MCP (healer fixed 86% of broken crawlers, builder 92% of builds, 1,697 runs), every fix verified before it ships
+- Owns the Amazon CORE social data pipeline and its v2 rewrite; CollabBoost XGBoost model that fills missing metrics and marks every estimate
+- LLM-assisted multilingual emotion coding across about 170,000 posts from 12 platforms
 
-### ArtemisAI (Feb 2025 – Present) — Founder & Lead Data Engineer, UK
-- Built Meta social data lakehouse from scratch (ECS Fargate → DynamoDB → S3) ingesting 30+ brand pages daily
-- Designed layered Redshift DWH (RDL → ODL → ADL) with sub-second KPI reporting via QuickSight
-- Deployed ML sentiment-tagging and topic-labeling microservices as B2B subscription datasets
-- Trained custom LLMs on engagement data — improved client monetization 40%
-- Self-healing infrastructure with EventBridge, CloudWatch and Twilio WhatsApp alerts
+### ArtemisAI (Feb 2025 – Present) — Co-founder & CTO, UK (Artemis AI Ltd)
+- AI advisor for creators and small businesses on Facebook and Instagram; team of eight; beta December 2026
+- 48 models in the architecture across text, image, video, time series, crisis detection and a page network; about ten run weekly over 3.39 million comments
+- Page affinity graph with Louvain community detection and a collaboration match score
+- QA and accuracy dashboards that keep model agreement separate from human-checked accuracy
+- Never claim he trained custom LLMs or a 40% monetisation lift; those claims are not accurate
 - Website: artemisai.co.uk
 
-### Dubizzle Labs (Feb 2022 – Aug 2024) — Senior Data Engineer (promoted twice), Pakistan
-- Led 3-engineer team owning 500+ regional web scrapers across MENA (Dubizzle, Bayut, Zameen, OLX) on EKS
-- Redesigned layered DWH (RDL → ODL → ADL); improved ETL throughput 60%
-- Built competitor intelligence platform with Star Schema, Snowflake Schema, Dimensional modeling
-- Developed Elasticsearch pipelines for property search; optimised queries 50% via custom index mapping
-- Reverse-engineered competitor mobile apps via Android Studio MITM (HTTP Toolkit + Charles Proxy)
-- Cut production scraping incidents 45% via unit testing and Scrapy contract validation
-- Promoted twice in 2 years: Associate SWE → Data Engineer → Senior Data Engineer
+### CXG (Dec 2025 – Present) — Data Engineer, Dubai Remote
+- Data collection and analysis for global fashion and luxury brands such as Prada (about 49 brand sites)
+- Normalises product attributes across regions and languages; 99%+ data completeness with pytest QA
 
-### VendueTech (Jun 2025 – Jul 2025) — Lead Data Engineer, Ireland Remote (Contract)
-- Led team building real-time auction data ingestion with Scrapy, Playwright, AWS Batch, Step Functions
-- Migrated Azure → AWS; PySpark on EMR Serverless reduced data latency 40%
-- Idempotent pipeline with DynamoDB deduplication ensuring exactly-once processing
+### Dubizzle Labs (Feb 2022 – Aug 2024) — Senior Data Engineer (promoted twice), Lahore, Pakistan
+- Led a 3-engineer team owning 500+ web scrapers on EKS for six products across nine Middle East countries (Dubizzle, Bayut, Zameen, OLX), data in English, Arabic, Urdu and Hindi
+- Redesigned layered DWH (RDL → ODL → ADL); ETL throughput up 60%
+- Competitor intelligence platform; Elasticsearch pipelines with queries 50% faster
+- Cut production scraping incidents 45% via unit testing and Scrapy contracts
 
 ### Fix.com (May 2023 – Present) — Data Engineer Consultant, Canada Remote
-- Scrapy + Scrapyd pipelines processing 50M+ data points from 200+ e-commerce sites
-- Expanded product catalog 50% in 12 months
-- Crawl time cut 40% via async I/O optimisation on Scrapy Cluster (ECS)
-- Residential proxy rotation with CloudWatch burn-rate monitoring
-- Great Expectations validation — 70% reduction in bad production data
+- ScrapeYard: FastAPI control plane for 86 manufacturer crawler projects with data-quality gates and human-approved AI fixes
+- Scrapy pipelines processing tens of millions of records from 200+ e-commerce sites; crawl time cut 40%; Great Expectations cut bad data 70%
+
+### US travel-tech company (Jul – Sep 2026) — Data Consultant, contract under NDA (never name the company)
+- Audited a large-scale data collection engine and found silent measurement errors; fixed a data-licensing problem
+
+### VendueTech (Jun 2025 – Jul 2025) — Lead Data Engineer, Ireland Remote (Contract)
+- Led a team building real-time auction data ingestion; Azure → AWS migration cut latency 40%; exactly-once pipeline with DynamoDB checkpoints
 
 ### Prefe (Sep 2024 – Dec 2024) — Data Engineer Consultant, Italy Remote
-- Rebuilt legacy scrapers into modern Scrapy architecture; reduced failure rate 60%
-- Mentored 2 junior engineers on anti-bot evasion
+- Rebuilt legacy scrapers in Scrapy; failure rate down 60%; mentored 2 junior engineers
 
-### CXG (Dec 2025 – Jan 2026) — Freelance Data Engineer, Dubai Remote
-- Production crawlers for global luxury fashion brands bypassing Akamai v3 and Cloudflare Turnstile
-- 99%+ data completeness across all crawlers
-
-### Fiverr / Independent Consulting (Dec 2018 – Feb 2026) — Level 2 Seller, 5★, 300+ Projects
-- 300+ web scraping and data engineering projects for clients across 400+ websites globally
-- Bypassed Akamai, Cloudflare, Datadome, PerimeterX, Kasada, F5 Shape Security
-- Full-stack products: Scrapy → ECS Fargate → Redshift → Tableau for 50+ international clients
+### Fiverr / Independent (Dec 2018 – Feb 2026) — Level 2 Seller, 5★, 300+ projects
+- 300+ web scraping and data engineering projects across 400+ websites; mentored students into freelance data work
 
 ## SKILLS
 
@@ -423,7 +415,7 @@ Senior Full Stack Data Engineer with 6+ years of experience. Specialist in adver
 Scrapy, Scrapy Cluster, Scrapyd, Playwright, Puppeteer, Selenium, BeautifulSoup, Splash, Apify, curl_cffi, httpx, requests, Crawlee, lxml, parsel
 
 ### Anti-Bot & Evasion
-TLS/JA3/JA4 fingerprint spoofing, curl_cffi, cycle-tls, GoLogin, undetected-chromedriver, playwright-stealth, rebrowser-patches, 2Captcha, puzzle solving, proxy rotation, Akamai v3 bypass, Cloudflare Turnstile bypass, Datadome bypass, PerimeterX, Kasada, F5 Shape Security, Bright Data, Oxylabs, Smartproxy, NetNut, Charles Proxy, Burp Suite, HTTP Toolkit, Android Studio MITM, hidden REST/GraphQL discovery, JS bundle deobfuscation
+TLS/JA3/JA4 fingerprint spoofing, curl_cffi, cycle-tls, GoLogin, undetected-chromedriver, playwright-stealth, rebrowser-patches, 2Captcha, puzzle solving, proxy rotation, Akamai v3 bypass, Cloudflare Turnstile bypass, Datadome bypass, PerimeterX, Kasada, F5 Shape Security, Bright Data, Oxylabs, Smartproxy, NetNut, Charles Proxy, Burp Suite, HTTP Toolkit, hidden REST/GraphQL discovery, JS bundle deobfuscation
 
 ### ETL / ELT
 PySpark, AWS Glue, dbt, Matillion, Apache Airflow, Step Functions, EventBridge, EMR Serverless, Apache Kafka, Kinesis, SNS/SQS, Great Expectations, Pandas, Polars, NumPy, Apache Flink
