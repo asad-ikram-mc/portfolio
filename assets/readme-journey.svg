@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="230" viewBox="0 0 1200 230" role="img" aria-label="Journey: Lahore school, FAST-NUCES 2017, Fiverr 2018, Dubizzle Labs 2022, Chevening and Portsmouth 2024, Fluency and Artemis AI 2025, research and PhD 2026">
+  <defs>
+    <linearGradient id="ln" x1="0" x2="1"><stop offset="0" stop-color="#64A8FF"/><stop offset=".55" stop-color="#7B61FF"/><stop offset="1" stop-color="#00C6FB"/></linearGradient>
+    <style>
+      .t{font-family:'Segoe UI',Manrope,Helvetica,Arial,sans-serif}.m{font-family:'JetBrains Mono',Consolas,monospace}
+      .draw{stroke-dasharray:1100;stroke-dashoffset:1100;animation:draw 3.2s ease forwards}
+      @keyframes draw{to{stroke-dashoffset:0}}
+      .p{opacity:0;animation:pop .6s ease forwards}
+      @keyframes pop{from{opacity:0}to{opacity:1}}
+      .halo{animation:halo 2.4s ease-out infinite}
+      @keyframes halo{0%{r:8;opacity:.8}100%{r:22;opacity:0}}
+    </style>
+  </defs>
+  <rect width="1200" height="230" rx="20" fill="#0a0d16"/>
+  <path class="draw" d="M70 110 H1130" stroke="url(#ln)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <g class="t" text-anchor="middle">
+    <g class="p" style="animation-delay:.2s"><circle cx="90" cy="110" r="8" fill="#64A8FF"/><text x="90" y="72" class="m" font-size="13" fill="#64A8FF">SCHOOL</text><text x="90" y="148" font-size="15" fill="#F5F5F7" font-weight="700">Lahore</text><text x="90" y="170" font-size="12" fill="#98A2B3">Crescent</text></g>
+    <g class="p" style="animation-delay:.6s"><circle cx="260" cy="110" r="8" fill="#64A8FF"/><text x="260" y="72" class="m" font-size="13" fill="#64A8FF">2017</text><text x="260" y="148" font-size="15" fill="#F5F5F7" font-weight="700">FAST-NUCES</text><text x="260" y="170" font-size="12" fill="#98A2B3">Karachi → CFD</text></g>
+    <g class="p" style="animation-delay:1s"><circle cx="430" cy="110" r="8" fill="#64A8FF"/><text x="430" y="72" class="m" font-size="13" fill="#64A8FF">2018</text><text x="430" y="148" font-size="15" fill="#F5F5F7" font-weight="700">Fiverr</text><text x="430" y="170" font-size="12" fill="#98A2B3">442 orders</text></g>
+    <g class="p" style="animation-delay:1.4s"><circle cx="600" cy="110" r="8" fill="#7B61FF"/><text x="600" y="72" class="m" font-size="13" fill="#7B61FF">2022</text><text x="600" y="148" font-size="15" fill="#F5F5F7" font-weight="700">Dubizzle Labs</text><text x="600" y="170" font-size="12" fill="#98A2B3">10 countries</text></g>
+    <g class="p" style="animation-delay:1.8s"><circle cx="770" cy="110" r="8" fill="#7B61FF"/><text x="770" y="72" class="m" font-size="13" fill="#7B61FF">2024</text><text x="770" y="148" font-size="15" fill="#F5F5F7" font-weight="700">Chevening</text><text x="770" y="170" font-size="12" fill="#98A2B3">MSc, Portsmouth</text></g>
+    <g class="p" style="animation-delay:2.2s"><circle cx="940" cy="110" r="8" fill="#00C6FB"/><text x="940" y="72" class="m" font-size="13" fill="#00C6FB">2025</text><text x="940" y="148" font-size="15" fill="#F5F5F7" font-weight="700">Fluency + Artemis AI</text><text x="940" y="170" font-size="12" fill="#98A2B3">M+C Saatchi · CTO</text></g>
+    <g class="p" style="animation-delay:2.6s"><circle cx="1110" cy="110" r="8" fill="#30D158"/><circle class="halo" cx="1110" cy="110" r="8" fill="none" stroke="#30D158" stroke-width="2"/><text x="1110" y="72" class="m" font-size="13" fill="#30D158">2026</text><text x="1110" y="148" font-size="15" fill="#F5F5F7" font-weight="700">Research</text><text x="1110" y="170" font-size="12" fill="#98A2B3">arXiv · PhD</text></g>
+  </g>
+</svg>
