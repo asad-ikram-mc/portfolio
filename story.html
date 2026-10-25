@@ -1104,6 +1104,271 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
   .colo{margin-top:12pt}
 }
 
+/* ===== v3 additions: stats, logos, medals, certificates, leadership, Artemis showcase, mobile carousels ===== */
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes v3ang{to{--ang:360deg}}
+@keyframes v3dash{to{stroke-dashoffset:-28}}
+@keyframes v3spin{to{transform:rotate(360deg)}}
+@keyframes v3pulse{0%,100%{transform:scale(.86);opacity:.12}50%{transform:scale(1.12);opacity:.3}}
+@keyframes v3pop{from{opacity:0;transform:translateY(6px) scale(.6)}to{opacity:1;transform:none}}
+@keyframes v3shine{from{transform:translateX(-130%) skewX(-18deg)}to{transform:translateX(230%) skewX(-18deg)}}
+@keyframes v3rip{to{transform:scale(1);opacity:0}}
+@keyframes v3glint{0%,100%{opacity:.0}50%{opacity:.55}}
+
+/* ---------- hero stats: 8 cards, 4 columns ---------- */
+.stats{max-width:1200px}
+@media (min-width:1024px){
+  .stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .stats .st{grid-template-columns:minmax(0,1fr);align-content:start;padding:20px 20px 18px}
+  .stats .st-ic{grid-row:auto;margin:0 0 12px}
+  .stats .st-n{font-size:clamp(30px,2.7vw,40px)}
+}
+.st:nth-child(7){--sg:rgba(20,200,160,.26);--s1:#0E9F96;--s2:#0071E3}
+.st:nth-child(8){--sg:rgba(192,76,240,.24);--s1:#9A3FD8;--s2:#F0508C}
+.st-intl .st-s{line-height:1.6}
+.st-f{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;grid-column:-2}
+.flg{display:block;line-height:0}
+.flg svg{display:block;width:21px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(11,21,48,.16),0 3px 8px -4px rgba(11,21,48,.4)}
+.js .st-intl:not(.in) .flg{opacity:0}
+.js .st-intl.in .flg{animation:v3pop .5s var(--out) both}
+.st-intl.in .flg:nth-child(2){animation-delay:.06s}.st-intl.in .flg:nth-child(3){animation-delay:.12s}.st-intl.in .flg:nth-child(4){animation-delay:.18s}.st-intl.in .flg:nth-child(5){animation-delay:.24s}
+.st-intl.in .flg:nth-child(6){animation-delay:.3s}.st-intl.in .flg:nth-child(7){animation-delay:.36s}.st-intl.in .flg:nth-child(8){animation-delay:.42s}.st-intl.in .flg:nth-child(9){animation-delay:.48s}.st-intl.in .flg:nth-child(10){animation-delay:.54s}
+.cdots{display:none}
+
+/* ---------- logos: legible at rest ---------- */
+.lgo img{filter:none;opacity:1}
+.lgo a,.lgo-in{color:var(--ink2);color:color-mix(in srgb,var(--b,#0B1530) 52%,#0B1530);position:relative;overflow:hidden}
+.is-dark .lgo a,.is-dark .lgo-in{color:#28334D;color:color-mix(in srgb,var(--b,#0B1530) 52%,#0B1530);background:#F4F6FB}
+.lgo .lg-ico{color:var(--b)}
+.lgo a:hover,.lgo-in:hover,.lgo a:focus-visible{color:color-mix(in srgb,var(--b,#0B1530) 52%,#0B1530)}
+.mono{display:grid;place-items:center;flex:none;min-width:32px;height:32px;padding:0 7px;border-radius:10px;background:var(--b);background:linear-gradient(135deg,color-mix(in srgb,var(--b) 75%,#0B1530),color-mix(in srgb,var(--b) 58%,#0B1530));color:#fff;font:800 13px/1 var(--f);letter-spacing:-.02em;box-shadow:0 6px 14px -8px var(--b)}
+.lgo.flr{--b:#0B1530}
+.lgo.flr .lgo-in{width:124px;padding:0;justify-content:center;overflow:hidden}
+.lgo.flr .lgo-in:has(.wm-only){width:auto;padding:0 22px}
+.lgo.flr img{width:70px;height:60px;max-width:none;mix-blend-mode:multiply;transform:scale(1.25)}
+.lgo img[src$="portsmouth.png"]{height:40px!important}
+.lg-cap2{margin-top:-8px;margin-bottom:14px}
+.lg-cap a{color:var(--acc-ink);text-decoration:underline;text-underline-offset:2px}
+
+/* ---------- chapter 01: medal cards ---------- */
+.medals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0 8px}
+.medal{position:relative;overflow:hidden;isolation:isolate;padding:16px 14px 14px;border-radius:18px;background:linear-gradient(160deg,rgba(255,159,67,.13),rgba(240,80,140,.07) 55%,rgba(123,97,255,.08)),var(--surface);border:1px solid var(--line)}
+.medal::after{content:"";position:absolute;inset:0 auto 0 0;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-130%) skewX(-18deg);pointer-events:none}
+.medal.in::after{animation:v3shine 1.3s .35s var(--out) both}
+.md-ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;margin-bottom:10px;color:#fff;background:conic-gradient(from 200deg,#FF9F43,#F0508C,#7B61FF,#FF9F43);box-shadow:0 0 0 4px rgba(255,159,67,.18),0 10px 20px -10px #F0508C}
+.md-ic svg{width:21px;height:21px}
+.medal b{display:block;font:800 15.5px/1.25 var(--f);letter-spacing:-.02em;color:var(--ink);margin-bottom:4px}
+.medal>span:not(.md-ic){display:block;font-size:13.5px;line-height:1.45;color:var(--sub)}
+.medal-note{font-size:13.5px;color:var(--sub);margin:4px 0 14px}
+
+/* ---------- certificates ---------- */
+.cstats{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:0 auto clamp(28px,4vw,44px);padding:0;max-width:980px}
+.cstats li{display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-b);box-shadow:var(--shadow-s);font-size:14px;line-height:1.35;color:var(--sub);max-width:100%}
+.cstats b{font:800 21px/1 var(--f);letter-spacing:-.03em;color:var(--ink);white-space:nowrap}
+.certs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.cert{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:6px;min-height:178px;padding:20px 18px 18px;border-radius:20px;background:var(--surface);box-shadow:var(--shadow-s);transition:transform .45s var(--out),box-shadow .45s var(--out)}
+.cert::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--ang),var(--cb),#00C6FB,#7B61FF,#F0508C,var(--cb));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.85;pointer-events:none}
+#certs.vis .cert::before{animation:v3ang 7s linear infinite}
+.cert:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.cert-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:8px;color:#fff;background:var(--cb);box-shadow:0 10px 22px -10px var(--cb),inset 0 0 0 1px rgba(255,255,255,.18)}
+.cert-ic svg{width:22px;height:22px}
+.cert-d{font:500 11.5px/1.3 var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--acc-ink)}
+.cert-t{font:800 17px/1.25 var(--f);letter-spacing:-.02em;color:var(--ink)}
+.cert-i{font-size:13.5px;line-height:1.45;color:var(--sub);margin-top:auto}
+.cert-shine{position:absolute;inset:0 auto 0 0;width:45%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:translateX(-130%) skewX(-18deg);pointer-events:none}
+.is-dark .cert-shine{background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent)}
+.cert.in .cert-shine{animation:v3shine 1.4s .3s var(--out) both}
+.cert-cap{margin-top:22px}
+
+/* ---------- leadership ---------- */
+.lstats{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 clamp(40px,5vw,64px);padding:0}
+.lstats li{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-b);box-shadow:var(--shadow-s);font-size:14.5px;line-height:1.45;color:var(--ink2)}
+.lstats b{font:800 clamp(32px,3.4vw,46px)/1.05 var(--f);letter-spacing:-.045em;background:linear-gradient(105deg,var(--l1,#0062D6),var(--l2,#7B61FF));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--acc);white-space:nowrap}
+.lstats li:nth-child(2){--l1:#6A48F5;--l2:#C04CF0}.lstats li:nth-child(3){--l1:#00788F;--l2:#0E9F96}.lstats li:nth-child(4){--l1:#C02A62;--l2:#FF8A3D}
+.ls-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--l1,#0062D6),var(--l2,#7B61FF))}
+.ls-ic svg{width:19px;height:19px}
+.ltl{position:relative;max-width:920px;margin:0 auto}
+.ltl-rail{position:absolute;left:27px;top:10px;bottom:10px;width:3px;border-radius:3px;background:var(--line2);overflow:hidden}
+.ltl-rail b{display:block;width:100%;height:100%;background:var(--spine);transform-origin:top;transform:scaleY(var(--lp,1))}
+.js .ltl-rail b{transform:scaleY(var(--lp,0))}
+.ld-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ld-i{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:18px;align-items:start}
+.ld-n{position:relative;z-index:1;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--n1,#0062D6),var(--n2,#6A48F5));box-shadow:0 0 0 6px var(--bg),0 12px 24px -10px var(--n1,#0062D6)}
+.ld-n svg{width:22px;height:22px}
+.ld-i:nth-child(3n+2){--n1:#6A48F5;--n2:#C04CF0}.ld-i:nth-child(3n){--n1:#00788F;--n2:#14C8A0}
+.ld-i:nth-child(4){--n1:#C02A62;--n2:#FF8A3D}.ld-i:nth-child(7){--n1:#5B36DC;--n2:#F0508C}
+.ld-c{position:relative;overflow:hidden;padding:18px 22px;border-radius:20px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-s);transition:transform .45s var(--out),box-shadow .45s var(--out)}
+.ld-c:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+.ld-k{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0 0 6px;font:500 11.5px/1.4 var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
+.ld-k span:first-child{color:var(--acc-ink)}
+.ld-c h3{font:800 clamp(18px,1.7vw,21px)/1.2 var(--f);letter-spacing:-.025em;margin:0 0 6px;color:var(--ink)}
+.ld-c p:last-child{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink2)}
+
+/* ---------- Artemis AI showcase ---------- */
+.aviz{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:start;margin:30px 0 34px}
+.av-stage{border-radius:24px;padding:clamp(8px,1.6vw,20px);background:radial-gradient(120% 80% at 50% 55%,rgba(123,97,255,.10),transparent 70%),var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-s)}
+.av-svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto;overflow:visible}
+.av-svg text{font-family:var(--f)}
+.av-b{font-size:19px;font-weight:800;fill:var(--ink)}
+.av-s{font:500 13.5px var(--m);fill:var(--sub)}
+.av-s2{font:600 14px var(--m);fill:var(--sub)}
+.av-big{font-size:54px;font-weight:800;letter-spacing:-2px;fill:url(#avg)}
+.av-lab{font-size:21px;font-weight:800;fill:var(--ink)}
+.av-src rect{fill:var(--tint);stroke:#0071E3;stroke-width:1.6}
+.av-wh rect{fill:var(--surface);stroke:#7B61FF;stroke-width:1.6}
+.av-out rect{fill:url(#avd)}
+.av-bw{fill:#fff}.av-sw{fill:#fff;opacity:.92}
+.av-flow{fill:none;stroke:url(#avu);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:6 8}
+.av-orbit{fill:none;stroke:var(--line2);stroke-width:1.6;stroke-dasharray:2 10;transform-box:view-box;transform-origin:380px 420px}
+.av-orbit2{fill:none;stroke:url(#avu);stroke-width:1.2;opacity:.35;stroke-dasharray:60 30;transform-box:view-box;transform-origin:380px 420px}
+.av-spoke{stroke:url(#avu);stroke-width:1.6;opacity:.5;stroke-dasharray:4 6}
+.av-core circle{fill:var(--surface);stroke:url(#avu);stroke-width:3}
+.av-dot{fill:currentColor}
+.av-halo{fill:currentColor;opacity:.16;transform-box:fill-box;transform-origin:center}
+.av-node{transition:filter .4s}
+.av-node.on .av-dot{filter:drop-shadow(0 0 10px currentColor)}
+.av-node.on .av-halo{opacity:.38}
+.av-pk circle{fill:#00C6FB;filter:drop-shadow(0 0 4px #00C6FB)}
+#building.vis .av-flow{animation:v3dash 1.1s linear infinite}
+#building.vis .av-spoke{animation:v3dash 1.8s linear infinite}
+#building.vis .av-orbit{animation:v3spin 80s linear infinite}
+#building.vis .av-orbit2{animation:v3spin 26s linear infinite reverse}
+#building.vis .av-halo{animation:v3pulse 3.6s ease-in-out infinite;animation-delay:calc(var(--k)*.5s)}
+.av-side .art-h:first-child{margin-top:0}
+.av-kpis{display:grid;grid-template-columns:128px minmax(0,1fr);gap:16px;align-items:center}
+.gauge{position:relative;width:128px;height:128px}
+.gauge svg{display:block;width:100%;height:100%;transform:rotate(-90deg)}
+.g-bg{fill:none;stroke:var(--line2);stroke-width:11}
+.g-fg{fill:none;stroke:#7B61FF;stroke-width:11;stroke-linecap:round;transition:stroke-dasharray 1.8s var(--out) .2s}
+.js .gauge:not(.in) .g-fg{stroke-dasharray:0 48}
+.g-in{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.g-in b{font:800 30px/1 var(--f);letter-spacing:-.04em;color:var(--ink)}
+.g-in small{font:500 10.5px/1.3 var(--m);letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-top:4px}
+.av-chips{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0;margin:0}
+.av-chips li{display:flex;align-items:center;flex-wrap:wrap;gap:4px 7px;padding:9px 12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;line-height:1.3;color:var(--sub)}
+.av-chips li:last-child{grid-column:1/-1}
+.av-chips b{color:var(--ink);font-weight:800}
+.av-chips span{display:grid;color:var(--vio)}
+.av-chips span svg{width:16px;height:16px}
+.fams{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fam{position:relative;isolation:isolate;overflow:hidden;padding:14px 14px 14px 62px;min-height:88px;border-radius:16px;background:var(--surface);border:1px solid var(--line);transition:border-color .4s,box-shadow .4s,transform .4s var(--out)}
+.fam:last-child{grid-column:1/-1}
+.fam-ic{position:absolute;left:13px;top:15px;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;background:var(--fc)}
+.fam-ic svg{width:19px;height:19px}
+.fam b{display:block;font:800 15.5px/1.2 var(--f);color:var(--ink)}
+.fam>span:not(.fam-ic){display:block;margin-top:4px;font-size:13.5px;line-height:1.45;color:var(--sub)}
+.fam.on{border-color:var(--fc);box-shadow:0 14px 30px -18px var(--fc);transform:translateY(-2px)}
+
+/* ---------- mobile chapter chip with progress ring ---------- */
+.cchip{display:none}
+
+/* ---------- tap ripple ---------- */
+.rip{position:absolute;z-index:5;border-radius:50%;pointer-events:none;background:currentColor;opacity:.16;transform:scale(0);animation:v3rip .65s ease-out forwards}
+.st,.cert,.fam,.ld-c,.medal,.lstats li,.cc{-webkit-tap-highlight-color:transparent}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){.certs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1023px){
+  .aviz{grid-template-columns:minmax(0,1fr)}
+  .av-stage{max-width:640px;margin:0 auto;width:100%}
+  .lstats{grid-template-columns:1fr 1fr}
+  .certs{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  /* swipeable carousels */
+  .stats,.certs,.fams{display:flex!important;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;gap:12px;padding:6px 0 12px}
+  .stats::-webkit-scrollbar,.certs::-webkit-scrollbar,.fams::-webkit-scrollbar{display:none}
+  .stats{width:calc(100% + 2*var(--gut));max-width:none;margin-left:calc(-1*var(--gut));margin-right:calc(-1*var(--gut));padding-left:var(--gut);padding-right:var(--gut);scroll-padding:0 var(--gut);align-self:center}
+  .certs{margin-left:calc(-1*var(--gut));margin-right:calc(-1*var(--gut));padding-left:var(--gut);padding-right:var(--gut);scroll-padding:0 var(--gut)}
+  .stats>li{flex:0 0 84%;scroll-snap-align:start;align-content:start}
+  .certs>li{flex:0 0 72%;scroll-snap-align:start}
+  .fams>li{flex:0 0 82%;scroll-snap-align:start}
+  .fam:last-child{grid-column:auto}
+  .stats .st-n{font-size:34px}
+  .cdots{display:flex;justify-content:center;gap:6px;margin:4px 0 0}
+  .cdots i{width:6px;height:6px;border-radius:6px;background:var(--line2);transition:width .3s var(--out),background .3s}
+  .cdots i.on{width:20px;background:linear-gradient(90deg,#0071E3,#7B61FF)}
+  .medals{grid-template-columns:minmax(0,1fr)}
+  .medal{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:12px;align-items:center;padding:12px}
+  .md-ic{grid-row:1/span 2;margin:0}
+  .medal b{margin:0}
+  .cstats li{border-radius:16px;padding:9px 14px;font-size:13px}
+  .lstats{gap:10px}
+  .lstats li{padding:15px;font-size:13.5px}
+  .lstats b{font-size:32px}
+  .ltl-rail{left:21px}
+  .ld-i{grid-template-columns:44px minmax(0,1fr);column-gap:12px}
+  .ld-n{width:44px;height:44px;box-shadow:0 0 0 5px var(--bg)}
+  .ld-n svg{width:18px;height:18px}
+  .ld-c{padding:15px 16px}
+  .av-lab{font-size:24px}
+  .av-b{font-size:21px}
+  .av-s{font-size:15px}
+  .av-s2{font-size:16px}
+  .av-kpis{grid-template-columns:minmax(0,1fr);justify-items:center}
+  .av-chips{width:100%}
+  .cchip{display:flex;position:fixed;z-index:295;right:12px;top:76px;align-items:center;gap:8px;max-width:min(64vw,280px);padding:6px 12px 6px 6px;border-radius:999px;background:var(--glass-s);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);border:1px solid var(--glass-b);box-shadow:var(--shadow-s);font:500 11px/1.2 var(--m);letter-spacing:.04em;color:var(--ink2);transform:translateY(-140%);opacity:0;transition:transform .5s var(--out),opacity .3s;pointer-events:none}
+  .cchip.show{transform:none;opacity:1}
+  .cchip svg{flex:none;width:26px;height:26px;transform:rotate(-90deg)}
+  .cchip circle{fill:none;stroke-width:3.2}
+  .cchip .cr-bg{stroke:var(--line2)}
+  .cchip .cr-fg{stroke:url(#ccg);stroke-linecap:round;transition:stroke-dasharray .2s linear}
+  .cchip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+@media (max-width:420px){
+  .lstats{grid-template-columns:1fr 1fr}
+  .lstats b{font-size:28px}
+  .av-chips{grid-template-columns:1fr}
+  .certs>li{flex-basis:80%}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  .cert::before,#certs.vis .cert::before,#building.vis .av-flow,#building.vis .av-spoke,#building.vis .av-orbit,#building.vis .av-orbit2,#building.vis .av-halo,.js .st-intl.in .flg,.cert.in .cert-shine,.medal.in::after,.rip{animation:none!important}
+  .js .st-intl:not(.in) .flg{opacity:1}
+  .cert-shine,.medal::after,.av-pk{display:none}
+  .g-fg,.cchip,.fam,.cert,.ld-c{transition:none!important}
+  .js .gauge:not(.in) .g-fg{stroke-dasharray:10 48}
+  .js .ltl-rail b{transform:none}
+}
+
+/* ---------- print ---------- */
+@media print{
+  .cdots,.cchip,.cert-shine,.av-pk,.rip,.md-ic,.ls-ic,.ld-n,.ltl-rail,.medal::after{display:none!important}
+  .stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;overflow:visible!important;width:100%!important;margin:16pt 0 0!important;padding:0!important;gap:6pt!important}
+  .stats .st{grid-template-columns:1fr!important;padding:8pt!important}
+  .stats .st-n{font-size:16pt!important}
+  .st-f{grid-column:auto}
+  .flg{opacity:1!important;animation:none!important}
+  .lgo a,.lgo-in{color:#28334D!important;background:#fff!important}
+  .av-glow{display:none}
+  .av-big{fill:#5B36DC}
+  .av-core circle{stroke:#7B61FF}
+  .medals{grid-template-columns:repeat(3,1fr)!important}
+  .medal{display:block!important;background:#fff!important;padding:6pt!important;break-inside:avoid}
+  .certs{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;overflow:visible!important;margin:0!important;padding:0!important;gap:6pt!important}
+  .cert{min-height:0;padding:8pt!important;border:1px solid #cfd6e3;break-inside:avoid}
+  .cert::before{display:none}
+  .cert-ic{width:22px;height:22px;border-radius:6px;margin-bottom:2pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert-ic svg{width:12px;height:12px}
+  .cert-t{font-size:10pt}
+  .cstats li{box-shadow:none;border:1px solid #cfd6e3;background:#fff}
+  .lstats{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6pt}
+  .lstats li{padding:8pt;background:#fff;border:1px solid #cfd6e3;break-inside:avoid}
+  .lstats b{font-size:18pt;-webkit-text-fill-color:#0063D6;color:#0063D6;background:none}
+  .ld-i{grid-template-columns:1fr!important;break-inside:avoid}
+  .ld-c{padding:8pt 10pt;box-shadow:none}
+  .aviz{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;break-inside:avoid;margin:10pt 0}
+  .av-stage{box-shadow:none;padding:4pt}
+  .av-svg{max-width:300px}
+  .fams{display:grid!important;grid-template-columns:1fr 1fr!important;overflow:visible!important;padding:0!important}
+  .fam{min-height:0;padding:6pt 6pt 6pt 40px;break-inside:avoid}
+  .fam-ic{width:24px;height:24px;left:8px;top:8px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .fam-ic svg{width:13px;height:13px}
+  .js .gauge:not(.in) .g-fg{stroke-dasharray:10 48}
+  #certs,#lead{break-before:auto}
+}
+
 </style>
 </head>
 <body>
@@ -1168,14 +1433,17 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
       <li><span>Lahore <small>2025</small></span></li>
     </ol>
 
-    <ul class="stats" aria-label="The story in six numbers">
+    <ul class="stats" id="heroStats" aria-label="The story in eight numbers">
       <li class="st rv" style="--dl:.05s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><b class="st-n"><span class="cnt" data-to="442"><span class="cnt-live" aria-hidden="true">442</span><span class="cnt-final">442</span></span></b><span class="st-l">completed Fiverr orders</span><span class="st-s">Fiverr · from Nov 2019</span></li>
       <li class="st rv" style="--dl:.12s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><b class="st-n"><span class="cnt" data-to="30" data-suf="+"><span class="cnt-live" aria-hidden="true">30+</span><span class="cnt-final">30+</span></span></b><span class="st-l">countries my Fiverr buyers came from</span><span class="st-s">Fiverr buyer map</span></li>
       <li class="st rv" style="--dl:.19s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span><b class="st-n"><span class="cnt" data-to="300" data-suf="+"><span class="cnt-live" aria-hidden="true">300+</span><span class="cnt-final">300+</span></span></b><span class="st-l">crawlers running daily at Dubizzle Labs</span><span class="st-s">Lahore · 2022 to 2024</span></li>
       <li class="st rv" style="--dl:.26s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><b class="st-n"><span class="cnt" data-to="10"><span class="cnt-live" aria-hidden="true">10</span><span class="cnt-final">10</span></span></b><span class="st-l">countries covered across six products</span><span class="st-s">Dubizzle Labs</span></li>
       <li class="st rv" style="--dl:.33s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span><b class="st-n"><span class="cnt" data-to="70000" data-suf="+"><span class="cnt-live" aria-hidden="true">70,000+</span><span class="cnt-final">70,000+</span></span></b><span class="st-l">applications in my Chevening cycle, for around 1,500 awards a year</span><span class="st-s">Chevening 2024/25</span></li>
       <li class="st rv" style="--dl:.4s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><b class="st-n"><span class="cnt" data-to="255446"><span class="cnt-live" aria-hidden="true">255,446</span><span class="cnt-final">255,446</span></span></b><span class="st-l">public comments analysed in my MSc dissertation</span><span class="st-s">Portsmouth · 2025</span></li>
+      <li class="st st-intl rv" style="--dl:.47s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><b class="st-n"><span class="cnt" data-to="10" data-suf="+"><span class="cnt-live" aria-hidden="true">10+</span><span class="cnt-final">10+</span></span></b><span class="st-l">international companies I have worked for, remotely</span><span class="st-s">Propre · Arthan · Fix.com · Prefe · VendueTech · Fluency · CXG · Artemis AI · Metoda · a US travel-technology company (under NDA)</span><span class="st-f" role="img" aria-label="Propre (Singapore, with a Japan office), Arthan (India), Fix.com (Canada), Prefe (Italy), VendueTech (Europe), M+C Saatchi Fluency and Artemis AI (UK), CXG (UAE), a US travel-technology company under NDA, and Metoda (Germany)"><span class="flg" title="Singapore: Propre"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="6" fill="#EF3340"/><rect y="6" width="18" height="6" fill="#fff"/><circle cx="4" cy="3" r="2" fill="#fff"/><circle cx="4.9" cy="3" r="1.9" fill="#EF3340"/></svg></span><span class="flg" title="Japan office: Propre"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="12" fill="#fff"/><circle cx="9" cy="6" r="3.4" fill="#BC002D"/></svg></span><span class="flg" title="India: Arthan"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="4" fill="#FF9933"/><rect y="4" width="18" height="4" fill="#fff"/><rect y="8" width="18" height="4" fill="#138808"/><circle cx="9" cy="6" r="1.4" fill="none" stroke="#000080" stroke-width=".6"/></svg></span><span class="flg" title="Canada: Fix.com"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="12" fill="#fff"/><rect width="4.5" height="12" fill="#D80621"/><rect x="13.5" width="4.5" height="12" fill="#D80621"/><path d="M9 2.4 9.8 4.2 11 3.7 10.5 6.4 11.7 5.6 12 6.6 10.4 7.9 10.6 8.6H9.3V10H8.7V8.6H7.4L7.6 7.9 6 6.6 6.3 5.6 7.5 6.4 7 3.7 8.2 4.2z" fill="#D80621"/></svg></span><span class="flg" title="Italy: Prefe"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="6" height="12" fill="#009246"/><rect x="6" width="6" height="12" fill="#fff"/><rect x="12" width="6" height="12" fill="#CE2B37"/></svg></span><span class="flg" title="Europe: VendueTech"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="12" fill="#003399"/><circle cx="12.60" cy="6.00" r=".55" fill="#FFCC00"/><circle cx="12.12" cy="7.80" r=".55" fill="#FFCC00"/><circle cx="10.80" cy="9.12" r=".55" fill="#FFCC00"/><circle cx="9.00" cy="9.60" r=".55" fill="#FFCC00"/><circle cx="7.20" cy="9.12" r=".55" fill="#FFCC00"/><circle cx="5.88" cy="7.80" r=".55" fill="#FFCC00"/><circle cx="5.40" cy="6.00" r=".55" fill="#FFCC00"/><circle cx="5.88" cy="4.20" r=".55" fill="#FFCC00"/><circle cx="7.20" cy="2.88" r=".55" fill="#FFCC00"/><circle cx="9.00" cy="2.40" r=".55" fill="#FFCC00"/><circle cx="10.80" cy="2.88" r=".55" fill="#FFCC00"/><circle cx="12.12" cy="4.20" r=".55" fill="#FFCC00"/></svg></span><span class="flg" title="United Kingdom: M+C Saatchi Fluency and Artemis AI"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="12" fill="#012169"/><path d="M0 0 18 12M18 0 0 12" stroke="#fff" stroke-width="2.4"/><path d="M0 0 18 12M18 0 0 12" stroke="#C8102E" stroke-width=".9"/><path d="M9 0v12M0 6h18" stroke="#fff" stroke-width="3.6"/><path d="M9 0v12M0 6h18" stroke="#C8102E" stroke-width="2"/></svg></span><span class="flg" title="UAE: CXG"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="4" fill="#00732F"/><rect y="4" width="18" height="4" fill="#fff"/><rect y="8" width="18" height="4" fill="#000"/><rect width="4.5" height="12" fill="#EF3340"/></svg></span><span class="flg" title="USA: a travel-technology company (under NDA)"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="12" fill="#fff"/><rect y="0.00" width="18" height=".923" fill="#B22234"/><rect y="1.85" width="18" height=".923" fill="#B22234"/><rect y="3.69" width="18" height=".923" fill="#B22234"/><rect y="5.54" width="18" height=".923" fill="#B22234"/><rect y="7.38" width="18" height=".923" fill="#B22234"/><rect y="9.23" width="18" height=".923" fill="#B22234"/><rect y="11.08" width="18" height=".923" fill="#B22234"/><rect width="8" height="6.46" fill="#3C3B6E"/></svg></span><span class="flg" title="Germany: Metoda"><svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><rect width="18" height="4" fill="#000"/><rect y="4" width="18" height="4" fill="#DD0000"/><rect y="8" width="18" height="4" fill="#FFCE00"/></svg></span></span></li>
+      <li class="st rv" style="--dl:.54s"><span class="st-ic" aria-hidden="true" data-fx><svg class="ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg></span><b class="st-n"><span class="cnt" data-to="48"><span class="cnt-live" aria-hidden="true">48</span><span class="cnt-final">48</span></span></b><span class="st-l">models in the Artemis AI architecture, about 10 running weekly</span><span class="st-s">Artemis AI · 7 model families</span></li>
     </ul>
+    <div class="cdots" aria-hidden="true" data-fx data-for="stats"></div>
 
     <div class="pills ri" style="--d:.95s">
       <a href="#timeline" class="pill fill">Start reading
@@ -1193,30 +1461,59 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
   <h2 class="sr-only" id="lg-h">Organisations and brands</h2>
   <div class="wrap lg-row"><p class="lg-k" id="lg-w">Where I've worked and studied</p></div>
   <div class="mq"><ul class="mq-track" aria-labelledby="lg-w">
+    <li class="lgo" style="--b:#1D4E89"><a href="https://crescentschool.edu.pk" target="_blank" rel="noopener" title="Crescent School and College, Lahore"><span class="mono" aria-hidden="true" data-fx>C</span><span class="wm">Crescent School and College</span></a></li>
     <li class="lgo" style="--b:#1B4F9C"><a href="https://www.nu.edu.pk" target="_blank" rel="noopener" title="FAST-NUCES"><img src="assets/logos/fast-nuces.png" alt="FAST-NUCES" height="30" style="height:30px" loading="lazy" decoding="async"></a></li>
     <li class="lgo" style="--b:#1DBF73"><a href="https://www.fiverr.com/asadikram56" target="_blank" rel="noopener" title="Fiverr"><svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M23.004 15.588a.995.995 0 1 0 .002-1.99.995.995 0 0 0-.002 1.99zm-.996-3.705h-.85c-.546 0-.84.41-.84 1.092v2.466h-1.61v-3.558h-.684c-.547 0-.84.41-.84 1.092v2.466h-1.61v-4.874h1.61v.74c.264-.574.626-.74 1.163-.74h1.972v.74c.264-.574.625-.74 1.162-.74h.527v1.316zm-6.786 1.501h-3.359c.088.546.43.858 1.006.858.43 0 .732-.175.83-.487l1.425.4c-.351.848-1.22 1.364-2.255 1.364-1.748 0-2.549-1.355-2.549-2.515 0-1.14.703-2.505 2.45-2.505 1.856 0 2.471 1.384 2.471 2.408 0 .224-.01.37-.02.477zm-1.562-.945c-.04-.42-.342-.81-.889-.81-.508 0-.81.225-.908.81h1.797zM7.508 15.44h1.416l1.767-4.874h-1.62l-.86 2.837-.878-2.837H5.72l1.787 4.874zm-6.6 0H2.51v-3.558h1.524v3.558h1.591v-4.874H2.51v-.302c0-.332.235-.536.606-.536h.918V8.412H2.85c-1.162 0-1.943.712-1.943 1.755v.4H0v1.316h.908v3.558z"/></svg><span class="wm">Fiverr</span></a></li>
+    <li class="lgo" style="--b:#0E7C66"><span class="lgo-in" title="Arthan, India (technology internship)"><span class="mono" aria-hidden="true" data-fx>A</span><span class="wm">Arthan</span></span></li>
     <li class="lgo" style="--b:#E3262B"><a href="https://www.dubizzlegroup.com" target="_blank" rel="noopener" title="Dubizzle Labs"><img src="assets/logos/dubizzle.png" alt="Dubizzle Labs" height="34" style="height:34px" loading="lazy" decoding="async"></a></li>
-    <li class="lgo" style="--b:#E2620E"><a href="https://www.fix.com" target="_blank" rel="noopener" title="Fix.com"><span class="wm wm-only">Fix.com</span></a></li>
-    <li class="lgo" style="--b:#7A1F5C"><a href="https://www.chevening.org" target="_blank" rel="noopener" title="Chevening"><span class="wm wm-only">Chevening</span></a></li>
+    <li class="lgo" style="--b:#E2620E"><a href="https://www.fix.com" target="_blank" rel="noopener" title="Fix.com"><span class="mono" aria-hidden="true" data-fx>F</span><span class="wm wm-only">Fix.com</span></a></li>
+    <li class="lgo" style="--b:#7A1F5C"><a href="https://www.chevening.org" target="_blank" rel="noopener" title="Chevening"><span class="mono" aria-hidden="true" data-fx>C</span><span class="wm wm-only">Chevening</span></a></li>
     <li class="lgo" style="--b:#621360"><a href="https://www.port.ac.uk" target="_blank" rel="noopener" title="University of Portsmouth"><img src="assets/logos/portsmouth.png" alt="University of Portsmouth" height="30" style="height:30px" loading="lazy" decoding="async"></a></li>
     <li class="lgo" style="--b:#0F1B33"><a href="https://mcsaatchi.com" target="_blank" rel="noopener" title="M+C Saatchi"><img src="assets/logos/mcsaatchi.svg" alt="M+C Saatchi" height="16" style="height:16px" loading="lazy" decoding="async"></a></li>
     <li class="lgo" style="--b:#0F1B33"><a href="https://fluency-mcsaatchi.com" target="_blank" rel="noopener" title="Fluency"><img src="assets/logos/fluency.svg" alt="Fluency" height="20" style="height:20px" loading="lazy" decoding="async"></a></li>
     <li class="lgo" style="--b:#21505F"><a href="https://www.cxg.com" target="_blank" rel="noopener" title="CXG"><img src="assets/logos/cxg.png" alt="CXG" height="24" style="height:24px" loading="lazy" decoding="async"></a></li>
     <li class="lgo" style="--b:#14325E"><a href="https://prefe.it" target="_blank" rel="noopener" title="Prefe"><img src="assets/logos/prefe.png" alt="" height="28" style="height:28px" loading="lazy" decoding="async"><span class="wm">Prefe</span></a></li>
-    <li class="lgo" style="--b:#2F54EB"><a href="https://www.propre.com" target="_blank" rel="noopener" title="Propre"><span class="wm wm-only">Propre</span></a></li>
+    <li class="lgo" style="--b:#2F54EB"><a href="https://www.propre.com" target="_blank" rel="noopener" title="Propre"><span class="mono" aria-hidden="true" data-fx>P</span><span class="wm wm-only">Propre</span></a></li>
     <li class="lgo" style="--b:#3BB98F"><a href="https://artemisai.co.uk" target="_blank" rel="noopener" title="Artemis AI"><img src="assets/logos/artemis.svg" alt="" height="28" style="height:28px" loading="lazy" decoding="async"><span class="wm">Artemis AI</span></a></li>
+    <li class="lgo" style="--b:#0149FE"><a href="https://venduetech.com" target="_blank" rel="noopener" title="VendueTech"><img src="assets/logos/venduetech.svg" alt="VendueTech" height="22" style="height:22px" loading="lazy" decoding="async"></a></li>
+    <li class="lgo" style="--b:#1E9C9A"><a href="https://scrapesync.io" target="_blank" rel="noopener" title="ScrapeSync"><img src="assets/logos/scrapesync.png" alt="" height="30" style="height:30px" loading="lazy" decoding="async"><span class="wm">ScrapeSync</span></a></li>
+    <li class="lgo" style="--b:#7A4EDB"><span class="lgo-in" title="Metoda, Germany"><span class="mono" aria-hidden="true" data-fx>M</span><span class="wm">Metoda</span></span></li>
+    <li class="lgo" style="--b:#2B3A55"><span class="lgo-in" title="A US travel-technology company (under NDA)"><span class="mono" aria-hidden="true" data-fx>US</span><span class="wm">A US travel-technology company (under NDA)</span></span></li>
   </ul></div>
   <div class="wrap lg-row"><p class="lg-k" id="lg-b">Brands my data work has served</p></div>
   <div class="mq rev"><ul class="mq-track" aria-labelledby="lg-b">
     <li class="lgo" style="--b:#FF9900"><span class="lgo-in" title="Amazon"><svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z"/></svg><span class="wm">Amazon</span></span></li>
     <li class="lgo" style="--b:#00274E"><span class="lgo-in" title="Ford"><svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 8.236C5.872 8.236.905 9.93.905 12.002S5.872 15.767 12 15.767c6.127 0 11.094-1.693 11.094-3.765 0-2.073-4.967-3.766-11.094-3.766zm-5.698 6.24c-.656.005-1.233-.4-1.3-1.101a1.415 1.415 0 0 1 .294-1.02c.195-.254.525-.465.804-.517.09-.017.213-.006.264.054.079.093.056.194-.023.234-.213.109-.47.295-.597.55a.675.675 0 0 0 .034.696c.263.397.997.408 1.679-.225.169-.156.32-.304.473-.48.3-.344.4-.47.8-1.024.005-.006.006-.014.004-.018-.003-.007-.009-.01-.02-.01-.267.007-.5.087-.725.255-.065.048-.159.041-.2-.021-.046-.07-.013-.163.062-.215.363-.253.76-.298 1.166-.367 0 0 .028.002.051-.03.167-.213.292-.405.47-.621.178-.22.41-.42.586-.572.246-.212.404-.283.564-.37.043-.022-.005-.049-.018-.049-.896-.168-1.827-.386-2.717-.056-.616.23-.887.718-.757 1.045.093.231.397.27.683.13a1.55 1.55 0 0 0 .611-.544c.087-.134.27-.038.171.195-.26.611-.757 1.097-1.363 1.118-.516.016-.849-.363-.848-.831.002-.924 1.03-1.532 2.11-1.622 1.301-.108 2.533.239 3.825.395.989.12 1.938.123 2.932-.106.118-.025.2.05.193.168-.01.172-.143.337-.47.516-.373.204-.763.266-1.17.27-.984.008-1.901-.376-2.85-.582.002.041.012.091-.023.117-.525.388-1 .782-1.318 1.334-.011.013-.005.025.013.024.277-.015.525-.022.783-.042.045-.004.047-.015.043-.048a.64.64 0 0 1 .2-.558c.172-.153.387-.17.53-.06.16.126.147.353.058.523a.63.63 0 0 1-.382.31s-.03.006-.026.034c.006.043.2.151.217.18.017.027.008.07-.021.102a.123.123 0 0 1-.095.045c-.033 0-.053-.012-.096-.035a.92.92 0 0 1-.27-.217c-.024-.031-.037-.032-.099-.029-.279.017-.714.059-1.009.096-.071.008-.082.022-.096.047-.47.775-.972 1.61-1.523 2.17-.592.6-1.083.758-1.604.762zM19.05 10.71c-.091.158-1.849 2.834-1.96 3.11-.035.088-.04.155-.004.204.092.124.297.051.425-.038.381-.262.645-.58.937-.858.017-.013.046-.018.065 0 .043.04.106.091.15.137a.04.04 0 0 1 .002.057 5.873 5.873 0 0 1-.904.911c-.47.364-.939.457-1.172.224a.508.508 0 0 1-.14-.316c-.002-.057-.031-.06-.058-.034-.278.275-.76.579-1.198.362-.366-.18-.451-.618-.383-.986.001-.008-.006-.06-.051-.03a1.28 1.28 0 0 1-.3.162.853.853 0 0 1-.366.077.518.518 0 0 1-.451-.253.759.759 0 0 1-.095-.347c-.001-.011-.017-.032-.033-.005-.3.457-.579.899-.875 1.363-.016.022-.03.036-.06.037l-.587.001c-.036 0-.053-.028-.034-.063.104-.2.674-1.03 1.06-1.736.107-.194.085-.294.019-.337-.083-.054-.248.027-.387.133-.379.287-.697.735-.859.935-.095.117-.185.291-.433.56-.391.425-.91.669-1.408.5a.848.848 0 0 1-.546-.58c-.015-.052-.044-.066-.073-.032-.08.1-.245.249-.383.342-.015.011-.052.033-.084.017a.851.851 0 0 1-.152-.199.07.07 0 0 1 .016-.08c.197-.173.305-.271.391-.38.064-.08.113-.17.17-.315.12-.302.393-.866.938-1.158a1.81 1.81 0 0 1 .652-.219c.1-.01.183.002.213.08.011.033.039.105.056.158.011.032.003.057-.035.071-.32.122-.643.311-.865.61-.253.338-.321.746-.152.98.123.17.322.2.514.139.29-.092.538-.363.666-.663.138-.329.16-.717.058-1.059-.016-.059-.001-.104.037-.136.077-.063.184-.112.215-.128a.14.14 0 0 1 .182.045c.106.157.163.378.17.607.006.049.026.05.05.025.19-.202.366-.418.568-.58.185-.147.422-.267.643-.262.286.006.428.2.419.546-.001.044.03.04.051.011a1.19 1.19 0 0 1 .24-.264c.198-.163.4-.236.611-.222.26.02.468.257.425.527a.53.53 0 0 1-.281.406.362.362 0 0 1-.405-.044.336.336 0 0 1-.096-.322c.005-.025-.027-.048-.054-.02-.254.264-.273.606-.107.76.183.17.458.056.658-.075.366-.239.65-.563.979-.813.218-.166.467-.314.746-.351a.87.87 0 0 1 .454.052c.2.081.326.25.342.396.004.043.036.048.063.01.158-.246 1.005-1.517 1.075-1.65.02-.041.044-.047.089-.047h.606c.035 0 .051.02.036.047zm-2.32 2.204a.053.053 0 0 0-.003.04c.003.02.03.04.056.05.01.003.015.01.004.032-.075.16-.143.252-.237.391a1.472 1.472 0 0 1-.3.325c-.178.147-.424.307-.628.2-.09-.047-.13-.174-.127-.276.004-.288.132-.584.369-.875.288-.355.607-.539.816-.438.216.103.148.354.05.55zm-5.949-1.881a.398.398 0 0 1 .132-.345c.057-.05.133-.062.18-.022.052.045.027.157-.026.234a.43.43 0 0 1-.245.177c-.018.004-.034-.004-.041-.044zM12 7.5C5.34 7.5 0 9.497 0 12c0 2.488 5.383 4.5 12 4.5s12-2.02 12-4.5-5.383-4.5-12-4.5zm0 8.608C5.649 16.108.5 14.27.5 12.002.5 9.733 5.65 7.895 12 7.895s11.498 1.838 11.498 4.107c0 2.268-5.148 4.106-11.498 4.106z"/></svg><span class="wm">Ford</span></span></li>
-    <li class="lgo" style="--b:#0F1B33"><span class="lgo-in" title="UK Government (supported)"><span class="wm wm-only">UK Government (supported)</span></span></li>
+    <li class="lgo" style="--b:#0F1B33"><span class="lgo-in" title="UK Government (supported)"><span class="mono" aria-hidden="true" data-fx>UK</span><span class="wm wm-only">UK Government (supported)</span></span></li>
     <li class="lgo needs-approval" style="--b:#111111"><span class="lgo-in" title="Nike"><svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M24 7.8L6.442 15.276c-1.456.616-2.679.925-3.668.925-1.12 0-1.933-.392-2.437-1.177-.317-.504-.41-1.143-.28-1.918.13-.775.476-1.6 1.036-2.478.467-.71 1.232-1.643 2.297-2.8a6.122 6.122 0 00-.784 1.848c-.28 1.195-.028 2.072.756 2.632.373.261.886.392 1.54.392.522 0 1.11-.084 1.764-.252L24 7.8z"/></svg><span class="wm">Nike</span></span></li>
     <li class="lgo needs-approval" style="--b:#008FC7"><span class="lgo-in" title="Abbott"><svg class="lg-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.812 2.4H0v3.197h19.773V5.6a1.03 1.03 0 0 1 1.032 1.031v10.742l-.004.007a1.034 1.034 0 0 1-1.034 1.025H4.23c-.569 0-1.033-.46-1.033-1.033v-4.34c0-.57.464-1.032 1.033-1.032H17.6V8.803H3.188A3.185 3.185 0 0 0 0 11.99v6.423A3.188 3.188 0 0 0 3.188 21.6h17.624A3.187 3.187 0 0 0 24 18.412V5.587A3.186 3.186 0 0 0 20.812 2.4"/></svg><span class="wm">Abbott</span></span></li>
     <li class="lgo needs-approval" style="--b:#001689"><span class="lgo-in" title="Durex"><img src="assets/logos/durex.svg" alt="Durex" height="26" style="height:26px" loading="lazy" decoding="async"></span></li>
     <li class="lgo needs-approval" style="--b:#E4002B"><span class="lgo-in" title="Rentokil"><img src="assets/logos/rentokil.svg" alt="Rentokil" height="18" style="height:18px" loading="lazy" decoding="async"></span></li>
-    <li class="lgo needs-approval" style="--b:#0F1B33"><span class="lgo-in" title="CFMOTO"><span class="wm wm-only">CFMOTO</span></span></li>
+    <li class="lgo needs-approval" style="--b:#0F1B33"><span class="lgo-in" title="CFMOTO"><span class="mono" aria-hidden="true" data-fx>CF</span><span class="wm wm-only">CFMOTO</span></span></li>
   </ul></div>
+  <div class="wrap lg-row"><p class="lg-k" id="lg-r">Brands in the M+C Saatchi Fluency client roster</p></div>
+  <div class="mq"><ul class="mq-track" aria-labelledby="lg-r">
+    <li class="lgo flr"><span class="lgo-in" title="Ballantine's"><img src="assets/logos/ballantines.png" alt="Ballantine's" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="United Nations"><span class="wm wm-only">United Nations</span></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="WWE"><img src="assets/logos/wwe.png" alt="WWE" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="GSK"><img src="assets/logos/gsk.png" alt="GSK" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="McDonald's"><img src="assets/logos/mcdonalds.png" alt="McDonald's" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="National Trust"><img src="assets/logos/national-trust.png" alt="National Trust" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Moët Hennessy"><img src="assets/logos/moet-hennessy.png" alt="Moët Hennessy" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Thames Water"><img src="assets/logos/thames-water.png" alt="Thames Water" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Bayer"><img src="assets/logos/bayer.png" alt="Bayer" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Reckitt"><img src="assets/logos/reckitt.png" alt="Reckitt" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Toyota"><img src="assets/logos/toyota.png" alt="Toyota" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Ascential"><img src="assets/logos/ascential.png" alt="Ascential" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="NFL"><img src="assets/logos/nfl.png" alt="NFL" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Ashley HomeStore"><img src="assets/logos/ashley.png" alt="Ashley HomeStore" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Fruit of the Loom"><img src="assets/logos/fruit-of-the-loom.png" alt="Fruit of the Loom" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Bacardi"><img src="assets/logos/bacardi.png" alt="Bacardi" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Western Union"><img src="assets/logos/western-union.png" alt="Western Union" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="fuboTV"><img src="assets/logos/fubo.png" alt="fuboTV" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr"><span class="lgo-in" title="Diageo"><span class="wm wm-only">Diageo</span></span></li>
+  </ul></div>
+  <div class="wrap"><p class="lg-cap lg-cap2">This second row is the client list that Fluency, the M+C Saatchi data consultancy I work for, shows on its own website (<a href="https://fluency-mcsaatchi.com/clients" target="_blank" rel="noopener">fluency-mcsaatchi.com</a>, October 2026). I did not work on these brands myself; they show the kind of clients the team serves. The brands I did work on are in the row above.</p></div>
   <div class="wrap"><p class="lg-cap">Trademarks belong to their owners. Shown to describe client work through agencies and employers, not endorsement.</p></div>
 </section>
 
@@ -1249,6 +1546,8 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
             <p>I grew up in Lahore. I did my O Levels at Crescent School and my FSc at Crescent College, both in the city. At school I was on the athletics team, running the 200, 400 and 800 metres and relays and competing in the long jump and high jump, and I played for the school football team. At college I took part in speech competitions and played for the college football team. Computers were not part of my schooling; I met them at university.</p>
             <p>Looking back, I liked to compete, I liked being part of a team and I was willing to stand up and speak. All three came back later: in leading teams, in my Chevening interview and in pitching a start-up.</p>
             <ul class="sport" aria-label="School and college activities"><li>Long jump</li><li>High jump</li><li>200 m</li><li>400 m</li><li>800 m</li><li>Relays</li><li>School football</li><li>College football</li><li>Speech competitions</li></ul>
+            <div class="medals" role="list" aria-label="School and college, as medal cards"><div class="medal rv" role="listitem"><span class="md-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="13" cy="4" r="2"/><path d="m4 22 4-7 3 2 1-5 4 3h4"/><path d="m7 10 3-3 4 1"/></svg></span><b>Athletics</b><span>School team: long jump, high jump, 200 m, 400 m, 800 m and relays</span></div><div class="medal rv" role="listitem" style="--dl:.08s"><span class="md-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m12 7 4.5 3.2-1.7 5.3H9.2L7.5 10.2z"/><path d="M12 2v5M21.5 9.5l-5 .7M18 20l-3.2-4.5M6 20l3.2-4.5M2.5 9.5l5 .7"/></svg></span><b>Two football teams</b><span>The school team, then the college team</span></div><div class="medal rv" role="listitem" style="--dl:.16s"><span class="md-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"/></svg></span><b>Speech competitions</b><span>At college: standing up and speaking</span></div></div>
+            <p class="medal-note">I took part in all of these. I have not listed results or prizes, because I do not have them written down.</p>
             <p class="mini">Key facts</p>
             <ul class="facts">
               <li><b>O Levels</b>Crescent School, Lahore</li>
@@ -1338,7 +1637,7 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
             <ul class="chips" aria-label="Tools"><li>Python</li><li>IEEE 802.11</li><li>Qt</li><li>MySQL</li><li>Data analytics</li><li>Lead generation</li></ul>
             <p class="mini">Courses across the degree</p>
             <ul class="chips" style="margin-top:0" aria-label="Courses across the degree"><li>Database Systems</li><li>Design and Analysis of Algorithms</li><li>Linear Algebra</li><li>Calculus</li><li>Probability and Statistics</li></ul>
-            <p class="lks" aria-label="Links"><a class="lk" href="https://www.propre.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>propre.com</a></p>
+            <p class="lks" aria-label="Links"><a class="lk" href="#certs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg>All my certificates</a> <a class="lk" href="https://www.propre.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>propre.com</a></p>
           </article>
         </li>
 
@@ -1565,6 +1864,33 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
   </div>
 </section>
 
+
+<!-- ================= CERTIFICATIONS ================= -->
+<section class="sec alt" id="certs" aria-labelledby="ce-h" style="--gh:0,198,251">
+  <div class="wrap">
+    <div class="head mid">
+      <p class="eyeb"><span class="eyi" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span>Learning on the side</p>
+      <h2 class="hd" id="ce-h">Certifications and courses</h2>
+      <p class="hd-sub">My first two university years were hard, and online courses helped turn them around. I kept adding certificates through my final year and into my first job, where I took five DataCamp data-engineering courses on the job.</p>
+    </div>
+    <ul class="cstats rv" aria-label="Certificates in numbers"><li><b><span class="cnt" data-to="10"><span class="cnt-live" aria-hidden="true">10</span><span class="cnt-final">10</span></span></b><span>certificates</span></li><li><b><span class="cnt" data-to="4"><span class="cnt-live" aria-hidden="true">4</span><span class="cnt-final">4</span></span></b><span>issuers: Google, the University of Michigan, HackerRank and DataCamp</span></li><li><b>2021 to 2022</b><span>final year at FAST-NUCES and first year at Dubizzle Labs</span></li></ul>
+    <ol class="certs" id="certList" aria-label="Certificates and courses, oldest first">
+        <li class="cert rv" style="--cb:#3341D6;--dl:0.00s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span><span class="cert-d">From 2018</span><b class="cert-t">SQL, data analytics and data warehousing</b><span class="cert-i">Paid and online courses, alongside Fiverr</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#1A73E8;--dl:0.07s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg></span><span class="cert-d">Jun 2021</span><b class="cert-t">Google Data Analytics Certificate</b><span class="cert-i">Google, via Coursera</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#1A73E8;--dl:0.14s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg></span><span class="cert-d">Jun 2021</span><b class="cert-t">Google Data Analytics Capstone</b><span class="cert-i">Google, via Coursera</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#0056D2;--dl:0.21s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.374 23.977c-4.183-.21-8.006-2.626-9.959-6.347-2.097-3.858-1.871-8.864.732-12.454C4.748 1.338 9.497-.698 14.281.23c4.583.857 8.351 4.494 9.358 8.911 1.122 4.344-.423 9.173-3.925 12.04-2.289 1.953-5.295 2.956-8.34 2.797zm7.705-8.05a588.737 588.737 0 0 0-3.171-1.887c-.903 1.483-2.885 2.248-4.57 1.665-2.024-.639-3.394-2.987-2.488-5.134.801-2.009 2.79-2.707 4.357-2.464a4.19 4.19 0 0 1 2.623 1.669c1.077-.631 2.128-1.218 3.173-1.855-2.03-3.118-6.151-4.294-9.656-2.754-3.13 1.423-4.89 4.68-4.388 7.919.54 3.598 3.73 6.486 7.716 6.404a7.664 7.664 0 0 0 6.404-3.563z"/></svg></span><span class="cert-d">Aug 2021</span><b class="cert-t">Python Data Structures</b><span class="cert-i">University of Michigan, via Coursera</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#0B7A3E;--dl:0.00s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 0v24h24V0zm9.95 8.002h1.805c.061 0 .111.05.111.111v7.767c0 .061-.05.111-.11.111H9.95c-.061 0-.111-.05-.111-.11v-2.87H7.894v2.87c0 .06-.05.11-.11.11H5.976a.11.11 0 01-.11-.11V8.112c0-.06.05-.11.11-.11h1.806c.061 0 .11.05.11.11v2.869H9.84v-2.87c0-.06.05-.11.11-.11zm2.999 0h5.778c.061 0 .111.05.111.11v7.767a.11.11 0 01-.11.112h-5.78a.11.11 0 01-.11-.11V8.111c0-.06.05-.11.11-.11z"/></svg></span><span class="cert-d">Sep 2021</span><b class="cert-t">Python</b><span class="cert-i">HackerRank certificate</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#0B7A3E;--dl:0.07s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 0v24h24V0zm9.95 8.002h1.805c.061 0 .111.05.111.111v7.767c0 .061-.05.111-.11.111H9.95c-.061 0-.111-.05-.111-.11v-2.87H7.894v2.87c0 .06-.05.11-.11.11H5.976a.11.11 0 01-.11-.11V8.112c0-.06.05-.11.11-.11h1.806c.061 0 .11.05.11.11v2.869H9.84v-2.87c0-.06.05-.11.11-.11zm2.999 0h5.778c.061 0 .111.05.111.11v7.767a.11.11 0 01-.11.112h-5.78a.11.11 0 01-.11-.11V8.111c0-.06.05-.11.11-.11z"/></svg></span><span class="cert-d">Sep 2021</span><b class="cert-t">Problem Solving</b><span class="cert-i">HackerRank certificate</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#05192D;--dl:0.14s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.946 18.151v-5.239L21.209 8.2 19.2 7.048l-6.254 3.567V5.36c0-.356-.192-.689-.5-.866L4.922.177a1.434 1.434 0 0 0-1.455.044 1.438 1.438 0 0 0-.676 1.224v14.777A1.44 1.44 0 0 0 4.92 17.49l6.032-3.44v4.683a1 1 0 0 0 .504.867l7.73 4.4 2.01-1.152-8.25-4.697zM10.953 5.938v5.814L4.785 15.27V2.4l6.168 3.539v-.001z"/></svg></span><span class="cert-d">Jun 2022</span><b class="cert-t">Data Engineering for Everyone</b><span class="cert-i">DataCamp</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#05192D;--dl:0.21s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.946 18.151v-5.239L21.209 8.2 19.2 7.048l-6.254 3.567V5.36c0-.356-.192-.689-.5-.866L4.922.177a1.434 1.434 0 0 0-1.455.044 1.438 1.438 0 0 0-.676 1.224v14.777A1.44 1.44 0 0 0 4.92 17.49l6.032-3.44v4.683a1 1 0 0 0 .504.867l7.73 4.4 2.01-1.152-8.25-4.697zM10.953 5.938v5.814L4.785 15.27V2.4l6.168 3.539v-.001z"/></svg></span><span class="cert-d">Jun 2022</span><b class="cert-t">Introduction to Data Engineering</b><span class="cert-i">DataCamp</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#05192D;--dl:0.00s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.946 18.151v-5.239L21.209 8.2 19.2 7.048l-6.254 3.567V5.36c0-.356-.192-.689-.5-.866L4.922.177a1.434 1.434 0 0 0-1.455.044 1.438 1.438 0 0 0-.676 1.224v14.777A1.44 1.44 0 0 0 4.92 17.49l6.032-3.44v4.683a1 1 0 0 0 .504.867l7.73 4.4 2.01-1.152-8.25-4.697zM10.953 5.938v5.814L4.785 15.27V2.4l6.168 3.539v-.001z"/></svg></span><span class="cert-d">Jun 2022</span><b class="cert-t">Introduction to Data Science in Python</b><span class="cert-i">DataCamp</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#05192D;--dl:0.07s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.946 18.151v-5.239L21.209 8.2 19.2 7.048l-6.254 3.567V5.36c0-.356-.192-.689-.5-.866L4.922.177a1.434 1.434 0 0 0-1.455.044 1.438 1.438 0 0 0-.676 1.224v14.777A1.44 1.44 0 0 0 4.92 17.49l6.032-3.44v4.683a1 1 0 0 0 .504.867l7.73 4.4 2.01-1.152-8.25-4.697zM10.953 5.938v5.814L4.785 15.27V2.4l6.168 3.539v-.001z"/></svg></span><span class="cert-d">Jun 2022</span><b class="cert-t">Streamlined Data Ingestion with pandas</b><span class="cert-i">DataCamp</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+        <li class="cert rv" style="--cb:#05192D;--dl:0.14s"><span class="cert-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.946 18.151v-5.239L21.209 8.2 19.2 7.048l-6.254 3.567V5.36c0-.356-.192-.689-.5-.866L4.922.177a1.434 1.434 0 0 0-1.455.044 1.438 1.438 0 0 0-.676 1.224v14.777A1.44 1.44 0 0 0 4.92 17.49l6.032-3.44v4.683a1 1 0 0 0 .504.867l7.73 4.4 2.01-1.152-8.25-4.697zM10.953 5.938v5.814L4.785 15.27V2.4l6.168 3.539v-.001z"/></svg></span><span class="cert-d">Jul 2022</span><b class="cert-t">Writing Efficient Python Code</b><span class="cert-i">DataCamp</span><span class="cert-shine" aria-hidden="true" data-fx></span></li>
+    </ol>
+    <div class="cdots" aria-hidden="true" data-fx data-for="certList"></div>
+    <p class="lg-cap cert-cap">Dates as listed on my LinkedIn profile. The 2018 courses were paid and online SQL, analytics and data-warehousing courses; I have not listed them by name.</p>
+  </div>
+</section>
 <div class="bdiv" aria-hidden="true" data-fx><i></i><i></i><i></i></div>
 <!-- ================= COUNTRIES ================= -->
 <section class="sec dark" id="countries" aria-labelledby="co-h">
@@ -1780,6 +2106,36 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
 </section>
 
 
+<!-- ================= LEADERSHIP ================= -->
+<section class="sec" id="lead" aria-labelledby="ld-h" style="--gh:123,97,255">
+  <div class="wrap">
+    <div class="head mid">
+      <p class="eyeb"><span class="eyi" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Mentorship and leadership</p>
+      <h2 class="hd" id="ld-h">Leading teams, and bringing people with me</h2>
+      <p class="hd-sub">I have led teams in a Lahore office, across remote start-ups and at Artemis AI, and I have always tried to pull other people up with me. Here it is in one place.</p>
+    </div>
+    <ul class="lstats" aria-label="Leadership in numbers">
+      <li class="rv"><span class="ls-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></span><b><span class="cnt" data-to="5"><span class="cnt-live" aria-hidden="true">5</span><span class="cnt-final">5</span></span></b><span>teams I have led or co-led: Dubizzle scraping, Propforce warehouse, VendueTech, Artemis AI, ScrapeSync</span></li>
+      <li class="rv" style="--dl:.07s"><span class="ls-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span><b><span class="cnt" data-to="4"><span class="cnt-live" aria-hidden="true">4</span><span class="cnt-final">4</span></span></b><span>contractors I brought into Artemis AI</span></li>
+      <li class="rv" style="--dl:.14s"><span class="ls-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><b><span class="cnt" data-to="3"><span class="cnt-live" aria-hidden="true">3</span><span class="cnt-final">3</span></span></b><span>engineers I led at Dubizzle Labs, and 3 developers at VendueTech</span></li>
+      <li class="rv" style="--dl:.21s"><span class="ls-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span><b><span class="cnt" data-to="70000" data-suf="+"><span class="cnt-live" aria-hidden="true">70,000+</span><span class="cnt-final">70,000+</span></span></b><span>applications in the Chevening cycle that selected me</span></li>
+    </ul>
+    <div class="ltl"><div class="ltl-rail" aria-hidden="true" data-fx><b></b></div>
+      <ol class="ld-list" aria-label="Leadership and mentoring, in order">
+        <li class="ld-i rv" style="--dl:0.00s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="ld-c"><p class="ld-k"><span>2019 to 2021</span><span>University · Punjab</span></p><h3>Fellow students into freelancing</h3><p>At university I helped several fellow students from remote parts of Punjab, the first in their families at a university like ours, start freelancing. I set up their accounts, passed clients to them and taught them the skills. Through Fiverr I also taught data courses to students.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.06s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><div class="ld-c"><p class="ld-k"><span>2022 to 2024</span><span>Dubizzle Labs · Lahore</span></p><h3>A team of three, and the juniors around it</h3><p>I led three engineers, two in web scraping and one in data warehousing, and led hiring for the scraping project. I mentored juniors, introduced them to freelancing and trained colleagues on ETL.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.12s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span><div class="ld-c"><p class="ld-k"><span>2024</span><span>Dubizzle Labs · Senior Data Engineer</span></p><h3>The Propforce warehouse team</h3><p>As Senior Data Engineer I led the data-crawling team and the Propforce data-warehouse team, with the warehouse modelled from scratch.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.00s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span><div class="ld-c"><p class="ld-k"><span>2024/25</span><span>Chevening · UK Government</span></p><h3>Selected as a future leader</h3><p>Chevening funds a one-year UK master's for future leaders. My leadership essay was about freelancing from my early semesters, helping peers into freelance work and pioneering Dubizzle's competitor-analysis pipeline. I was selected in a cycle of more than 70,000 applications.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.06s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><div class="ld-c"><p class="ld-k"><span>2024 to 2025</span><span>University of Portsmouth</span></p><h3>Classmates new to data</h3><p>On my MSc I mentored classmates who arrived without a data background.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.12s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></span><div class="ld-c"><p class="ld-k"><span>Jun to Jul 2025</span><span>VendueTech · Lead Data Engineer</span></p><h3>Leading a remote team</h3><p>I led three developers on real-time auction data pipelines, ran sprint planning and code reviews, and sat on the interview panel for a senior data engineer.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.00s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span><div class="ld-c"><p class="ld-k"><span>2025 to now</span><span>Artemis AI · Co-founder and CTO</span></p><h3>Building the team</h3><p>I brought four contractors into the team (AI/ML, back end, product design and legal) and lead the architecture, evaluation, planning and the sprint plan to launch.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.06s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></span><div class="ld-c"><p class="ld-k"><span>2026 to now</span><span>ScrapeSync</span></p><h3>Co-leading a delivery team</h3><p>I co-lead ScrapeSync, a small web-scraping team with three engineers, so I can take on bigger freelance work and lead a team doing it.</p></div></li>
+        <li class="ld-i rv" style="--dl:0.12s"><span class="ld-n" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><div class="ld-c"><p class="ld-k"><span>2026 to now</span><span>Guide · Discord</span></p><h3>Giving back</h3><p>I write a free field guide to web data collection and help people get unstuck in web-scraping communities on Discord.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
 <!-- ================= PEOPLE ================= -->
 <section class="sec" id="people" aria-labelledby="pp-h">
   <div class="wrap">
@@ -1989,6 +2345,34 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
         <li><b><span class="cnt" data-to="3.39" data-dec="2" data-suf="M"><span class="cnt-live" aria-hidden="true">3.39M</span><span class="cnt-final">3.39M</span></span></b><span>public comments collected from Facebook pages</span></li>
         <li><b><span class="cnt" data-to="4"><span class="cnt-live" aria-hidden="true">4</span><span class="cnt-final">4</span></span></b><span>contractors I lead: AI/ML, back end, product design, legal</span></li>
       </ul>
+      <div class="aviz">
+        <div class="av-stage rv"><svg class="av-svg" viewBox="0 0 760 770" role="img" aria-labelledby="av-t" focusable="false">
+<title id="av-t">Artemis AI architecture: read-only Facebook and Instagram Graph API data is collected into a warehouse, read by 48 models in seven families (text, vision and video, time series, crisis, network, Art-E and quality), and turned into Art-E advice in the iPhone and Android app.</title>
+<defs><linearGradient id="avg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0071E3"/><stop offset=".55" stop-color="#7B61FF"/><stop offset="1" stop-color="#F0508C"/></linearGradient>
+<linearGradient id="avu" gradientUnits="userSpaceOnUse" x1="0" y1="60" x2="0" y2="720"><stop offset="0" stop-color="#0071E3"/><stop offset=".5" stop-color="#7B61FF"/><stop offset="1" stop-color="#F0508C"/></linearGradient>
+<linearGradient id="avd" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0062D6"/><stop offset=".5" stop-color="#5B36DC"/><stop offset="1" stop-color="#9A3FD8"/></linearGradient>
+<radialGradient id="avc"><stop offset="0" stop-color="#7B61FF" stop-opacity=".32"/><stop offset="1" stop-color="#7B61FF" stop-opacity="0"/></radialGradient></defs>
+<g class="av-src"><rect x="70" y="18" width="270" height="60" rx="16"/><text x="205" y="45" text-anchor="middle" class="av-b">Facebook Graph API</text><text x="205" y="66" text-anchor="middle" class="av-s">posts · comments · insights</text></g>
+<g class="av-src"><rect x="420" y="18" width="270" height="60" rx="16"/><text x="555" y="45" text-anchor="middle" class="av-b">Instagram Graph API</text><text x="555" y="66" text-anchor="middle" class="av-s">read-only, never posts</text></g>
+<path class="av-flow" id="avp1" d="M205 78 C205 106 380 98 380 124"/><path class="av-flow" id="avp2" d="M555 78 C555 106 380 98 380 124"/>
+<g class="av-wh"><rect x="190" y="124" width="380" height="62" rx="16"/><text x="380" y="151" text-anchor="middle" class="av-b">Collect, then warehouse</text><text x="380" y="172" text-anchor="middle" class="av-s">hourly growth curves · 90-day backfill</text></g>
+<path class="av-flow" id="avp3" d="M380 186 L380 342"/>
+<circle class="av-orbit" cx="380" cy="420" r="172"/><circle class="av-orbit2" cx="380" cy="420" r="128"/>
+<line class="av-spoke" x1="380" y1="420" x2="380.0" y2="248.0"/><line class="av-spoke" x1="380" y1="420" x2="514.5" y2="312.8"/><line class="av-spoke" x1="380" y1="420" x2="547.7" y2="458.3"/><line class="av-spoke" x1="380" y1="420" x2="454.6" y2="575.0"/><line class="av-spoke" x1="380" y1="420" x2="305.4" y2="575.0"/><line class="av-spoke" x1="380" y1="420" x2="212.3" y2="458.3"/><line class="av-spoke" x1="380" y1="420" x2="245.5" y2="312.8"/>
+<circle class="av-glow" cx="380" cy="420" r="124" fill="url(#avc)"/>
+<g class="av-core"><circle cx="380" cy="420" r="78"/><text x="380" y="424" text-anchor="middle" class="av-big">48</text><text x="380" y="448" text-anchor="middle" class="av-s2">models · 7 families</text><text x="380" y="467" text-anchor="middle" class="av-s2">about 10 weekly</text></g>
+<g class="av-node" style="--k:0;color:#0062D6" transform="translate(380.0 248.0)"><circle class="av-halo" r="40"/><circle class="av-dot" r="31"/><svg x="-13" y="-13" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></g><text class="av-lab" text-anchor="start"><tspan x="426.0" y="254.0">Text</tspan></text><g class="av-node" style="--k:1;color:#6A48F5" transform="translate(514.5 312.8)"><circle class="av-halo" r="40"/><circle class="av-dot" r="31"/><svg x="-13" y="-13" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg></g><text class="av-lab" text-anchor="start"><tspan x="553.6" y="276.6">Vision and</tspan><tspan x="553.6" y="298.6">video</tspan></text><g class="av-node" style="--k:2;color:#00788F" transform="translate(547.7 458.3)"><circle class="av-halo" r="40"/><circle class="av-dot" r="31"/><svg x="-13" y="-13" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></g><text class="av-lab" text-anchor="start"><tspan x="596.4" y="475.4">Time series</tspan></text><g class="av-node" style="--k:3;color:#C02A62" transform="translate(454.6 575.0)"><circle class="av-halo" r="40"/><circle class="av-dot" r="31"/><svg x="-13" y="-13" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></svg></g><text class="av-lab" text-anchor="start"><tspan x="476.3" y="626.0">Crisis</tspan></text><g class="av-node" style="--k:4;color:#08776F" transform="translate(305.4 575.0)"><circle class="av-halo" r="40"/><circle class="av-dot" r="31"/><svg x="-13" y="-13" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></g><text class="av-lab" text-anchor="end"><tspan x="283.7" y="626.0">Network</tspan></text><g class="av-node" style="--k:5;color:#9A3FD8" transform="translate(212.3 458.3)"><circle class="av-halo" r="40"/><circle class="av-dot" r="31"/><svg x="-13" y="-13" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.06 4 16l5.94 1.94L12 24l2.06-6.06L20 16l-5.94-1.94L12 8z" transform="scale(.8) translate(3 -3)"/><path d="M19 2v4M21 4h-4"/></svg></g><text class="av-lab" text-anchor="end"><tspan x="163.6" y="475.4">Art-E</tspan></text><g class="av-node" style="--k:6;color:#C2451A" transform="translate(245.5 312.8)"><circle class="av-halo" r="40"/><circle class="av-dot" r="31"/><svg x="-13" y="-13" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></g><text class="av-lab" text-anchor="end"><tspan x="206.4" y="287.6">Quality</tspan></text>
+<path class="av-flow" id="avp4" d="M380 498 L380 700"/>
+<g class="av-out"><rect x="170" y="700" width="420" height="60" rx="18"/><text x="380" y="727" text-anchor="middle" class="av-b av-bw">Art-E advice in the app</text><text x="380" y="748" text-anchor="middle" class="av-s av-sw">iPhone and Android · hosted in AWS London</text></g>
+<g class="av-pk" data-fx></g>
+</svg></div>
+        <div class="av-side">
+          <p class="art-h">The system at a glance</p>
+          <div class="av-kpis"><div class="gauge rv" role="img" aria-label="About 10 of 48 models running in weekly production"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="g-bg" cx="60" cy="60" r="50"/><circle class="g-fg" cx="60" cy="60" r="50" pathLength="48" stroke-dasharray="10 48"/></svg><span class="g-in"><b>~10</b><small>of 48 weekly</small></span></div><ul class="av-chips" aria-label="Artemis AI facts"><li><span aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></span><b><span class="cnt" data-to="7"><span class="cnt-live" aria-hidden="true">7</span><span class="cnt-final">7</span></span></b> model families</li><li><span aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><b><span class="cnt" data-to="3.39" data-suf="M" data-dec="2"><span class="cnt-live" aria-hidden="true">3.39M</span><span class="cnt-final">3.39M</span></span></b> public comments</li><li><span aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></span><b>Read-only</b> Meta Graph API access</li><li><span aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b><span class="cnt" data-to="4"><span class="cnt-live" aria-hidden="true">4</span><span class="cnt-final">4</span></span></b> contractors on my team</li><li><span aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span><b>15 Dec 2026</b> invited beta</li></ul></div>
+          <ol class="fams" id="famList" aria-label="The seven model families"><li class="fam rv" style="--k:0;--fc:#0062D6;--dl:0.00s"><span class="fam-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><b>Text</b><span>Sentiment, emotion, topic, intent and toxicity for posts and comments.</span></li><li class="fam rv" style="--k:1;--fc:#6A48F5;--dl:0.05s"><span class="fam-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg></span><b>Vision and video</b><span>OCR, image fingerprints and a content-type classifier; video through frames, speech-to-text and OCR.</span></li><li class="fam rv" style="--k:2;--fc:#00788F;--dl:0.10s"><span class="fam-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span><b>Time series</b><span>Growth curves, each page's normal range and the best hours to post.</span></li><li class="fam rv" style="--k:3;--fc:#C02A62;--dl:0.15s"><span class="fam-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></svg></span><b>Crisis</b><span>Early warning of comment storms, judged against each page's own normal, with spam and banter filters.</span></li><li class="fam rv" style="--k:4;--fc:#08776F;--dl:0.20s"><span class="fam-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></span><b>Network</b><span>Page-to-page affinity and community detection to suggest collaboration partners (a prototype).</span></li><li class="fam rv" style="--k:5;--fc:#9A3FD8;--dl:0.25s"><span class="fam-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.94 14.06 4 16l5.94 1.94L12 24l2.06-6.06L20 16l-5.94-1.94L12 8z" transform="scale(.8) translate(3 -3)"/><path d="M19 2v4M21 4h-4"/></svg></span><b>Art-E</b><span>Retrieval over the page's own data; every number has to come from a checked tool.</span></li><li class="fam rv" style="--k:6;--fc:#C2451A;--dl:0.30s"><span class="fam-ic" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><b>Quality</b><span>An accuracy tracker, a QA dashboard and drift alarms.</span></li></ol>
+          <div class="cdots" aria-hidden="true" data-fx data-for="famList"></div>
+        </div>
+      </div>
 
       <div class="art-cols">
         <div>
@@ -2473,6 +2857,104 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
   /* ---------- printing always gets the full, final page ---------- */
   W.addEventListener('beforeprint',function(){showAll();ws.forEach(function(w){w.classList.add('on')});d.classList.remove('is-dark')});
   W.addEventListener('afterprint',applyTheme);
+})();
+
+/* ===== v3 additions: carousel dots, leadership rail, Artemis showcase motion, mobile chapter chip, tap ripples ===== */
+(function(){
+  var W=window,D=document;
+  function mq(q){return W.matchMedia?W.matchMedia(q):{matches:false}}
+  var RM=mq('(prefers-reduced-motion: reduce)').matches;
+  var hasIO='IntersectionObserver' in W;
+  function $$(s,r){return [].slice.call((r||D).querySelectorAll(s))}
+  function clamp(v,a,b){return v<a?a:(v>b?b:v)}
+
+  /* ---------- carousel dots (mobile scroll-snap rows) ---------- */
+  $$('.cdots[data-for]').forEach(function(dots){
+    var id=dots.getAttribute('data-for'),box=D.getElementById(id==='stats'?'heroStats':id);if(!box)return;
+    var items=$$(':scope > li',box);if(!items.length)return;
+    items.forEach(function(){dots.appendChild(D.createElement('i'))});
+    var ds=$$('i',dots),raf=0;
+    function upd(){raf=0;
+      var x=box.scrollLeft,best=0,bd=1e9;
+      items.forEach(function(it,i){var d=Math.abs(it.offsetLeft-box.offsetLeft-x-parseFloat(getComputedStyle(box).paddingLeft||0));if(d<bd){bd=d;best=i}});
+      if(x+box.clientWidth>=box.scrollWidth-4)best=items.length-1;
+      ds.forEach(function(dd,i){dd.classList.toggle('on',i===best)});
+    }
+    box.addEventListener('scroll',function(){if(!raf)raf=requestAnimationFrame(upd)},{passive:true});
+    upd();
+  });
+
+  /* ---------- leadership rail fills as you read ---------- */
+  var ltl=D.querySelector('.ltl'),rail=ltl&&ltl.querySelector('.ltl-rail');
+  var chip=null,chipTxt=null,chipRing=null;
+
+  /* ---------- mobile chapter chip with a progress ring ---------- */
+  (function(){
+    chip=D.createElement('div');chip.className='cchip';chip.setAttribute('aria-hidden','true');
+    chip.innerHTML='<svg viewBox="0 0 36 36"><defs><linearGradient id="ccg" x1="0" x2="1"><stop offset="0" stop-color="#0071E3"/><stop offset="1" stop-color="#7B61FF"/></linearGradient></defs><circle class="cr-bg" cx="18" cy="18" r="15"/><circle class="cr-fg" cx="18" cy="18" r="15" pathLength="100" stroke-dasharray="0 100"/></svg><span></span>';
+    D.body.appendChild(chip);chipTxt=chip.querySelector('span');chipRing=chip.querySelector('.cr-fg');
+  })();
+  var chs=$$('.ch'),secs=$$('main > section[id]').filter(function(s){return s.querySelector('h2')}),hero=D.getElementById('top');
+  function label(){
+    var vh=W.innerHeight,cur=null;
+    for(var i=0;i<chs.length;i++){var r=chs[i].getBoundingClientRect();if(r.top<vh*0.4&&r.bottom>vh*0.2)cur=chs[i]}
+    if(cur){var n=cur.querySelector('.yr'),t=cur.querySelector('.ch-t');return (n?n.textContent+' · ':'')+(t?t.textContent:'')}
+    for(var j=0;j<secs.length;j++){var sr=secs[j].getBoundingClientRect();if(sr.top<vh*0.4&&sr.bottom>vh*0.4){var h=secs[j].querySelector('h2');return h?h.textContent.replace(/\s+/g,' ').trim():''}}
+    return '';
+  }
+  var tick=false,lastTxt='';
+  function frame(){
+    tick=false;
+    var vh=W.innerHeight,de=D.documentElement,h=de.scrollHeight-vh,y=W.pageYOffset||de.scrollTop;
+    if(rail&&!RM){var r=ltl.getBoundingClientRect();rail.style.setProperty('--lp',clamp((vh*0.6-r.top)/r.height,0,1).toFixed(3))}
+    if(chip&&W.innerWidth<=720){
+      var past=hero?hero.getBoundingClientRect().bottom<80:y>400,txt=past?label():'';
+      chip.classList.toggle('show',!!txt);
+      if(txt&&txt!==lastTxt){chipTxt.textContent=txt;lastTxt=txt}
+      chipRing.setAttribute('stroke-dasharray',(h>0?clamp(y/h,0,1)*100:0).toFixed(1)+' 100');
+    }
+  }
+  function onScroll(){if(!tick){tick=true;requestAnimationFrame(frame)}}
+  W.addEventListener('scroll',onScroll,{passive:true});W.addEventListener('resize',onScroll);frame();
+
+  /* ---------- Artemis showcase: flowing data packets and a family spotlight ---------- */
+  var svg=D.querySelector('.av-svg'),pk=svg&&svg.querySelector('.av-pk');
+  if(svg&&pk&&!RM){
+    var NS='http://www.w3.org/2000/svg';
+    [['avp1',0],['avp2',.7],['avp1',1.4],['avp2',2.1],['avp3',.35],['avp3',1.45],['avp4',.9],['avp4',2]].forEach(function(p){
+      var c=D.createElementNS(NS,'circle');c.setAttribute('r','4.5');
+      var m=D.createElementNS(NS,'animateMotion');m.setAttribute('dur','2.8s');m.setAttribute('repeatCount','indefinite');m.setAttribute('begin',p[1]+'s');
+      var mp=D.createElementNS(NS,'mpath');mp.setAttributeNS('http://www.w3.org/1999/xlink','href','#'+p[0]);mp.setAttribute('href','#'+p[0]);
+      m.appendChild(mp);c.appendChild(m);pk.appendChild(c);
+    });
+  }
+  var nodes=$$('.av-node'),fams=$$('.fam'),fi=-1,ft=0,famOn=false;
+  function spot(i){nodes.forEach(function(n,k){n.classList.toggle('on',k===i)});fams.forEach(function(f,k){f.classList.toggle('on',k===i)})}
+  function cycle(){fi=(fi+1)%nodes.length;spot(fi)}
+  if(nodes.length&&!RM&&hasIO){
+    new IntersectionObserver(function(es){var v=es[0].isIntersecting;
+      if(v&&!famOn){famOn=true;cycle();ft=setInterval(function(){if(!D.hidden)cycle()},2400)}
+      else if(!v&&famOn){famOn=false;clearInterval(ft)}
+    },{threshold:.25}).observe(svg);
+    fams.forEach(function(f,k){f.addEventListener('pointerenter',function(){fi=k;spot(k)})});
+  }
+  if(svg&&svg.pauseAnimations){
+    if(hasIO)new IntersectionObserver(function(es){try{es[0].isIntersecting?svg.unpauseAnimations():svg.pauseAnimations()}catch(e){}}).observe(svg);
+  }
+
+  /* ---------- tap ripples ---------- */
+  if(!RM){
+    D.addEventListener('pointerdown',function(e){
+      var el=e.target.closest&&e.target.closest('.st,.cert,.fam,.ld-c,.medal,.lstats li,.cc,.lgo a,.lgo-in');if(!el)return;
+      var r=el.getBoundingClientRect(),s=Math.max(r.width,r.height)*2.2,sp=D.createElement('span');
+      sp.className='rip';sp.setAttribute('aria-hidden','true');
+      sp.style.width=sp.style.height=s+'px';sp.style.left=(e.clientX-r.left-s/2)+'px';sp.style.top=(e.clientY-r.top-s/2)+'px';
+      el.appendChild(sp);setTimeout(function(){if(sp.parentNode)sp.parentNode.removeChild(sp)},700);
+    },{passive:true});
+  }
+
+  /* printing: show everything final */
+  W.addEventListener('beforeprint',function(){$$('.gauge').forEach(function(g){g.classList.add('in')});if(rail)rail.style.setProperty('--lp','1')});
 })();
 
 </script>
