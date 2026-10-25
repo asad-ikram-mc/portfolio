@@ -375,7 +375,6 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
 .lgo a:hover,.lgo-in:hover,.lgo a:focus-visible{color:var(--b);border-color:color-mix(in srgb,var(--b) 40%,transparent);box-shadow:0 14px 30px -16px var(--b);transform:translateY(-3px)}
 .lgo a:hover img,.lgo-in:hover img,.lgo a:focus-visible img{filter:none;opacity:1}
 .is-dark .lgo a,.is-dark .lgo-in{background:rgba(255,255,255,.92);border-color:transparent;color:#5C6478}
-.lg-cap{font-size:12.5px;color:var(--sub);margin:0 auto;max-width:80ch;text-align:center}
 
 /* ===== roles gantt ===== */
 .gantt{border-radius:var(--r);padding:clamp(14px,2.4vw,30px)}
@@ -945,7 +944,6 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
   .lgo img{max-height:16pt;width:auto;filter:none;opacity:1}
   .wm{font-size:8.5pt}
   .lg-ico{width:14pt;height:14pt}
-  .lg-cap{font-size:7.5pt;text-align:left;margin:0}
   .sec,.sec.alt,.foot,.interlude,#countries{background:#fff!important;padding:14pt 0!important;border:0!important;color:#111;overflow:visible}
   .head{display:block;text-align:left;margin:0 0 12pt;max-width:none;padding-top:8pt;border-top:1px solid #111;break-inside:avoid;break-after:avoid}
   .head .eyeb{display:block;margin:0 0 6pt;padding:0;border:0;background:none}
@@ -1147,8 +1145,6 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
 .lgo.flr .lgo-in:has(.wm-only){width:auto;padding:0 22px}
 .lgo.flr img{width:70px;height:60px;max-width:none;mix-blend-mode:multiply;transform:scale(1.25)}
 .lgo img[src$="portsmouth.png"]{height:40px!important}
-.lg-cap2{margin-top:-8px;margin-bottom:14px}
-.lg-cap a{color:var(--acc-ink);text-decoration:underline;text-underline-offset:2px}
 
 /* ---------- chapter 01: medal cards ---------- */
 .medals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0 8px}
@@ -1379,6 +1375,116 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
   #certs,#lead{break-before:auto}
 }
 
+/* ---------- v4: Find my work, big link cards ---------- */
+.lc-grp{margin-top:44px}
+.lc-grp:first-of-type{margin-top:8px}
+.lc-gh{display:flex;align-items:center;gap:12px;font-size:clamp(19px,2.2vw,23px);letter-spacing:-.02em;margin:0 0 18px}
+.lc-gh .eyi{margin:0}
+.lc-n{font-family:var(--m);font-size:11.5px;font-weight:500;letter-spacing:.06em;color:var(--sub);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-left:2px}
+.lcg{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.lcg>li{min-width:0;display:flex}
+@media (min-width:1100px){.lcg-4{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.lcg-4 .lc-t{font-size:18px}}
+.lc{--b:#0063D6;position:relative;display:flex;flex-direction:column;width:100%;min-width:0;border-radius:22px;background:var(--surface);border:1px solid var(--line);color:inherit;text-decoration:none;isolation:isolate;overflow:hidden;
+  box-shadow:0 1px 2px rgba(11,21,48,.05),0 14px 34px -22px rgba(11,21,48,.35);
+  transition:transform .55s var(--out),box-shadow .55s var(--out),border-color .4s;-webkit-tap-highlight-color:transparent}
+.lc::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;z-index:5;pointer-events:none;
+  background:linear-gradient(135deg,var(--b),#00C6FB 48%,#7B61FF);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  opacity:0;transition:opacity .45s}
+.lc:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.lc:focus-visible::before{opacity:1}
+
+/* media */
+.lc-m{position:relative;isolation:isolate;display:block;flex:none;aspect-ratio:40/21;overflow:hidden;background:var(--pbg,#fff);border-bottom:1px solid var(--line)}
+.lc-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--out)}
+.lc-pan{background:
+  radial-gradient(110% 95% at 12% 0%,color-mix(in srgb,var(--b) 24%,#fff) 0%,transparent 62%),
+  radial-gradient(90% 90% at 100% 100%,color-mix(in srgb,var(--b) 18%,#EEF2FF) 0%,transparent 70%),
+  linear-gradient(135deg,#FFFFFF,color-mix(in srgb,var(--b) 10%,#F6F8FF))}
+.lc-pan::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(color-mix(in srgb,var(--b) 30%,transparent) 1px,transparent 1.3px);background-size:16px 16px;
+  -webkit-mask-image:radial-gradient(70% 80% at 85% 20%,#000,transparent 75%);mask-image:radial-gradient(70% 80% at 85% 20%,#000,transparent 75%);opacity:.7}
+.lc-pan::after{content:"";position:absolute;width:46%;aspect-ratio:1;right:-12%;bottom:-30%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,color-mix(in srgb,var(--b) 30%,transparent),transparent 68%);filter:blur(6px);transition:transform .8s var(--out)}
+.lc-lg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 8%}
+.lc-lg>*{position:relative;z-index:1;transition:transform .7s var(--out)}
+.lc-col{flex-direction:column;gap:10px}
+.lc-lg img{display:block;height:var(--h,60px);width:auto;max-width:64%;object-fit:contain;mix-blend-mode:multiply}
+.lc-wm{font-weight:800;font-size:clamp(19px,1.9vw,25px);letter-spacing:-.025em;line-height:1.1;color:color-mix(in srgb,var(--b) 66%,#0B1530);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.lc-col .lc-wm{font-family:var(--m);font-weight:500;font-size:clamp(13px,1.2vw,15px);letter-spacing:0;color:color-mix(in srgb,var(--b) 62%,#0B1530)}
+.lc-wm-big{font-size:clamp(34px,3.6vw,46px);letter-spacing:-.04em}
+.lc-ico{display:grid;place-items:center;width:76px;height:76px;border-radius:22px;background:#fff;color:color-mix(in srgb,var(--b) 88%,#0B1530);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 14px 30px -14px color-mix(in srgb,var(--b) 65%,transparent),0 0 0 1px color-mix(in srgb,var(--b) 16%,transparent)}
+.lc-ico svg{width:42px;height:42px}
+
+/* body */
+.lc-b{position:relative;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;padding:18px 20px 16px}
+.lc-k{display:flex;align-items:center;gap:8px;font-family:var(--m);font-size:11px;line-height:1.35;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
+.lc-k::before{content:"";width:8px;height:8px;flex:none;border-radius:50%;background:var(--b);box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 18%,transparent)}
+.lc-t{font-size:19px;line-height:1.28;letter-spacing:-.02em;font-weight:800;color:var(--ink)}
+.lc-d{font-size:14.5px;line-height:1.55;color:var(--sub)}
+.lc-u{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:12px;border-top:1px dashed var(--line2);font-family:var(--m);font-size:12.5px;color:var(--acc-ink)}
+.lc-d+.lc-u{margin-top:auto}
+.lc-b>.lc-d{margin-bottom:6px}
+.lc-u>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lc-ar{flex:none;width:32px;height:32px;padding:8px;border-radius:50%;background:var(--acc-tint);color:var(--acc-ink);transition:transform .45s var(--out),background-color .35s,color .35s}
+
+/* hover: lift, glow, gradient border */
+@media (hover:hover) and (pointer:fine){
+  .lc:hover{transform:translateY(-7px);border-color:transparent;box-shadow:0 2px 4px rgba(11,21,48,.05),0 28px 56px -24px color-mix(in srgb,var(--b) 75%,transparent),0 0 44px -12px color-mix(in srgb,var(--b) 45%,transparent)}
+  .lc:hover::before{opacity:1}
+  .lc:hover .lc-img img{transform:scale(1.045)}
+  .lc:hover .lc-lg>*{transform:scale(1.06)}
+  .lc:hover .lc-pan::after{transform:translate(-18%,-12%) scale(1.2)}
+  .lc:hover .lc-ar{transform:translate(2px,-2px);background:color-mix(in srgb,var(--b) 62%,#0B1530);color:#fff}
+}
+/* tap ripple (touch) */
+.lc .rip{position:absolute;z-index:6;border-radius:50%;pointer-events:none;background:color-mix(in srgb,var(--b) 30%,transparent);transform:scale(0);animation:lcrip .65s var(--out) forwards}
+@keyframes lcrip{to{transform:scale(1);opacity:0}}
+@media (hover:none){.lc:active{transform:scale(.985)}}
+
+/* dark theme: panels stay light so the logos read; card chrome follows the theme */
+.is-dark .lc{box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 18px 40px -24px rgba(0,0,0,.8)}
+.is-dark .lc-m{border-bottom-color:rgba(255,255,255,.06)}
+.is-dark .lc-pan{filter:saturate(1.05) brightness(.97)}
+
+/* tablet */
+@media (max-width:1023px){.lcg{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
+/* phone: one column of full cards, slightly tighter */
+@media (max-width:639px){
+  .lc-grp{margin-top:34px}
+  .lcg{grid-template-columns:minmax(0,1fr);gap:14px}
+  .lc{border-radius:20px}
+  .lc-lg img{height:calc(var(--h,60px)*.9)}
+  .lc-wm-big{font-size:38px}
+  .lc-b{padding:14px 16px 14px;gap:5px}
+  .lc-t{font-size:18px}
+  .lc-d{font-size:14px;line-height:1.5}
+  .lc-u{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .lc,.lc-img img,.lc-lg>*,.lc-ar,.lc-pan::after{transition:none!important}
+  .lc:hover,.lc:hover .lc-img img,.lc:hover .lc-lg>*{transform:none!important}
+  .lc .rip{display:none}
+}
+@media print{
+  #links{padding:10pt 0!important}
+  .lc-grp{margin-top:8pt;break-inside:auto}
+  .lc-gh{font-size:11pt;margin:0 0 5pt}
+  .lc-gh .eyi,.lc-n{display:none}
+  .lcg{grid-template-columns:repeat(3,1fr)!important;gap:5pt!important}
+  .lcg-4{grid-template-columns:repeat(4,1fr)!important}
+  .lcg>li{break-inside:avoid;opacity:1!important;transform:none!important}
+  .lc{flex-direction:column;border:1px solid #ccc!important;border-radius:5pt;box-shadow:none!important;background:#fff!important;transform:none!important}
+  .lc::before,.lc-m,.lc-ar,.lc .rip{display:none!important}
+  .lc-b{padding:5pt 7pt;gap:1pt}
+  .lc-k{font-size:6.5pt;color:#444}
+  .lc-k::before{width:5pt;height:5pt;box-shadow:none}
+  .lc-t{font-size:9pt;color:#000}
+  .lc-d{font-size:7.5pt;line-height:1.35;color:#333}
+  .lc-u{font-size:7pt;padding-top:3pt;border-top:1px dotted #bbb;color:#0B3D91}
+}
+
 </style>
 </head>
 <body>
@@ -1501,31 +1607,12 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
     <li class="lgo needs-approval" style="--b:#001689"><span class="lgo-in" title="Durex"><img src="assets/logos/durex.svg" alt="Durex" height="26" style="height:26px" loading="lazy" decoding="async"></span></li>
     <li class="lgo needs-approval" style="--b:#E4002B"><span class="lgo-in" title="Rentokil"><img src="assets/logos/rentokil.svg" alt="Rentokil" height="18" style="height:18px" loading="lazy" decoding="async"></span></li>
     <li class="lgo needs-approval" style="--b:#0F1B33"><span class="lgo-in" title="CFMOTO"><span class="mono" aria-hidden="true" data-fx>CF</span><span class="wm wm-only">CFMOTO</span></span></li>
+    <li class="lgo flr" style="--b:#FF007F"><span class="lgo-in" title="Reckitt"><img src="assets/logos/reckitt.png" alt="Reckitt" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr" style="--b:#F36633"><span class="lgo-in" title="GSK"><img src="assets/logos/gsk.png" alt="GSK" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr" style="--b:#10384F"><span class="lgo-in" title="Bayer"><img src="assets/logos/bayer.png" alt="Bayer" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr" style="--b:#111111"><span class="lgo-in" title="WWE"><img src="assets/logos/wwe.png" alt="WWE" width="70" height="60" loading="lazy" decoding="async"></span></li>
+    <li class="lgo flr" style="--b:#013369"><span class="lgo-in" title="NFL"><img src="assets/logos/nfl.png" alt="NFL" width="70" height="60" loading="lazy" decoding="async"></span></li>
   </ul></div>
-  <div class="wrap lg-row"><p class="lg-k" id="lg-r">Brands in the M+C Saatchi Fluency client roster</p></div>
-  <div class="mq"><ul class="mq-track" aria-labelledby="lg-r">
-    <li class="lgo flr"><span class="lgo-in" title="Ballantine's"><img src="assets/logos/ballantines.png" alt="Ballantine's" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="United Nations"><span class="wm wm-only">United Nations</span></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="WWE"><img src="assets/logos/wwe.png" alt="WWE" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="GSK"><img src="assets/logos/gsk.png" alt="GSK" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="McDonald's"><img src="assets/logos/mcdonalds.png" alt="McDonald's" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="National Trust"><img src="assets/logos/national-trust.png" alt="National Trust" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Moët Hennessy"><img src="assets/logos/moet-hennessy.png" alt="Moët Hennessy" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Thames Water"><img src="assets/logos/thames-water.png" alt="Thames Water" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Bayer"><img src="assets/logos/bayer.png" alt="Bayer" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Reckitt"><img src="assets/logos/reckitt.png" alt="Reckitt" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Toyota"><img src="assets/logos/toyota.png" alt="Toyota" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Ascential"><img src="assets/logos/ascential.png" alt="Ascential" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="NFL"><img src="assets/logos/nfl.png" alt="NFL" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Ashley HomeStore"><img src="assets/logos/ashley.png" alt="Ashley HomeStore" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Fruit of the Loom"><img src="assets/logos/fruit-of-the-loom.png" alt="Fruit of the Loom" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Bacardi"><img src="assets/logos/bacardi.png" alt="Bacardi" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Western Union"><img src="assets/logos/western-union.png" alt="Western Union" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="fuboTV"><img src="assets/logos/fubo.png" alt="fuboTV" width="70" height="60" loading="lazy" decoding="async"></span></li>
-    <li class="lgo flr"><span class="lgo-in" title="Diageo"><span class="wm wm-only">Diageo</span></span></li>
-  </ul></div>
-  <div class="wrap"><p class="lg-cap lg-cap2">This second row is the client list that Fluency, the M+C Saatchi data consultancy I work for, shows on its own website (<a href="https://fluency-mcsaatchi.com/clients" target="_blank" rel="noopener">fluency-mcsaatchi.com</a>, October 2026). I did not work on these brands myself; they show the kind of clients the team serves. The brands I did work on are in the row above.</p></div>
-  <div class="wrap"><p class="lg-cap">Trademarks belong to their owners. Shown to describe client work through agencies and employers, not endorsement.</p></div>
 </section>
 
 <div class="bdiv" aria-hidden="true" data-fx><i></i><i></i><i></i></div>
@@ -2510,6 +2597,60 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
 
 </main>
 
+<div class="bdiv" aria-hidden="true" data-fx><i></i><i></i><i></i></div>
+<!-- ================= LINKS ================= -->
+<section class="sec alt" id="links" aria-labelledby="lc-h" style="--gh:0,113,227">
+  <div class="wrap">
+    <div class="head mid">
+      <p class="eyeb"><span class="eyi" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>Find my work</p>
+      <h2 class="hd" id="lc-h">Links and places</h2>
+      <p class="hd-sub">Everything I run, wrote or worked for, one card each. Every card opens the real site in a new tab.</p>
+    </div>
+    <div class="lc-grp">
+    <h3 class="lc-gh" id="lc-g1"><span class="eyi" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>My projects<span class="lc-n">3</span></h3>
+    <ul class="lcg" aria-labelledby="lc-g1">
+      <li class="rv" style="--dl:0.00s"><a class="lc" href="https://artemisai.co.uk" target="_blank" rel="noopener" style="--b:#3BB98F"><span class="lc-m lc-img" style="--pbg:#0B0D0C"><img src="assets/cards/artemis.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">Co-founder and CTO · since Feb 2025</span><b class="lc-t">Artemis AI</b><span class="lc-d">Social-media intelligence for Facebook and Instagram pages, read-only through Meta's official Graph APIs.</span><span class="lc-u"><span>artemisai.co.uk</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.06s"><a class="lc" href="https://web-scraping-guide.com" target="_blank" rel="noopener" style="--b:#0063D6"><span class="lc-m lc-pan"><span class="lc-lg lc-col"><span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span><span class="lc-wm">web-scraping-guide.com</span></span></span><span class="lc-b"><span class="lc-k">Author · since May 2026</span><b class="lc-t">The web scraping guide</b><span class="lc-d">A free, no-signup engineering guide to web data collection that respects platform terms. Updated weekly.</span><span class="lc-u"><span>web-scraping-guide.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.12s"><a class="lc" href="https://scrapesync.io" target="_blank" rel="noopener" style="--b:#1E9C9A"><span class="lc-m lc-pan"><span class="lc-lg"><img src="assets/logos/scrapesync.png" alt="" style="--h:72px" loading="lazy" decoding="async"><span class="lc-wm">ScrapeSync</span></span></span><span class="lc-b"><span class="lc-k">Founder and co-lead · since 2026</span><b class="lc-t">ScrapeSync</b><span class="lc-d">A small web-scraping services team I co-lead, so I can take on bigger freelance work.</span><span class="lc-u"><span>scrapesync.io</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+    </ul>
+    </div>
+    <div class="lc-grp">
+    <h3 class="lc-gh" id="lc-g2"><span class="eyi" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 2v7.31M14 9.3V1.99M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></span>Research<span class="lc-n">4</span></h3>
+    <ul class="lcg lcg-4" aria-labelledby="lc-g2">
+      <li class="rv" style="--dl:0.00s"><a class="lc" href="https://arxiv.org/abs/2610.16757" target="_blank" rel="noopener" style="--b:#B31B1B"><span class="lc-m lc-img" style="--pbg:#FFFFFF"><img src="assets/cards/arxiv.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">Preprint · Oct 2026 · not peer reviewed</span><b class="lc-t">Is the Platform Part of the Measurement?</b><span class="lc-d">With Dr Ella Haig. A six-step protocol and a 500-replication known-truth simulation. arXiv:2610.16757.</span><span class="lc-u"><span>arxiv.org</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.06s"><a class="lc" href="https://github.com/asadfix/platform-measurement" target="_blank" rel="noopener" style="--b:#24292F"><span class="lc-m lc-pan"><span class="lc-lg lc-col"><span class="lc-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span><span class="lc-wm">platform-measurement</span></span></span><span class="lc-b"><span class="lc-k">Code · Python</span><b class="lc-t">Platform-measurement code</b><span class="lc-d">The code behind the preprint: the protocol and the known-truth simulation.</span><span class="lc-u"><span>github.com/asadfix</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.12s"><a class="lc" href="https://doi.org/10.5281/zenodo.23105129" target="_blank" rel="noopener" style="--b:#1F6FB2"><span class="lc-m lc-pan"><span class="lc-lg"><span class="lc-wm lc-wm-big">zenodo</span></span></span><span class="lc-b"><span class="lc-k">Archive · v1.0.0</span><b class="lc-t">Zenodo DOI</b><span class="lc-d">The archived, citable release of the paper code: 10.5281/zenodo.23105129.</span><span class="lc-u"><span>doi.org</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.18s"><a class="lc" href="https://github.com/asadfix" target="_blank" rel="noopener" style="--b:#5B3FE0"><span class="lc-m lc-pan"><span class="lc-lg lc-col"><span class="lc-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span><span class="lc-wm">asadfix</span></span></span><span class="lc-b"><span class="lc-k">Profile</span><b class="lc-t">GitHub</b><span class="lc-d">My public repositories, including the paper code and the guide's source.</span><span class="lc-u"><span>github.com/asadfix</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+    </ul>
+    </div>
+    <div class="lc-grp">
+    <h3 class="lc-gh" id="lc-g3"><span class="eyi" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>Where I worked and studied<span class="lc-n">12</span></h3>
+    <ul class="lcg" aria-labelledby="lc-g3">
+      <li class="rv" style="--dl:0.00s"><a class="lc" href="https://fluency-mcsaatchi.com" target="_blank" rel="noopener" style="--b:#0F1B33"><span class="lc-m lc-img" style="--pbg:#DED9D3"><img src="assets/cards/fluency.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">Dec 2024 to present</span><b class="lc-t">M+C Saatchi Fluency</b><span class="lc-d">Data Engineer, part time, London. I built and own Crawler IQ and the Amazon CORE pipeline.</span><span class="lc-u"><span>fluency-mcsaatchi.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.06s"><a class="lc" href="https://mcsaatchi.com" target="_blank" rel="noopener" style="--b:#C9A800"><span class="lc-m lc-img" style="--pbg:#FFF214"><img src="assets/cards/mcs.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">The group</span><b class="lc-t">M+C Saatchi Group</b><span class="lc-d">The group behind Fluency, the M+C Saatchi data consultancy I work for.</span><span class="lc-u"><span>mcsaatchi.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.12s"><a class="lc" href="https://mcsaatchi.com/americas" target="_blank" rel="noopener" style="--b:#0F1B33"><span class="lc-m lc-img" style="--pbg:#D8D2C8"><img src="assets/cards/mcsam.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">For the New York team</span><b class="lc-t">M+C Saatchi Americas</b><span class="lc-d">A 12-month US consumer discourse study of more than 100,000 consumer mentions.</span><span class="lc-u"><span>mcsaatchi.com/americas</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.00s"><a class="lc" href="https://www.fix.com" target="_blank" rel="noopener" style="--b:#E2620E"><span class="lc-m lc-pan"><span class="lc-lg"><span class="lc-wm lc-wm-big">Fix.com</span></span></span><span class="lc-b"><span class="lc-k">May 2023 to present</span><b class="lc-t">Fix.com</b><span class="lc-d">Data Engineer, independent contractor (Eldis Group, Canada). I design and run ScrapeYard.</span><span class="lc-u"><span>fix.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.06s"><a class="lc" href="https://www.dubizzlegroup.com" target="_blank" rel="noopener" style="--b:#E3262B"><span class="lc-m lc-pan"><span class="lc-lg"><img src="assets/logos/dubizzle.png" alt="" style="--h:64px" loading="lazy" decoding="async"></span></span><span class="lc-b"><span class="lc-k">Feb 2022 to Aug 2024</span><b class="lc-t">Dubizzle Labs</b><span class="lc-d">Associate Software Engineer to Senior Data Engineer in Lahore. 300+ crawlers running daily.</span><span class="lc-u"><span>dubizzlegroup.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.12s"><a class="lc" href="https://www.cxg.com" target="_blank" rel="noopener" style="--b:#21505F"><span class="lc-m lc-img" style="--pbg:#0E3A48"><img src="assets/cards/cxg.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">Since late 2025</span><b class="lc-t">CXG</b><span class="lc-d">Data Engineer, consultant, Dubai, across three engagements.</span><span class="lc-u"><span>cxg.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.00s"><a class="lc" href="https://prefe.it" target="_blank" rel="noopener" style="--b:#14325E"><span class="lc-m lc-pan"><span class="lc-lg"><img src="assets/logos/prefe.png" alt="" style="--h:68px" loading="lazy" decoding="async"><span class="lc-wm">Prefe</span></span></span><span class="lc-b"><span class="lc-k">Sep to Dec 2024</span><b class="lc-t">Prefe</b><span class="lc-d">Data Engineer, part time, Milan: a retail price-intelligence start-up.</span><span class="lc-u"><span>prefe.it</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.06s"><a class="lc" href="https://venduetech.com" target="_blank" rel="noopener" style="--b:#0149FE"><span class="lc-m lc-img" style="--pbg:#4462F0"><img src="assets/cards/vendue.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">Jun to Jul 2025</span><b class="lc-t">VendueTech</b><span class="lc-d">Lead Data Engineer, part time, at a European proptech start-up.</span><span class="lc-u"><span>venduetech.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.12s"><a class="lc" href="https://www.propre.com" target="_blank" rel="noopener" style="--b:#2F54EB"><span class="lc-m lc-pan"><span class="lc-lg"><span class="lc-wm lc-wm-big">Propre</span></span></span><span class="lc-b"><span class="lc-k">Nov 2021 to Jan 2022</span><b class="lc-t">Propre</b><span class="lc-d">Data Engineer, short remote contract, Singapore, with a Japan office.</span><span class="lc-u"><span>propre.com</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.00s"><a class="lc" href="https://www.chevening.org" target="_blank" rel="noopener" style="--b:#7A1F5C"><span class="lc-m lc-pan"><span class="lc-lg"><span class="lc-wm lc-wm-big">Chevening</span></span></span><span class="lc-b"><span class="lc-k">Sep 2024 to Sep 2025</span><b class="lc-t">Chevening</b><span class="lc-d">Chevening Scholar 2024/25, the UK Government's scholarship programme.</span><span class="lc-u"><span>chevening.org</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.06s"><a class="lc" href="https://www.port.ac.uk" target="_blank" rel="noopener" style="--b:#621360"><span class="lc-m lc-pan"><span class="lc-lg"><img src="assets/logos/portsmouth.png" alt="" style="--h:60px" loading="lazy" decoding="async"></span></span><span class="lc-b"><span class="lc-k">Sep 2024 to Sep 2025</span><b class="lc-t">University of Portsmouth</b><span class="lc-d">MSc Data Analytics, Distinction. Dissertation on 255,446 public comments.</span><span class="lc-u"><span>port.ac.uk</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.12s"><a class="lc" href="https://www.nu.edu.pk" target="_blank" rel="noopener" style="--b:#1B4F9C"><span class="lc-m lc-pan"><span class="lc-lg"><img src="assets/logos/fast-nuces.png" alt="" style="--h:56px" loading="lazy" decoding="async"></span></span><span class="lc-b"><span class="lc-k">Aug 2017 to Jan 2022</span><b class="lc-t">FAST-NUCES</b><span class="lc-d">BS Computer Science, Karachi then Chiniot-Faisalabad.</span><span class="lc-u"><span>nu.edu.pk</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+    </ul>
+    </div>
+    <div class="lc-grp">
+    <h3 class="lc-gh" id="lc-g4"><span class="eyi" aria-hidden="true" data-fx><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>Profiles<span class="lc-n">3</span></h3>
+    <ul class="lcg" aria-labelledby="lc-g4">
+      <li class="rv" style="--dl:0.00s"><a class="lc" href="https://www.fiverr.com/asadikram56" target="_blank" rel="noopener" style="--b:#1DBF73"><span class="lc-m lc-img" style="--pbg:#1DBF73"><img src="assets/cards/fiverr.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></span><span class="lc-b"><span class="lc-k">Dec 2018 to Feb 2026</span><b class="lc-t">Fiverr</b><span class="lc-d">Freelance data engineer: 442 completed orders from buyers in 30+ countries.</span><span class="lc-u"><span>fiverr.com/asadikram56</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.06s"><a class="lc" href="https://linkedin.com/in/asad-ikram98" target="_blank" rel="noopener" style="--b:#0A66C2"><span class="lc-m lc-pan"><span class="lc-lg lc-col"><span class="lc-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span><span class="lc-wm">LinkedIn</span></span></span><span class="lc-b"><span class="lc-k">Profile</span><b class="lc-t">LinkedIn</b><span class="lc-d">My full work history, and the easiest way to message me.</span><span class="lc-u"><span>linkedin.com/in/asad-ikram98</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li class="rv" style="--dl:0.12s"><a class="lc" href="index.html" target="_blank" rel="noopener" style="--b:#5B3FE0"><span class="lc-m lc-pan"><span class="lc-lg"><img src="favicon.svg" alt="" style="--h:64px" loading="lazy" decoding="async"><span class="lc-wm">Asad Ikram</span></span></span><span class="lc-b"><span class="lc-k">Home</span><b class="lc-t">Portfolio</b><span class="lc-d">My main portfolio: projects, roles and contact details in one place.</span><span class="lc-u"><span>asad-ikram-mc.github.io/portfolio</span><svg class="lc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+    </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ================= FOOTER ================= -->
 <footer class="foot" id="contact">
   <div class="aurora foot-aur" aria-hidden="true" data-fx></div>
@@ -2966,6 +3107,22 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
 
   /* printing: show everything final */
   W.addEventListener('beforeprint',function(){$$('.gauge').forEach(function(g){g.classList.add('in')});if(rail)rail.style.setProperty('--lp','1')});
+})();
+
+/* v4: tap ripple on the link cards (touch and pen only; mouse users get the hover lift) */
+(function(){
+  var W=window;
+  if(W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.addEventListener('pointerdown',function(e){
+    if(e.pointerType==='mouse')return;
+    var c=e.target.closest&&e.target.closest('.lc');if(!c)return;
+    var r=c.getBoundingClientRect(),s=Math.max(r.width,r.height)*2.2,d=document.createElement('span');
+    d.className='rip';d.setAttribute('aria-hidden','true');
+    d.style.width=d.style.height=s+'px';
+    d.style.left=(e.clientX-r.left-s/2)+'px';d.style.top=(e.clientY-r.top-s/2)+'px';
+    c.appendChild(d);
+    setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},700);
+  },{passive:true});
 })();
 
 </script>
