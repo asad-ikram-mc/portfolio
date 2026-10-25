@@ -1285,6 +1285,16 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
   .fams>li{flex:0 0 82%;scroll-snap-align:start}
   .fam:last-child{grid-column:auto}
   .stats .st-n{font-size:34px}
+  /* mobile stats: compact 2-column grid instead of a swipe row */
+  .stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible!important;width:100%!important;margin-left:0!important;margin-right:0!important;padding:6px 0 0!important;align-items:stretch}
+  .stats>li{flex:none;min-width:0}
+  .cdots[data-for="stats"]{display:none!important}
+  .stats .st{display:flex!important;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 14px 12px!important;text-align:left}
+  .stats .st-ic,.stats .st-ic .ring{width:38px;height:38px;margin:0 0 4px!important}
+  .stats .st>.st-n{margin:0;font-size:clamp(24px,7.4vw,30px)}
+  .stats .st-l{font-size:13px;line-height:1.35}
+  .stats .st-s{margin-top:4px;font-size:9.5px;letter-spacing:.06em}
+  .stats .st:has(.flags),.stats .st.wide{grid-column:1/-1}
   .cdots{display:flex;justify-content:center;gap:6px;margin:4px 0 0}
   .cdots i{width:6px;height:6px;border-radius:6px;background:var(--line2);transition:width .3s var(--out),background .3s}
   .cdots i.on{width:20px;background:linear-gradient(90deg,#0071E3,#7B61FF)}
@@ -1424,13 +1434,14 @@ h1.big .grad{filter:drop-shadow(0 8px 26px rgba(100,120,255,.28))}
     </h1>
     <p class="ident ri" style="--d:.55s"><span>Data engineer</span><span>Chevening Scholar 2024/25</span><span>Co-founder and CTO, Artemis AI</span></p>
     <p class="hero-sub ri" style="--d:.68s">I came to computer science with no computing background and opened my Fiverr account in December 2018. That was the start of <b>nearly eight years</b> of data work: SQL tutoring first, then large-scale web and social media data collection, and the pipelines and models that turn that data into decisions people can trust. This page tells the story in order, from school in Lahore to the company I am building now.</p>
-    <ol class="route ri" style="--d:.8s" aria-label="Where the story happened, in order">
-      <li><span>Lahore <small>school</small></span></li>
-      <li><span>Karachi <small>2017</small></span></li>
-      <li><span>Chiniot-Faisalabad <small>2019</small></span></li>
-      <li><span>Lahore <small>2022</small></span></li>
-      <li><span>Portsmouth <small>2024</small></span></li>
-      <li><span>Lahore <small>2025</small></span></li>
+    <ol class="route ri" style="--d:.8s" aria-label="How my career progressed, in order">
+      <li><span>CS student <small>2017</small></span></li>
+      <li><span>Freelancer <small>2018</small></span></li>
+      <li><span>Associate engineer <small>2022</small></span></li>
+      <li><span>Senior data engineer <small>2024</small></span></li>
+      <li><span>Chevening Scholar <small>2024</small></span></li>
+      <li><span>Co-founder and CTO <small>2025</small></span></li>
+      <li><span>Researcher <small>2026</small></span></li>
     </ol>
 
     <ul class="stats" id="heroStats" aria-label="The story in eight numbers">
